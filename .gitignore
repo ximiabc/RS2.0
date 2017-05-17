@@ -1,0 +1,8 @@
+*.classpath
+*.mymetadata
+.settings/org.eclipse.wst.common.component
+*.jsdtscope
+.settings/org.eclipse.jdt.core.prefs
+*.container
+.settings/org.eclipse.wst.common.project.facet.core.xml
+*.name
