@@ -6,3 +6,5 @@
 *.container
 .settings/org.eclipse.wst.common.project.facet.core.xml
 *.name
+.settings/org.eclipse.core.resources.prefs
+*.class
