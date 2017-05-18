@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--图片映射 -->
+	<class name="com.zqrc.rs.pro.entity.Type" table="t_type">
+		<!--主键 -->
+		<id name="id" column="Id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<!--普通属性 -->
+		<property name="name" type="string"></property>
+		
+		<!-- 关联类型 -->
+		<set name="students"  lazy="false" cascade="all" inverse="true" >
+            <key column="student_type"></key>
+            <one-to-many class="com.zqrc.rs.pro.entity.Student" />
+        </set>
+	</class>
+
+</hibernate-mapping>

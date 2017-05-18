@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.zqrc.rs.pro.entity.Student" table="t_student">
+		<!--主键 -->
+		<id name="id" column="Id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<!--普通属性 -->
+		<property name="stuNum" type="string"></property>
+		<property name="name" type="integer"></property>
+		<property name="sex" type="string"></property>
+		<property name="nation" type="string"></property>
+		<property name="born" type="date"></property>
+		<property name="father" type="string"></property>
+		<property name="mother" type="string"></property>
+		<property name="schoolEnd" type="string"></property>
+		<property name="SchoolStart" type="string"></property>
+		<property name="census" type="string"></property>
+		<property name="classes" type="string"></property>
+		<property name="state" type="integer"></property>
+		<property name="item1" type="string"></property>
+		<property name="item2" type="string"></property>
+		<property name="item3" type="string"></property>
+		<property name="item4" type="string"></property>
+		<property name="item5" type="string"></property>
+		<property name="item6" type="string"></property>
+		<property name="item7" type="string"></property>
+		<property name="item8" type="string"></property>
+		<property name="item9" type="string"></property>
+		<property name="item10" type="string"></property>
+		<property name="item11" type="string"></property>
+		<property name="item12" type="string"></property>
+		<property name="item13" type="string"></property>
+		<property name="item14" type="string"></property>
+		<property name="item15" type="string"></property>
+		<property name="item16" type="string"></property>
+		<property name="item17" type="string"></property>
+		<property name="item18" type="string"></property>
+		<property name="item19" type="string"></property>
+		<property name="item20" type="string"></property>
+		<property name="item21" type="string"></property>
+		<property name="item22" type="string"></property>
+		<property name="item23" type="string"></property>
+		<property name="item24" type="string"></property>
+		<property name="item25" type="string"></property>
+		<property name="item26" type="string"></property>
+		<property name="item27" type="string"></property>
+		<property name="item28" type="string"></property>
+		
+		
+		<!-- 关联类型 -->
+		<many-to-one name="type" class="com.zqrc.rs.pro.entity.Type" column="student_type"></many-to-one>
+	</class>
+
+</hibernate-mapping>

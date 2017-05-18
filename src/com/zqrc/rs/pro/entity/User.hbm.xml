@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--图片映射 -->
+	<class name="com.zqrc.rs.pro.entity.User" table="t_user">
+		<!--主键 -->
+		<id name="id" column="Id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<!--普通属性 -->
+		<property name="name" type="string"></property>
+		<property name="pass" type="string"></property>
+		
+		<!-- 关联权限 -->
+		<many-to-one name="role" class="com.zqrc.rs.pro.entity.Role" column="user_role"></many-to-one>
+		
+		<!-- 关联上级-->
+		<many-to-one name="user" class="com.zqrc.rs.pro.entity.User" column="user_users"></many-to-one>
+		<!-- 关联下级 -->
+		<set name="users"  lazy="false" cascade="all" inverse="true" >
+            <key column="user_users"></key>
+            <one-to-many class="com.zqrc.rs.pro.entity.User" />
+        </set>
+	</class>
+
+</hibernate-mapping>

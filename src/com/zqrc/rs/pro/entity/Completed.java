@@ -4,10 +4,6 @@ import java.util.Date;
 
 /**
  * Completed 已完成报名学生表
- * 字段
- * Stu_id  学生id
- * User_id 添加人id
- * Com_time 报名时间
  * @author JiaQi
  *
  */

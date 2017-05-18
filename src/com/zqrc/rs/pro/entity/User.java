@@ -1,68 +1,70 @@
 package com.zqrc.rs.pro.entity;
+
+import java.util.HashSet;
+import java.util.Set;
+
 /**
- * 用户表
- * 字段  id 主键自增长
- * username 账号
- * password  密码
- * name  真实名字
- * role  角色 （外键关联 role表）
- * 
+ * 用户表（教委高级、教委普通、学校、教师）
  * @author JiaQi
- *
  */
 public class User {
 	private Integer id;
-	private String username;
-	private String password;
 	private String name;
-	private Integer role;
+	private String pass;
+	private Role role;//关联权限
+
+	private User user;//关联一个上级
+	private Set<User>users=new HashSet<User>();//关联多个下级
+
+	public User() {
+	}
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getRole() {
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(Integer role) {
+
+	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	public User() {
+
+	public User getUser() {
+		return user;
 	}
-	
-	public User(Integer id, String username, String password, String name,
-			Integer role) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.name = name;
-		this.role = role;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password="
-				+ password + ", name=" + name + ", role=" + role + "]";
+
+	public Set<User> getUsers() {
+		return users;
 	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
+
 }

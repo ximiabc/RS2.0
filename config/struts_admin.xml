@@ -6,6 +6,5 @@
 <struts>
 	<!-- 高级管理员 -->
 	<package name="admin" extends="struts-default" namespace="/">
-		
 	</package>
 </struts>

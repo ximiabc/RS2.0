@@ -1,54 +1,44 @@
 package com.zqrc.rs.pro.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *  Role角色
- *  字段
- *  User_id user id
- *  Role_name  角色名称
- *  Role 权限 
  * @author JiaQi
  *
  */
 public class Role {
-	private Integer User_id;
-	private String Role_name;
-	private Integer Role;
-	
-	public Integer getUser_id() {
-		return User_id;
-	}
-
-	public void setUser_id(Integer user_id) {
-		User_id = user_id;
-	}
-
-	public String getRole_name() {
-		return Role_name;
-	}
-
-	public void setRole_name(String role_name) {
-		Role_name = role_name;
-	}
-
-	public Integer getRole() {
-		return Role;
-	}
-
-	public void setRole(Integer role) {
-		Role = role;
-	}
-
+	private Integer id;
+	private String name;
+	private Integer value;//0错误\1教委高级\2教委普通\3学校\4老师
+	private Set<User>users=new HashSet<User>();
 	public Role() {
 	}
-
-	public Role(Integer user_id, String role_name, Integer role) {
-		User_id = user_id;
-		Role_name = role_name;
-		Role = role;
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Integer getValue() {
+		return value;
+	}
+	public void setValue(Integer value) {
+		this.value = value;
+	}
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 	
-	public String toString() {
-		return "Role [User_id=" + User_id + ", Role_name=" + Role_name
-				+ ", Role=" + Role + "]";
-	}
 }
+
