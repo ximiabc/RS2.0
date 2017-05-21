@@ -32,7 +32,6 @@ public class Completed {
 	}
 
 	public Completed(Integer stu_id, Integer user_id, Date com_time) {
-		super();
 		Stu_id = stu_id;
 		User_id = user_id;
 		Com_time = com_time;
