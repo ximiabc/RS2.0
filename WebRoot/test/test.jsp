@@ -22,6 +22,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   测试功能
-  <a href="/test/excle.jsp">excle测试</a>
+  <a href="Exporta">excle测试</a>
+  
+  解析测试
+  <form action="Exportb">
+  <input type="file" name="demoe">
+  <input type="submit">
+  </form>
   </body>
 </html>
