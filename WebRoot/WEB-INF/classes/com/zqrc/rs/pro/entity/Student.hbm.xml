@@ -9,19 +9,13 @@
 		<id name="id" column="Id" type="integer">
 			<generator class="native"></generator>
 		</id>
+		<!-- 关联范围类型 -->
+		<many-to-one name="type" class="com.zqrc.rs.pro.entity.Type" column="student_type"></many-to-one>
+		<!-- 关联学生届别 -->
+		<many-to-one name="grade" class="com.zqrc.rs.pro.entity.Grade" column="student_grade"></many-to-one>
+		<!-- 关联学生报名状态 -->
+		<many-to-one name="states" class="com.zqrc.rs.pro.entity.States" column="student_states"></many-to-one>
 		<!--普通属性 -->
-		<property name="stuNum" type="string"></property>
-		<property name="name" type="integer"></property>
-		<property name="sex" type="string"></property>
-		<property name="nation" type="string"></property>
-		<property name="born" type="date"></property>
-		<property name="father" type="string"></property>
-		<property name="mother" type="string"></property>
-		<property name="schoolEnd" type="string"></property>
-		<property name="SchoolStart" type="string"></property>
-		<property name="census" type="string"></property>
-		<property name="classes" type="string"></property>
-		<property name="state" type="integer"></property>
 		<property name="item1" type="string"></property>
 		<property name="item2" type="string"></property>
 		<property name="item3" type="string"></property>
@@ -50,10 +44,19 @@
 		<property name="item26" type="string"></property>
 		<property name="item27" type="string"></property>
 		<property name="item28" type="string"></property>
+		<property name="item29" type="string"></property>
+		<property name="item30" type="string"></property>
+		<property name="item31" type="string"></property>
+		<property name="item32" type="string"></property>
+		<property name="item33" type="string"></property>
+		<property name="item34" type="string"></property>
+		<property name="item35" type="string"></property>
+		<property name="item36" type="string"></property>
+		<property name="item37" type="string"></property>
+		<property name="item38" type="string"></property>
+		<property name="item39" type="string"></property>
+		<property name="item40" type="string"></property>
 		
-		
-		<!-- 关联类型 -->
-		<many-to-one name="type" class="com.zqrc.rs.pro.entity.Type" column="student_type"></many-to-one>
 	</class>
 
 </hibernate-mapping>

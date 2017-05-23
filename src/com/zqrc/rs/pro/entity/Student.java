@@ -1,7 +1,5 @@
 package com.zqrc.rs.pro.entity;
 
-import java.util.Date;
-
 /**
  * 学生
  * @author JiaQi
@@ -9,20 +7,9 @@ import java.util.Date;
  */
 public class Student {
 	private Integer id;
-	private String stuNum;
-	private String name;
-	private String sex;
-	private String nation;//名族0
-	private Date born;
-	private String father;
-	private String mother;
-	private String schoolEnd;//毕业
-	private String SchoolStart;//应就读
-	private String census;//户籍所在地
-	private String classes;//班级
-	
-	private Integer state;//报名状态  0未报名、1报名成功、2报名拒绝、3申请审核中
-	private Type type;//学生类型
+	private Type type;//学生范围类型
+	private Grade grade;//学生届别类型
+	private States states;//学生报名
 	
 	private String item1;
 	private String item2;
@@ -52,6 +39,18 @@ public class Student {
 	private String item26;
 	private String item27;
 	private String item28;
+	private String item29;
+	private String item30;
+	private String item31;
+	private String item32;
+	private String item33;
+	private String item34;
+	private String item35;
+	private String item36;
+	private String item37;
+	private String item38;
+	private String item39;
+	private String item40;
 	
 	public Student() {
 	}
@@ -64,108 +63,28 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getStuNum() {
-		return stuNum;
-	}
-
-	public void setStuNum(String stuNum) {
-		this.stuNum = stuNum;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getNation() {
-		return nation;
-	}
-
-	public void setNation(String nation) {
-		this.nation = nation;
-	}
-
-	public Date getBorn() {
-		return born;
-	}
-
-	public void setBorn(Date born) {
-		this.born = born;
-	}
-
-	public String getFather() {
-		return father;
-	}
-
-	public void setFather(String father) {
-		this.father = father;
-	}
-
-	public String getMother() {
-		return mother;
-	}
-
-	public void setMother(String mother) {
-		this.mother = mother;
-	}
-
-	public String getSchoolEnd() {
-		return schoolEnd;
-	}
-
-	public void setSchoolEnd(String schoolEnd) {
-		this.schoolEnd = schoolEnd;
-	}
-
-	public String getSchoolStart() {
-		return SchoolStart;
-	}
-
-	public void setSchoolStart(String schoolStart) {
-		SchoolStart = schoolStart;
-	}
-
-	public String getCensus() {
-		return census;
-	}
-
-	public void setCensus(String census) {
-		this.census = census;
-	}
-
-	public String getClasses() {
-		return classes;
-	}
-
-	public void setClasses(String classes) {
-		this.classes = classes;
-	}
-
-	public Integer getState() {
-		return state;
-	}
-
-	public void setState(Integer state) {
-		this.state = state;
-	}
-
 	public Type getType() {
 		return type;
 	}
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+	
+	public States getStates() {
+		return states;
+	}
+
+	public void setStates(States states) {
+		this.states = states;
+	}
+
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
 	}
 
 	public String getItem1() {
@@ -390,5 +309,101 @@ public class Student {
 
 	public void setItem28(String item28) {
 		this.item28 = item28;
+	}
+
+	public String getItem29() {
+		return item29;
+	}
+
+	public void setItem29(String item29) {
+		this.item29 = item29;
+	}
+
+	public String getItem30() {
+		return item30;
+	}
+
+	public void setItem30(String item30) {
+		this.item30 = item30;
+	}
+
+	public String getItem31() {
+		return item31;
+	}
+
+	public void setItem31(String item31) {
+		this.item31 = item31;
+	}
+
+	public String getItem32() {
+		return item32;
+	}
+
+	public void setItem32(String item32) {
+		this.item32 = item32;
+	}
+
+	public String getItem33() {
+		return item33;
+	}
+
+	public void setItem33(String item33) {
+		this.item33 = item33;
+	}
+
+	public String getItem34() {
+		return item34;
+	}
+
+	public void setItem34(String item34) {
+		this.item34 = item34;
+	}
+
+	public String getItem35() {
+		return item35;
+	}
+
+	public void setItem35(String item35) {
+		this.item35 = item35;
+	}
+
+	public String getItem36() {
+		return item36;
+	}
+
+	public void setItem36(String item36) {
+		this.item36 = item36;
+	}
+
+	public String getItem37() {
+		return item37;
+	}
+
+	public void setItem37(String item37) {
+		this.item37 = item37;
+	}
+
+	public String getItem38() {
+		return item38;
+	}
+
+	public void setItem38(String item38) {
+		this.item38 = item38;
+	}
+
+	public String getItem39() {
+		return item39;
+	}
+
+	public void setItem39(String item39) {
+		this.item39 = item39;
+	}
+
+	public String getItem40() {
+		return item40;
+	}
+
+	public void setItem40(String item40) {
+		this.item40 = item40;
 	}
 }

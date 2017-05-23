@@ -4,13 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 学生范围类别
- * @author JiaQi
+ * 学生报名状态
  *
  */
-public class Type {
+public class States {
 	private Integer id;
-	private String name;
+	private String name;//未报名、报名成功（认证成功 ）、报名失败、认证审核中、认证失败、
 	private Set<Student>students=new HashSet<Student>();
 	
 	public Integer getId() {
@@ -37,7 +36,7 @@ public class Type {
 		this.students = students;
 	}
 
-	public Type() {
+	public States() {
 	}
 
 }

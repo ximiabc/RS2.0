@@ -4,11 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 学生范围类别
- * @author JiaQi
+ * 学生届别
  *
  */
-public class Type {
+public class Grade {
 	private Integer id;
 	private String name;
 	private Set<Student>students=new HashSet<Student>();
@@ -37,7 +36,7 @@ public class Type {
 		this.students = students;
 	}
 
-	public Type() {
+	public Grade() {
 	}
 
 }
