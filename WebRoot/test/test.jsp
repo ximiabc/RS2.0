@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>测试</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -21,7 +21,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
-    <a href="test/test.jsp">功能测试</a>
+  测试功能
+  <a href="Exporta">excle测试</a>
+  
+  解析测试
+  <form action="Exportb">
+  <input type="file" name="demoe">
+  <input type="submit">
+  </form>
   </body>
 </html>
