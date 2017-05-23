@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.zqrc.rs.pro.service.UserService;
 
 public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected T model;
@@ -36,6 +37,6 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	/**
 	 * 注入所有的service
 	 */
-//	@Resource
-//	protected AdminService adminService;
+	@Resource
+	protected UserService userService;
 }
