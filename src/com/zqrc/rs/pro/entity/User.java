@@ -12,6 +12,7 @@ public class User {
 	private String name;
 	private String pass;
 	private Role role;//关联权限
+	private Integer num;//报名人数限制
 
 	private User user;//关联一个上级
 	private Set<User>users=new HashSet<User>();//关联多个下级
@@ -67,4 +68,11 @@ public class User {
 		this.users = users;
 	}
 
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
+	}
 }

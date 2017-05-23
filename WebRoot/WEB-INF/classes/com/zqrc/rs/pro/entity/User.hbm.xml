@@ -13,10 +13,9 @@
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
 		<property name="pass" type="string"></property>
-		
+		<property name="num" type="integer"></property>
 		<!-- 关联权限 -->
 		<many-to-one name="role" class="com.zqrc.rs.pro.entity.Role" column="user_role"></many-to-one>
-		
 		<!-- 关联上级-->
 		<many-to-one name="user" class="com.zqrc.rs.pro.entity.User" column="user_users"></many-to-one>
 		<!-- 关联下级 -->

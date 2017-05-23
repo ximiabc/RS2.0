@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!--学生字段 -->
+	<class name="com.zqrc.rs.pro.entity.PowerKey" table="t_powerkey">
+		<!--主键 -->
+		<id name="id" column="Id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<!--普通属性 -->
+		<property name="name" type="string"></property>
+		
+		<set name="self" lazy="false" cascade="all" inverse="true">
+			<key column="power_self"></key>
+			<one-to-many class="com.zqrc.rs.pro.entity.Power"/>
+		</set>
+		<set name="subs" lazy="false" cascade="all" inverse="true">
+			<key column="power_subs"></key>
+			<one-to-many class="com.zqrc.rs.pro.entity.Power"/>
+		</set>
+		<set name="stus" lazy="false" cascade="all" inverse="true">
+			<key column="power_stus"></key>
+			<one-to-many class="com.zqrc.rs.pro.entity.Power"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>
