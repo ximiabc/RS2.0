@@ -39,16 +39,6 @@
                 </param>  
                 <param name="bufferSize">1024</param>  
             </result>  
-            <param name="savePath">/WebRoot/test</param>  
-            <result name="input">/index.jsp</result>
-             <interceptor-ref name="fileUpload">
-                <!-- 文件过滤 -->
-                <param name="allowedTypes">xls</param>
-                <!-- 文件大小, 以字节为单位 -->
-                <param name="maximumSize">1025956</param>
-            </interceptor-ref>
-            <!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
-            <interceptor-ref name="defaultStack" />
 		</action>
 	</package>
 
