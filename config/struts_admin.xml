@@ -6,5 +6,7 @@
 <struts>
 	<!-- 高级管理员 -->
 	<package name="admin" extends="struts-default" namespace="/">
+		<action name="admin_*" class="com.zqrc.rs.pro.action.UserAction" method="{1}">
+		</action>
 	</package>
 </struts>

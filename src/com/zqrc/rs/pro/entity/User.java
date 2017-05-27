@@ -9,6 +9,7 @@ import java.util.Set;
  */
 public class User {
 	private Integer id;
+	private String account;
 	private String name;
 	private String pass;
 	private Role role;//关联权限
@@ -18,6 +19,14 @@ public class User {
 	private Set<User>users=new HashSet<User>();//关联多个下级
 
 	public User() {
+	}
+	
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public Integer getId() {

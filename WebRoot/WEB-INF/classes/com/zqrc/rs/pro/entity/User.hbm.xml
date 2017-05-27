@@ -11,6 +11,7 @@
 			<generator class="native"></generator>
 		</id>
 		<!--普通属性 -->
+		<property name="account" type="string"></property>
 		<property name="name" type="string"></property>
 		<property name="pass" type="string"></property>
 		<property name="num" type="integer"></property>
