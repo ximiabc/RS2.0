@@ -23,6 +23,7 @@
 			<!-- exit -->
 			<result name="exit">/exit.jsp</result>
 		</action>
+		
 		<!-- 登录验证码 -->
 		<action name="images" class="com.zqrc.rs.pro.action.SecurityCodeImageAction">
 			<result name="success" type="stream">  
@@ -31,6 +32,7 @@
                 <param name="bufferSize">2048</param>  
             </result>
 		</action>
+		
 		<!-- 登录控制 -->
 		<action name="login" class="com.zqrc.rs.pro.action.UserAction">
 			<!-- 登录成功 -->

@@ -75,13 +75,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<!--<li><a href="#" target="center">报名模版管理</a></li>-->
 				</ul>
 			</div>
+			<!--manage  -->
+			<div class="rs-summary">
+				<div class="rs-teacher glyphicon glyphicon-inbox"></div>管理员管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_manageList" target="center">浏览管理员</a></li>
+				</ul>
+			</div>
 			<!--School  -->
 			<div class="rs-summary">
 				<div class="rs-school glyphicon glyphicon-briefcase"></div>学校管理
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="rs-school/index.html" target="center">增删改查</a></li>
+					<li><a href="admin_schoolList" target="center">学校浏览</a></li>
 				</ul>
 			</div>
 			<!--Teacher  -->
@@ -90,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="rs-teacher/index.html" target="center">增删改查</a></li>
+					<li><a href="admin_teacherList" target="center">教师浏览</a></li>
 				</ul>
 			</div>
 			<!--Student  -->
@@ -110,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="rs-personage/manage-personage.html" target="center">查改</a></li>
+					<li><a href="admin_personal" target="center">我的信息</a></li>
 				</ul>
 			</div>
 			<!--end  -->
@@ -118,12 +127,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 			<!-- center panel -->
 			<div class="embed-responsive" id="rs-frameCenter">
-				<iframe class="embed-responsive-item" name="center" src="main.html" width="100%" height="100%"></iframe>
+				<iframe class="embed-responsive-item" name="center" src="admin_mainView" width="100%" height="100%"></iframe>
 			</div>
 		</div>
 		<div id="rs-pageFooter">
 			<hr style="padding: 0px;margin: 0px;">
-			<p>版权所有:zzuli-zqrc &copy; 2017&nbsp;&nbsp;&nbsp;&nbsp;<a href="help.html" target="center">使用指南</a></p>
+			<p>版权所有:zzuli-zqrc &copy; 2017&nbsp;&nbsp;&nbsp;&nbsp;<a href="admin_help" target="center">使用指南</a></p>
 		</div>
 	</body>
 </html>

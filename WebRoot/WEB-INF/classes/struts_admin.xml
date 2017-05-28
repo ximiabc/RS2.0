@@ -6,7 +6,32 @@
 <struts>
 	<!-- 高级管理员 -->
 	<package name="admin" extends="struts-default" namespace="/">
+		<!--  -->
 		<action name="admin_*" class="com.zqrc.rs.pro.action.UserAction" method="{1}">
+			<!-- 通用操作************ -->
+			<!-- 欢迎面板 -->
+			<result name="main">/WEB-INF/view/main.jsp</result>
+			<!-- 帮助界面 -->
+			<result name="help">/WEB-INF/view/help.jsp</result>
+			
+			<!-- 个人操作************ -->
+			<!-- 个人管理页 -->
+			<result name="person">/WEB-INF/view/admin/personal.jsp</result>
+			
+			<!-- 管理员操作 **********-->
+			<!-- 浏览管理员 -->
+			<result name="manageList">/WEB-INF/view/manage/list_view.jsp</result>
+			
+			<!-- 学校操作************ -->
+			<!-- 浏览学校 -->
+			<result name="schoolList">/WEB-INF/view/master/list_view.jsp</result>
+			
+			<!-- 教师操作************ -->
+			<!-- 教师浏览 -->
+			<result name="teacherList">/WEB-INF/view/teacher/list_view.jsp</result>
+			
+			<!-- 报名管理************ -->
+			<!-- 权限管理************ -->
 		</action>
 	</package>
 </struts>
