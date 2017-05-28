@@ -93,6 +93,69 @@ public class UserAction extends BaseAction<User>{
 	}
 	
 	/**
+	 * 报名日期
+	 * @return
+	 */
+	public String rs_date() {
+		return "rs_date";
+	}
+	
+	/**
+	 * 报名字段
+	 * @return
+	 */
+	public String rs_key() {
+		return "rs_key";
+	}
+	
+	/**
+	 * 教委权限管理
+	 * @return
+	 */
+	public String authority_manage() {
+		return "authority_manage";
+	}
+	/**
+	 * 学校权限管理
+	 * @return
+	 */
+	public String authority_master() {
+		return "authority_master";
+	}
+	/**
+	 * 教师权限管理
+	 * @return
+	 */
+	public String authority_teacher() {
+		return "authority_teacher";
+	}
+	
+	/**
+	 * 批量导入学生
+	 * @return
+	 */
+	public String addExcel() {
+		return "addExcel";
+	}
+	
+	/**
+	 * 浏览学生
+	 * @return
+	 */
+	public String listStudent() {
+		return "listStudent";
+	}
+	
+	/**
+	 * 审批学生
+	 */
+	public String auditStudent() {
+		
+		return "auditStudent";
+	}
+	
+	
+	/**
 	 * 帮助页
 	 * @return
 	 */

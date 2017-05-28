@@ -59,9 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="rs-manage/manage-education.html" target="center">管理教委</a></li>
-					<li><a href="rs-manage/manage-school.html" target="center">管理学校</a></li>
-					<li><a href="rs-manage/manage-techer.html" target="center">管理教师</a></li>
+					<li><a href="admin_authority_manage" target="center">教委权限</a></li>
+					<li><a href="admin_authority_master" target="center">学校权限</a></li>
+					<li><a href="admin_authority_teacher" target="center">教师权限</a></li>
 				</ul>
 			</div>
 			<!--Apply  -->
@@ -70,9 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="rs-register/registerTime.html" target="center">报名时间管理</a></li>
-					<li><a href="rs-register/registerTemplate.html" target="center">报名字段管理</a></li>
-					<!--<li><a href="#" target="center">报名模版管理</a></li>-->
+					<li><a href="admin_rs_date" target="center">报名时间管理</a></li>
+					<li><a href="admin_rs_key" target="center">报名字段管理</a></li>
 				</ul>
 			</div>
 			<!--manage  -->
@@ -108,9 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="rs-student/index.html" target="center">增删改查</a></li>
-					<li><a href="rs-student/audit.html" target="center">认证审核</a></li>
-					<li><a href="rs-student/Dragupload.html" target="center">批量导入</a></li>
+					<li><a href="admin_listStudent" target="center">增删改查</a></li>
+					<li><a href="admin_auditStudent" target="center">认证审核</a></li>
+					<li><a href="admin_addExcel" target="center">批量导入</a></li>
 				</ul>
 			</div>
 			<!--Person  -->
