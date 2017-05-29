@@ -4,8 +4,10 @@ import java.lang.reflect.ParameterizedType;
 
 import javax.annotation.Resource;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.zqrc.rs.pro.entity.User;
 import com.zqrc.rs.pro.service.UserService;
 
 public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
@@ -32,7 +34,15 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 		return model;
 	}
 	
-	
+	/**
+	 * 当前用户对象
+	 */
+	public void setCurrentUser(User currentUser) {
+		ActionContext.getContext().getSession().put("currentUser", currentUser);
+	}
+	public User getCurrentUser() {
+		return (User)ActionContext.getContext().getSession().get("currentUser");
+	}
 	
 	/**
 	 * 注入所有的service

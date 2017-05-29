@@ -15,4 +15,11 @@ import com.zqrc.rs.pro.service.UserService;
 @Service
 @Transactional
 public class UserServiceImpl extends BaseDaoImpl<User> implements UserService{
+
+	/**
+	 * 用户登录
+	 */
+	public User login(String account, String pass) {
+		return (User)getSession().createQuery("from User u where u.account = ? and u.pass = ?").setString(0, account).setString(1,pass).uniqueResult();
+	}
 }

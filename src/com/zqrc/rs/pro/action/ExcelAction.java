@@ -12,6 +12,7 @@ import com.zqrc.rs.until.ExcelUntil;
  *
  */
 public class ExcelAction extends ActionSupport{
+<<<<<<< HEAD
 	InputStream excelStream;
 	
 	public InputStream getExcelStream() {
@@ -26,4 +27,6 @@ public class ExcelAction extends ActionSupport{
         excelStream = es.getExcelInputStream();  
         return "excel"; 
 	}
+=======
+>>>>>>> origin/master
 }

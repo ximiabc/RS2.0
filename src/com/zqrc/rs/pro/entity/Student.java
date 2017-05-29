@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.entity;
 
+import java.util.Date;
+
 /**
  * 学生
  * @author JiaQi
@@ -10,6 +12,7 @@ public class Student {
 	private Type type;//学生范围类型
 	private Grade grade;//学生届别类型
 	private States states;//学生报名
+	private Date date;
 	
 	private String item1;
 	private String item2;
@@ -85,6 +88,14 @@ public class Student {
 
 	public void setGrade(Grade grade) {
 		this.grade = grade;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public String getItem1() {

@@ -11,9 +11,12 @@
 			<generator class="native"></generator>
 		</id>
 		<!--普通属性 -->
+		<property name="account" type="string"></property>
 		<property name="name" type="string"></property>
 		<property name="pass" type="string"></property>
 		<property name="num" type="integer"></property>
+		<property name="phone" type="string"></property>
+		<property name="info" type="string"></property>
 		<!-- 关联权限 -->
 		<many-to-one name="role" class="com.zqrc.rs.pro.entity.Role" column="user_role"></many-to-one>
 		<!-- 关联上级-->

@@ -9,15 +9,42 @@ import java.util.Set;
  */
 public class User {
 	private Integer id;
+	private String account;
 	private String name;
 	private String pass;
 	private Role role;//关联权限
 	private Integer num;//报名人数限制
+	private String phone;//电话
+	private String info;//描述信息
 
 	private User user;//关联一个上级
 	private Set<User>users=new HashSet<User>();//关联多个下级
 
 	public User() {
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public Integer getId() {
