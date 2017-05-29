@@ -21,6 +21,7 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.zqrc.rs.until.ExcelUntil;
 
 public class ExportAction extends ActionSupport {
 	InputStream excelStream;  
@@ -79,7 +80,7 @@ public class ExportAction extends ActionSupport {
 
 
 	public String a(){  
-        IExcelService es = new ExcelServiceImpl();  
+        IExcelService es = new ExcelUntil();  
         excelStream = es.getExcelInputStream();  
         return "excel";  
     } 
@@ -91,7 +92,7 @@ public class ExportAction extends ActionSupport {
         FileOutputStream fos = new FileOutputStream(this.getSavePath() +"\\"+ this.getFileFileName());  
         // 以上传文件建立文件输入流  
         FileInputStream fis = new FileInputStream(this.getFile());  
-		ExcelServiceImpl es = new ExcelServiceImpl();  
+		ExcelUntil es = new ExcelUntil();  
 		}catch(Exception e){
 			e.printStackTrace();
 		}
