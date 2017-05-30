@@ -70,8 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="admin_rs_date" target="center">报名时间管理</a></li>
-					<li><a href="admin_rs_key" target="center">报名字段管理</a></li>
+					<li><a href="admin_date_view" target="center">报名时间管理</a></li>
+					<li><a href="admin_fields_view" target="center">报名字段管理</a></li>
 				</ul>
 			</div>
 			<!--manage  -->
@@ -107,9 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="rs-detailed">
 				<ul>
-					<li><a href="admin_listStudent" target="center">增删改查</a></li>
-					<li><a href="admin_auditStudent" target="center">认证审核</a></li>
-					<li><a href="admin_addExcel" target="center">批量导入</a></li>
+					<li><a href="admin_student_list" target="center">增删改查</a></li>
+					<li><a href="admin_student_audit" target="center">认证审核</a></li>
+					<li><a href="admin_student_addExcel" target="center">批量导入</a></li>
 				</ul>
 			</div>
 			<!--Person  -->

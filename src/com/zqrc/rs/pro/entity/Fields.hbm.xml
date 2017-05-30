@@ -12,7 +12,7 @@
 		</id>
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
-		<property name="order" type="integer"></property>
+		<property name="orders" type="integer"></property>
 	</class>
 	
 </hibernate-mapping>

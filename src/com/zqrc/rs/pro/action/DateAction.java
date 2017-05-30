@@ -1,7 +1,7 @@
 package com.zqrc.rs.pro.action;
 
 import com.zqrc.rs.base.BaseAction;
-import com.zqrc.rs.pro.entity.Fields;
+import com.zqrc.rs.pro.entity.DueTime;
 
 /**
  * 学生信息字段控制器
@@ -9,11 +9,10 @@ import com.zqrc.rs.pro.entity.Fields;
  * @author 李志飞
  *
  */
-public class FieldsAction extends BaseAction<Fields>{
-	
+public class DateAction extends BaseAction<DueTime>{
 	
 	/**
-	 * 报名字段
+	 * 报名日期
 	 * @return
 	 */
 	public String view() {

@@ -12,4 +12,29 @@ import com.zqrc.rs.pro.entity.User;
  */
 public class PowerAction extends BaseAction<Power>{
 	
+	
+	/**
+	 * 教委权限管理
+	 * @return
+	 */
+	public String manage() {
+		return "manage";
+	}
+	
+	/**
+	 * 学校权限管理
+	 * @return
+	 */
+	public String master() {
+		return "master";
+	}
+	
+	/**
+	 * 教师权限管理
+	 * @return
+	 */
+	public String teacher() {
+		return "teacher";
+	}
+	
 }

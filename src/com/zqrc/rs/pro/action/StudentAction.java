@@ -11,4 +11,27 @@ import com.zqrc.rs.pro.entity.Student;
  */
 public class StudentAction extends BaseAction<Student>{
 	
+	/**
+	 * 批量导入学生
+	 * @return
+	 */
+	public String addExcel() {
+		return "addExcel";
+	}
+	
+	/**
+	 * 浏览学生
+	 * @return
+	 */
+	public String list() {
+		return "list";
+	}
+	
+	/**
+	 * 审批学生
+	 */
+	public String audit() {
+		return "audit";
+	}
+	
 }

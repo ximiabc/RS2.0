@@ -8,7 +8,7 @@ package com.zqrc.rs.pro.entity;
 public class Fields {
 	private Integer id;//序号
 	private String name;//字段名
-	private Integer order;//排序号
+	private Integer orders;//排序号
 	public Fields() {
 	}
 	public Integer getId() {
@@ -23,11 +23,12 @@ public class Fields {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Integer getOrder() {
-		return order;
+	public Integer getOrders() {
+		return orders;
 	}
-	public void setOrder(Integer order) {
-		this.order = order;
+	public void setOrders(Integer orders) {
+		this.orders = orders;
 	}
+	
 }
 
