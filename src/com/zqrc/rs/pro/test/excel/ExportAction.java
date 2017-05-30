@@ -80,8 +80,9 @@ public class ExportAction extends ActionSupport {
 
 
 	public String a(){  
+		String[]  name = null;
         IExcelService es = new ExcelUntil();  
-        excelStream = es.getExcelInputStream();  
+        excelStream = es.getExcelInputStream(name);  
         return "excel";  
     } 
 	

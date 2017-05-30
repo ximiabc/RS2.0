@@ -11,6 +11,6 @@ import jxl.write.WritableWorkbook;
 
 public interface IExcelService {
 	
-	InputStream getExcelInputStream();  
+	InputStream getExcelInputStream(String[] name);  
     
 }

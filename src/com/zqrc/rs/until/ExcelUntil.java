@@ -2,38 +2,37 @@ package com.zqrc.rs.until;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import com.zqrc.rs.pro.test.excel.IExcelService;
 
-import jxl.Cell;
-import jxl.Sheet;
 import jxl.Workbook;
-import jxl.read.biff.BiffException;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 public class ExcelUntil implements IExcelService{
-	public InputStream getExcelInputStream() {
+	public InputStream getExcelInputStream(String[] name) {
         //将OutputStream转化为InputStream  
         ByteArrayOutputStream out = new ByteArrayOutputStream();  
-        putDataOnOutputStream(out);  
+        putDataOnOutputStream(out,name);  
         return new ByteArrayInputStream(out.toByteArray());  
     }  
   
 //	生成excel
-    private void putDataOnOutputStream(OutputStream os) {
+    private void putDataOnOutputStream(OutputStream os,String[] name) {
         jxl.write.Label label;  
         WritableWorkbook workbook;  
         try {  
             workbook = Workbook.createWorkbook(os);  
             WritableSheet sheet = workbook.createSheet("Sheet1", 0);  
   
-            label = new jxl.write.Label(0, 0, "struts2导出excel");  
-            sheet.addCell(label);  
+            int i = 0;
+            
+            while(i < name.length){
+            	label = new jxl.write.Label(i, 0, name[i]);  
+            	sheet.addCell(label);  
+            }
             
             workbook.write();  
             workbook.close();  
