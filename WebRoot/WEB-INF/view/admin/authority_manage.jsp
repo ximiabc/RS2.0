@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<table class="table table-striped table-bordered table-hover " style="text-align:center; font-size:large ;">
 					<thead>
 						<tr class="info">
-							<td colspan="2" style="text-align: left;">修改权限  &nbsp; &nbsp; &nbsp; &nbsp;<s:actionmessage/> </td>
+							<td colspan="2" style="text-align: left;">修改权限 </td>
 						</tr>
 					</thead>
 					<tbody>
@@ -76,6 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tfoot>
 				</table>
 				</form>
+				<s:actionmessage/>
 			</div>
 		</div>
 	</body>

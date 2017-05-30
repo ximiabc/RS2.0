@@ -79,6 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tfoot>
 				</table>
 				</form>
+				<s:actionmessage/>
 			</div>
 		</div>
 	</body>

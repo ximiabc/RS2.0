@@ -6,13 +6,16 @@
 <hibernate-mapping>
 	<!--学生字段 -->
 	<class name="com.zqrc.rs.pro.entity.Fields" table="t_fields">
-		<!--主键 -->
-		<id name="id" column="Id" type="integer">
-			<generator class="native"></generator>
-		</id>
+		<!-- 复合主键 -->
+		<composite-id>
+			<key-property name="grade_id" type="integer"></key-property>
+			<key-property name="type_id" type="integer"></key-property>
+		</composite-id>
+		
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
 		<property name="orders" type="integer"></property>
+		<property name="keyName" type="string"></property>
 	</class>
 	
 </hibernate-mapping>

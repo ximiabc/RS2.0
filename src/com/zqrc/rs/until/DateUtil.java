@@ -11,6 +11,28 @@ import java.util.Date;
 public class DateUtil {
 	
 	/**
+	 * 账号生成
+	 * @return
+	 */
+	public static String getAccount(String sups){
+		Format format = new SimpleDateFormat("yyyy-SSSS");
+		String str=format.format(new Date());
+		switch (sups.length()) {
+		case 0:sups="0000";
+			break;
+		case 1:sups="000"+sups;
+			break;
+		case 2:sups="00"+sups;
+			break;
+		case 3:sups="0"+sups;
+			break;
+		default:
+			break;
+		}
+		return str.replace("-", sups);
+	}
+	
+	/**
 	 * 唯一标识码
 	 * @return
 	 */
@@ -60,7 +82,6 @@ public class DateUtil {
 		if(date==null){
 	        return "无";			
 			}else{
-				
 				SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
 				String datestr= sFormat.format(date);
 				return datestr;

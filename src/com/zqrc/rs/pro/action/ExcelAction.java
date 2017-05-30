@@ -12,7 +12,6 @@ import com.zqrc.rs.until.ExcelUntil;
  *
  */
 public class ExcelAction extends ActionSupport{
-<<<<<<< HEAD
 	InputStream excelStream;
 	
 	public InputStream getExcelStream() {
@@ -21,12 +20,14 @@ public class ExcelAction extends ActionSupport{
 	public void setExcelStream(InputStream excelStream) {
 		this.excelStream = excelStream;
 	}
-//	
+	
+	/**
+	 * 导出excal
+	 * @return
+	 */
 	public String outExcel(){
         IExcelService es = new ExcelUntil();  
         excelStream = es.getExcelInputStream();  
         return "excel"; 
 	}
-=======
->>>>>>> origin/master
 }

@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import com.zqrc.rs.pro.entity.User;
 import com.zqrc.rs.pro.service.PowerKeyService;
 import com.zqrc.rs.pro.service.PowerService;
+import com.zqrc.rs.pro.service.StudentService;
 import com.zqrc.rs.pro.service.UserService;
 
 public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
@@ -55,4 +56,6 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	protected PowerService powerService;
 	@Resource
 	protected PowerKeyService powerKeyService;
+	@Resource
+	protected StudentService studentService;
 }
