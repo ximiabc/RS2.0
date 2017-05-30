@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -29,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<body>
 		<div>
 			<div class="rs-infoBox table-responsive col-xs-12 rs-location">
+				<form action="admin_authority_update">
 				<table class="table table-striped table-bordered table-hover " style="text-align:center; font-size:large">
 					<thead>
 						<tr class="info">
@@ -39,45 +42,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tbody>
 						<tr>
 							<td>权限类型：</td>
-							<td>教师管理</td>
-						</tr>
-						<tr>
-							<td>操作权限等级：</td>
-							<td>3</td>
+							<td>${bean.name }<input name="id" value="${bean.id }" hidden="true"/></td>
 						</tr>
 						<tr>
 							<td>个人操作权限：</td>
 							<td>
-								
-								<select class="form-control" name="select_1" style="height:100%;">
-									<option value="0">所有操作</option>
-									<option value="1">查询修改</option>
-									<option value="2">仅查询</option>
-									<option value="3">无权限</option>
+								<select class="form-control" name="self_id" style="height:100%;">
+									<s:iterator value="key">
+										<option value="${id }" <c:if test='${bean.self.id == id }'>selected="selected"</c:if>>${name }</option>
+									</s:iterator>
 								</select>
-
 							</td>
 						</tr>
 						<tr>
 							<td>下级操作权限：</td>
 							<td>
-								<select class="form-control" name="select_2" style="height:100%;">
-									<option value="0">所有操作</option>
-									<option value="1">查询修改</option>
-									<option value="2">仅查询</option>
-									<option value="3">无权限</option>
+								<select class="form-control" name="subs_id" style="height:100%;">
+									<s:iterator value="key">
+										<option value="${id }" <c:if test='${bean.subs.id == id }'>selected="selected"</c:if>>${name }</option>
+									</s:iterator>
 								</select>
-								
 							</td>
 						</tr>
 						<tr>
 							<td>学生操作权限：</td>
 							<td>	
-								<select class="form-control" name="select_3" style="height:100%;">
-									<option value="0">所有操作</option>
-									<option value="1">查询修改</option>
-									<option value="2">仅查询</option>
-									<option value="3">无权限</option>
+								<select class="form-control" name="stus_id" style="height:100%;">
+									<s:iterator value="key">
+										<option value="${id }" <c:if test='${bean.stus.id == id }'>selected="selected"</c:if>>${name }</option>
+									</s:iterator>
 								</select>
 							</td>
 						</tr>
@@ -88,6 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 					</tfoot>	
 				</table>
+				</form>
 			</div>
 		</div>
 	</body>
