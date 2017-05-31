@@ -11,6 +11,8 @@
 		</id>
 		<!-- 学生报名日期 -->
 		<property name="date" type="date"></property>
+		<!-- 学年 -->
+		<many-to-one name="years" class="com.zqrc.rs.pro.entity.SchoolYear" column="year_stus"></many-to-one>
 		<!-- 关联范围类型 -->
 		<many-to-one name="type" class="com.zqrc.rs.pro.entity.Type" column="student_type"></many-to-one>
 		<!-- 关联学生届别 -->

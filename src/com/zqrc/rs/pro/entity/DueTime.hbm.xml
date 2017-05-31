@@ -10,6 +10,7 @@
 		<composite-id>
 			<key-property name="grade_id" type="integer"></key-property>
 			<key-property name="type_id" type="integer"></key-property>
+			<key-property name="year_id" type="integer"></key-property>
 		</composite-id>
 		
 		<!--普通属性 -->

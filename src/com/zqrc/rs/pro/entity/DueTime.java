@@ -12,11 +12,21 @@ public class DueTime implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer grade_id;
 	private Integer type_id;
+	private Integer year_id;
 	
 	private Date startDate;
 	private Date endDate;
 	public DueTime() {
 	}
+	
+	public Integer getYear_id() {
+		return year_id;
+	}
+
+	public void setYear_id(Integer year_id) {
+		this.year_id = year_id;
+	}
+
 	public Integer getGrade_id() {
 		return grade_id;
 	}

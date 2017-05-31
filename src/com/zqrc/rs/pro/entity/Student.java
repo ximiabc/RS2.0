@@ -13,6 +13,7 @@ public class Student {
 	private Grade grade;//学生届别类型
 	private States states;//学生报名
 	private Date date;
+	private SchoolYear years;
 	
 	private String item1;
 	private String item2;
@@ -56,6 +57,14 @@ public class Student {
 	private String item40;
 	
 	public Student() {
+	}
+	
+	public SchoolYear getYears() {
+		return years;
+	}
+
+	public void setYears(SchoolYear years) {
+		this.years = years;
 	}
 
 	public Integer getId() {
