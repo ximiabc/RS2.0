@@ -9,4 +9,5 @@ import com.zqrc.rs.pro.entity.SchoolYear;
  *
  */
 public interface YearService extends BaseDao<SchoolYear>{
+	SchoolYear getNews();
 }

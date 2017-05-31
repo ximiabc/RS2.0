@@ -9,4 +9,5 @@ import com.zqrc.rs.pro.entity.DueTime;
  *
  */
 public interface DueTimeService extends BaseDao<DueTime>{
+	DueTime getByComposite(Integer grade,Integer type,Integer year);
 }

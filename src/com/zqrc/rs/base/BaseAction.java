@@ -8,12 +8,17 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.zqrc.rs.pro.entity.User;
+import com.zqrc.rs.pro.service.DueTimeService;
 import com.zqrc.rs.pro.service.FieldService;
+import com.zqrc.rs.pro.service.GradeService;
 import com.zqrc.rs.pro.service.PowerKeyService;
 import com.zqrc.rs.pro.service.PowerService;
+import com.zqrc.rs.pro.service.RoleService;
 import com.zqrc.rs.pro.service.StatesService;
 import com.zqrc.rs.pro.service.StudentService;
+import com.zqrc.rs.pro.service.TypeService;
 import com.zqrc.rs.pro.service.UserService;
+import com.zqrc.rs.pro.service.YearService;
 
 public abstract class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	protected T model;
@@ -64,5 +69,14 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	protected StudentService studentService;
 	@Resource
 	protected StatesService statesService;
-	
+	@Resource
+	protected DueTimeService dueTimeService;
+	@Resource
+	protected GradeService gradeService;
+	@Resource
+	protected RoleService roleService;
+	@Resource
+	protected TypeService typeService;
+	@Resource
+	protected YearService yearService;
 }

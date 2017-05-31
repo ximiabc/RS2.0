@@ -15,4 +15,11 @@ import com.zqrc.rs.pro.service.YearService;
 @Service
 @Transactional
 public class YearServiceImpl extends BaseDaoImpl<SchoolYear> implements YearService{
+
+	/**
+	 * 获取最新的一年
+	 */
+	public SchoolYear getNews() {
+		return (SchoolYear)getSession().createQuery("from SchoolYear s order by s.date desc").list().get(0);
+	}
 }

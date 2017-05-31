@@ -9,14 +9,26 @@
 		
 		<!-- 日期-->
 		<action name="admin_date_*" class="com.zqrc.rs.pro.action.DateAction" method="{1}">
+			<!-- 小学日期 -->
+			<result name="primaryIn">/WEB-INF/view/admin/primary_register_time_in.jsp</result>
+			<result name="primaryOut">/WEB-INF/view/admin/primary_register_time_out.jsp</result>
+			<!-- 中学日期 -->
+			<result name="middleIn">/WEB-INF/view/admin/middle_register_time_in.jsp</result>
+			<result name="middleOut">/WEB-INF/view/admin/middle_register_time_out.jsp</result>
 			<!-- 报名日期 -->
-			<result name="view">/WEB-INF/view/admin/rs_date.jsp</result>
+			<!-- <result name="view">/WEB-INF/view/admin/rs_date.jsp</result> -->
 		</action>
 		
 		<!-- 字段-->
 		<action name="admin_fields_*" class="com.zqrc.rs.pro.action.FieldsAction" method="{1}">
+			<!-- 小学字段 -->
+			<result name="primaryIn">/WEB-INF/view/admin/primary_register_template_in.jsp</result>
+			<result name="primaryOut">/WEB-INF/view/admin/primary_register_template_out.jsp</result>
+			<!-- 中学字段 -->
+			<result name="middleIn">/WEB-INF/view/admin/middle_register_template_in.jsp</result>
+			<result name="middleOut">/WEB-INF/view/admin/middle_register_template_out.jsp</result>
 			<!-- 报名字段 -->
-			<result name="view">/WEB-INF/view/admin/rs_key.jsp</result>
+			<!-- <result name="view">/WEB-INF/view/admin/rs_key.jsp</result> -->
 		</action>
 		
 		<!-- 权限 -->

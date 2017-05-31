@@ -25,17 +25,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 50px;}
 			#rs-frameCenter{margin-left:200px;height: 100%;}
 			#rs-pageFooter{bottom:0;text-align: center;background-color: #FFF;}
-			.rs-tab {padding-top: 103px;padding-bottom: 50px;width: 200px;height:100%;border-right: 1px solid #CCCCCC;color:#555;font-size: 14px;text-align: center;position: absolute;top: 0px;}
-			.rs-summary {height: 40px;line-height: 40px;cursor: pointer;font-size: 16px;position: relative;border-bottom: #ccc 1px dotted;transition: background-color .6s linear;-moz-transition: background-color .6s linear;-webkit-transition: background-color .6s linear;-o-transition: background-color .6s linear;}
+			.rs-tab {padding-top: 103px;padding-bottom: 50px;width: 200px;height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;position: absolute;top: 0px;}
+			.rs-summary {line-height: 40px;cursor: pointer;font-size: 16px;position: relative;border-bottom: #ccc 1px dotted;transition: background-color .6s linear;-moz-transition: background-color .6s linear;-webkit-transition: background-color .6s linear;-o-transition: background-color .6s linear;}
 			.rs-summary:hover{color:#000;}
-			.rs-permissions,.rs-apply,.rs-school,.rs-student,.rs-teacher,.rs-personal{position: absolute;height: 20px;width: 20px;top: 15px;left: 30px;opacity: 0.6;}
-			.rs-detailed {display: none;font-size: 14px;}
+			.rs-summary.rs-active{background-color:#0BF;}
+			.rs-summary .glyphicon{top: 2px;left: -20px;}
+			.rs-detailed {display: none;}
 			.rs-detailed ul {margin: 0;padding: 0;}
-			.rs-detailed li {height: 40px;line-height: 40px;list-style: none;background-color:rgba(0,188,255,.6);;border-bottom: #ccc 1px dotted;text-align: center;} 
-			.rs-detailed li a{color: #FFFFFF;text-decoration: none;display:inline-block;width:100%;height: 40px;}
-			.rs-detailed li a:hover{text-decoration: none;color:#FFFFFF; font-size: 16px;}
-			.rs-detailed li a:focus{color:#000000;font-size: 16px;}
-            .active{background-color:#0BF;}
+			.rs-detailed li , .rs-detailed .rs-summary{font-size: 14px;line-height: 40px;list-style: none;background-color:rgba(0,188,255,.6);border-bottom: #ccc 1px dotted;text-align: center;} 
+			.rs-detailed li a , .rs-detailed .rs-summary{color: #FFFFFF;text-decoration: none;display:inline-block;width:100%;height: 40px;}
+			.rs-detailed li a:hover , .rs-detailed .rs-summary:hover{text-decoration: none;color:#FFFFFF; font-size: 16px;}
+			.rs-detailed li a.rs-focus , .rs-detailed .rs-summary.rs-active{color:#000000;font-size: 16px;}
+			.rs-detailed .rs-detailed li{background-color:#FFF;}
+			.rs-detailed .rs-detailed li a{color: #0BF;font-size: 16px;}
+            .rs-detailed .rs-detailed li a.rs-focus{background-color:#f5f5f5;}
 		</style>
 	</head>
 	<body>
@@ -55,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="rs-tab bg-info">
 			<!--Manager-->  
 			<div class="rs-summary">
-				<div class="rs-permissions glyphicon glyphicon-th-list"></div>权限管理
+				<span class="glyphicon glyphicon-th-list"></span>权限管理
 			</div>
 			<div class="rs-detailed">
 				<ul>
@@ -66,17 +69,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--Apply  -->
 			<div class="rs-summary">
-				<div class="rs-apply glyphicon glyphicon-list-alt"></div>报名管理
+				<span class="glyphicon glyphicon-list-alt"></span>报名管理
 			</div>
 			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_date_view" target="center">报名时间管理</a></li>
-					<li><a href="admin_fields_view" target="center">报名字段管理</a></li>
-				</ul>
+				<div class="rs-summary">小学报名时间</div>
+				<div class="rs-detailed">
+					<ul>
+						<li><a href="admin_date_primaryIn" target="center">辖区内</a></li>
+						<li><a href="admin_date_primaryOut" target="center">辖区外</a></li>
+					</ul>
+				</div>
+				<div class="rs-summary">中学报名时间</div>
+				<div class="rs-detailed">
+					<ul>
+						<li><a href="admin_date_middleIn" target="center">辖区内</a></li>
+						<li><a href="admin_date_middleOut" target="center">辖区外</a></li>
+					</ul>
+				</div>
+				<div class="rs-summary">小学报名字段</div>
+				<div class="rs-detailed">
+					<ul>
+						<li><a href="admin_fields_primaryIn" target="center">辖区内</a></li>
+						<li><a href="admin_fields_primaryOut" target="center">辖区外</a></li>
+					</ul>
+				</div>
+				<div class="rs-summary">中学报名字段</div>
+				<div class="rs-detailed">
+					<ul>
+						<li><a href="admin_fields_middleIn" target="center">辖区内</a></li>
+						<li><a href="admin_fields_middleOut" target="center">辖区外</a></li>
+					</ul>
+				</div>
 			</div>
 			<!--manage  -->
 			<div class="rs-summary">
-				<div class="rs-teacher glyphicon glyphicon-inbox"></div>管理员管理
+				<div class="rs-teacher glyphicon glyphicon-inbox"></div>教委管理
 			</div>
 			<div class="rs-detailed">
 				<ul>
@@ -85,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--School  -->
 			<div class="rs-summary">
-				<div class="rs-school glyphicon glyphicon-briefcase"></div>学校管理
+				<span class="glyphicon glyphicon-briefcase"></span>学校管理
 			</div>
 			<div class="rs-detailed">
 				<ul>
@@ -94,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--Teacher  -->
 			<div class="rs-summary">
-				<div class="rs-teacher glyphicon glyphicon-inbox"></div>教师管理
+				<span class="glyphicon glyphicon-inbox"></span>教师管理
 			</div>
 			<div class="rs-detailed">
 				<ul>
@@ -103,18 +130,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--Student  -->
 			<div class="rs-summary">
-				<div class="rs-student glyphicon glyphicon-tasks"></div>学生管理
+				<span class="glyphicon glyphicon-tasks"></span>学生管理
 			</div>
 			<div class="rs-detailed">
 				<ul>
 					<li><a href="admin_student_list" target="center">学生浏览</a></li>
-					<li><a href="admin_student_audit" target="center">认证审核</a></li>
+					<li><a href="admin_student_audit" target="center">报名审核</a></li>
 					<li><a href="admin_student_addExcel" target="center">批量导入</a></li>
 				</ul>
 			</div>
 			<!--Person  -->
 			<div class="rs-summary">
-				<div class="rs-personal glyphicon glyphicon-user"></div>个人管理
+				<span class="glyphicon glyphicon-user"></span>个人管理
 			</div>
 			<div class="rs-detailed">
 				<ul>

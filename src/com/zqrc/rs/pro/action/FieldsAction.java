@@ -13,11 +13,35 @@ public class FieldsAction extends BaseAction<Fields>{
 	
 	
 	/**
-	 * 报名字段
+	 * 小学辖区内
 	 * @return
 	 */
-	public String view() {
-		return "view";
+	public String primaryIn() {
+		return "primaryIn";
+	}
+	
+	/**
+	 * 小学辖区外
+	 * @return
+	 */
+	public String primaryOut() {
+		return "primaryOut";
+	}
+	
+	/**
+	 * 中学辖区内
+	 * @return
+	 */
+	public String middleIn() {
+		return "middleIn";
+	}
+	
+	/**
+	 * 中学辖区外
+	 * @return
+	 */
+	public String middleOut() {
+		return "middleOut";
 	}
 	
 }
