@@ -25,82 +25,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="row">
 				<div class="col-md-3 col-xs-6">
 					<div class="rs-infoBox bg-info">
-						<h2>654</h2>
-						<p>申请人数</p>
+						<h2>800/1200</h2>
+						<p>小学</p>
 						<span class="rs-infoIcon glyphicon glyphicon-stats" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="col-md-3 col-xs-6">
 					<div class="rs-infoBox bg-info">
-						<h2>654</h2>
-						<p>管理人数</p>
+						<h2>1150/2000</h2>
+						<p>中学</p>
 						<span class="rs-infoIcon glyphicon glyphicon-user" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="col-md-3 col-xs-6">
 					<div class="rs-infoBox bg-info">
-						<h2>654</h2>
-						<p>管理人数</p>
+						<h2>3200</h2>
+						<p>计划人数</p>
 						<span class="rs-infoIcon glyphicon glyphicon-stats" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="col-md-3 col-xs-6">
 					<div class="rs-infoBox bg-info">
-						<h2>654</h2>
-						<p>管理人数</p>
+						<h2>70%</h2>
+						<p>报名总比</p>
 						<span class="rs-infoIcon glyphicon glyphicon-user" aria-hidden="true"></span>
 					</div>
 				</div>
-				<div class="rs-infoBox table-responsive col-md-3 col-xs-6">
+				<div class="rs-infoBox table-responsive col-md-4 col-xs-6">
 					<table class="table table-striped table-bordered table-hover table-condensed">
-						<caption class="text-center">什么什么的表格</caption>
+						<caption class="text-center">小学各校报名信息统计统计</caption>
 						<thead>
 							<tr class="info">
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
+								<td>学校名</td>
+								<td>实际人数</td>
+								<td>计划人数</td>
+								<td>完成率（%）</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
+								<td>小红花</td>
+								<td>205</td>
+								<td>300</td>
+								<td>72</td>
 							</tr>
 							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
+								<td>小红花</td>
+								<td>205</td>
+								<td>300</td>
+								<td>72</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="rs-infoBox table-responsive col-md-3 col-xs-6">
+				<div class="rs-pie table-responsive col-md-2 col-xs-6">
+					<div class="rs-infoBox" id="container1"></div>
+				</div>
+				<div class="rs-infoBox table-responsive col-md-4 col-xs-6">
 					<table class="table table-striped table-bordered table-hover table-condensed">
-						<caption class="text-center">什么什么的表格</caption>
+						<caption class="text-center">中学各校报名信息统计统计</caption>
 						<thead>
 							<tr class="info">
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
+								<td>学校名</td>
+								<td>实际人数</td>
+								<td>计划人数</td>
+								<td>完成率（%）</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
+								<td>大红花</td>
+								<td>205</td>
+								<td>300</td>
+								<td>72</td>
 							</tr>
 							<tr>
-								<td>1</td>
-								<td>2</td>
-								<td>3</td>
+								<td>小红花</td>
+								<td>205</td>
+								<td>300</td>
+								<td>72</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<div class="rs-pie table-responsive col-md-3 col-xs-6">
-					<div class="rs-infoBox" id="container"></div>
+				<div class="rs-pie table-responsive col-md-2 col-xs-6">
+					<div class="rs-infoBox" id="container2"></div>
 				</div>
 			</div>
 		</div>
@@ -110,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript">
 			$(document).ready(function () {
 			    // Build the chart
-			    Highcharts.chart('container', {
+			    Highcharts.chart('container1', {
 			        chart: {
 			            plotBackgroundColor: null,
 			            plotBorderWidth: null,
@@ -118,7 +127,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			            type: 'pie'
 			        },
 			        title: {
-			            text: '报名人数饼状图统计表'
+			            text: '报名统计图'
+			        },
+			        tooltip: {
+			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+			        },
+			        plotOptions: {
+			            pie: {
+			                allowPointSelect: true,
+			                cursor: 'pointer',
+			                dataLabels: {
+			                    enabled: false
+			                },
+			                showInLegend: true
+			            }
+			        },
+			        series: [{
+			            name: '比例（百分比）',
+			            colorByPoint: true,
+			            data: [{
+			                name: '报名人数',
+			                y: 56.33
+			            }, {
+			                name: '未报名人数',
+			                y: 24.03,
+			                sliced: true,
+			                selected: true
+			            }]
+			        }]
+			    });
+			    
+			     Highcharts.chart('container2', {
+			        chart: {
+			            plotBackgroundColor: null,
+			            plotBorderWidth: null,
+			            plotShadow: false,
+			            type: 'pie'
+			        },
+			        title: {
+			            text: '报名统计图'
 			        },
 			        tooltip: {
 			            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

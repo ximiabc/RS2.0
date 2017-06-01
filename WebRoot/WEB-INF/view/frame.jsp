@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</head>
 	<body>
 		<div id="rs-pageHeader">
-			<h1>上街区中、小学生<small style="color: #FFF;">入学报名信息管理系统</small></h1>
+			<h1>上街区中小学生<small style="color: #FFF;">入学报名信息管理系统</small></h1>
 			<span id="rs-userInfo">
 				<span class="rs-plr5">${currentUser.name }</span>
 				您好，您的身份为

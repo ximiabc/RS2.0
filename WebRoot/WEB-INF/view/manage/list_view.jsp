@@ -17,73 +17,88 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 		<script src="js/Formtext.js"></script>
 		<style>
-		    .rs-school-height{margin-top: 30px;padding-bottom:50px;}
-		    .rs-school-btn{position: absolute;top: 30px;right: 20px;}
-			.rs-school-spacing{margin:0 10px;}
-			.rs-school-center{text-align: center;}
-			.rs-school-space{width: 140px;margin: 0 auto;}
-			.rs-school-nav{width: 400px;}
-			.rs-people:hover{cursor: pointer;text-decoration: none;}
-			.text{background-color: #00BBFF;}
+		    .rs-school-height{margin-top: 30px;padding-bottom:20px;}
+		    .rs-people:hover{text-decoration: none;cursor: pointer;}
 			.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{line-height: 34px;}
-			@media (max-width: 765px){.rs-school-btn{position:absolute;top:100px;}}
+			.form-horizontal .rs-text{text-align: left;}
+			/*@media (max-width: 765px){.rs-school-btn{position:absolute;top:100px;}}*/
 			/*重构 popover */
 			.popover{border:1px solid #C00;color:#000;}
 			.popover .popover-content{padding:1px 5px;}
 			.popover.top>.arrow:after{border-top-color:#C00;}
+			.form-inline .form-control {
+			    display: inline-block;
+			    width: auto;
+			    vertical-align: middle;
+			}
 		</style>
 		</head>
 	<body>
 		<!--表单部分-->
-		<div>
-		<form class="form-inline rs-school-height">
+		<div class="container-fluid">
 			<!--表单查询及添加-->
-			<div class="form-group col-lg-6 col-md-8 col-xs-8 col-sm-8 col-md-offset-4 col-sm-offset-2 col-xs-offset-4 col-lg-offset-6">
-				<!--下拉选项框-->
-				<select name="select_type" class="form-control col-md-2 col-sm-2 col-xs-2 rs-school-spacing">
-					<option selected="selected" value="1">所有</option>
-		    		<option value="2">账号</option>
-		    		<option value="3">名称</option>
-				</select>
-			    <input type="text" class="form-control col-md-2 col-sm-2 col-xs-2 col-lg-2 col-xs-2 rs-school-spacing" placeholder="number">
-			    <button type="submit" class="btn btn-default col-sm-2 col-md-2 col-xs-2 rs-school-spacing" style="">检索</button>
-			    </div>
-		</form>
-		<button type="submit" class="btn btn-default rs-school-btn" data-toggle="modal" data-target="#myModal-1">增加学校</button>
-		</div>
-		<!--数据表格部分--> 
-		<div class="table-responsive col-xs-12 col-md-12">
-			<table class="table table-striped table-bordered table-hover table-condensed rs-school-center">
-				<thead>
-					<tr class="info">
-						<td></td>
-						<td>学校账号</td>
-						<td>学校名称</td>
-						<td>备注</td>
-						<td>联系电话</td>
-						<td>管理人</td>
-						<td>操作</td>
-					</tr>
-				</thead>
-				<tbody>
-					<s:iterator value="pageBean.recordList" status="indexs">
-						<tr>
-							<td>${indexs.index+1 }</td>
-							<td>${account }</td>
-							<td>${name }</td>
-							<td>${info }</td>
-							<td>${phone }</td>
-							<td>${user.name }</td>
-							<td>
-								<div class="rs-school-space">
-								<input class="btn btn-default" type="submit" value="删除">
-								<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
-								</div>
-							</td>
+			<div class="rs-school-height row">
+				<div class="col-xs-2">
+					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加管理员</button>
+				</div>
+				<div class="col-xs-offset-1 col-xs-9 clearfix">
+					<form class="form-inline pull-right">
+						<select name="select_type" class="form-control col-md-2 col-sm-2 col-xs-2 rs-school-spacing">
+							<option selected="selected" value="1">所有</option>
+				    		<option value="2">账号</option>
+				    		<option value="3">名称</option>
+						</select>
+					    <input type="text" class="form-control" placeholder="number">
+					    <button type="submit" class="form-control">检索</button>	
+				    </form>
+				</div>
+			</div>
+		<!--数据表格部分-->
+			<table class="table table-striped table-bordered table-hover table-condensed text-center">
+					<thead>
+						<tr class="info">
+							<td></td>
+							<td>学校账号</td>
+							<td>学校名称</td>
+							<td>备注</td>
+							<td>联系电话</td>
+							<td>管理人</td>
+							<td>操作</td>
 						</tr>
-					</s:iterator>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<s:iterator value="pageBean.recordList" status="indexs">
+							<tr>
+								<td>${indexs.index+1 }</td>
+								<td>${account }</td>
+								<td>${name }</td>
+								<td>${info }</td>
+								<td>${phone }</td>
+								<td>${user.name }</td>
+								<td>
+									<div class="rs-school-space">
+									<input class="btn btn-default" type="submit" value="删除">
+									<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
+									</div>
+								</td>
+							</tr>
+						</s:iterator>
+					</tbody>
+				</table>
+		<!--分页-->
+			<div class="clearfix">
+				<ul class="pagination pull-right">
+				  	<li><a href="#" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
+				    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				     <li><a href="#" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
+				</ul>
+			</div>
 		</div>
 		<!-- Modal 1-->
 		<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -233,21 +248,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.modal-body .form-group').find("div").removeClass("has-success");
 			}
 		</script>
-		<!--分页-->
-		<div class="rs-school-nav center-block">
-			<nav aria-label="Page navigation">
-			  <ul class="pagination">
-			  	<li><a href="#" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-			    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-			    <li><a href="#">1</a></li>
-			    <li><a href="#">2</a></li>
-			    <li><a href="#">3</a></li>
-			    <li><a href="#">4</a></li>
-			    <li><a href="#">5</a></li>
-			    <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-			     <li><a href="#" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
-			  </ul>
-			</nav>
-		</div>
 	</body>
 </html>
