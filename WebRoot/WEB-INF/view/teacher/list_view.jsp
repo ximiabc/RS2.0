@@ -187,19 +187,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校编号</label>
 							    <div class="col-xs-5">
-							   		<input type="text" class="form-control" id="inputText" placeholder="学校编号" disabled></input>
+							   		<input value="${currentUser.account }" type="text" class="form-control" id="inputText" placeholder="学校编号" disabled></input>
 								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校名称</label>
 							    <div class="col-xs-5">
-							   		<input type="text" class="form-control" id="inputText" placeholder="学校名称" disabled></input>
+							   		<input value="${currentUser.name }" type="text" class="form-control" id="inputText" placeholder="学校名称" disabled></input>
 								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师账号</label>
 							    <div class="col-xs-5">
-							    	<input type="text" class="form-control" id="inputText" placeholder="账号自动生成" disabled></input>
+							    	<input value="${bean.account }"  type="text" class="form-control" id="inputText" placeholder="账号自动生成" disabled></input>
 								</div>
 							</div>
 							<div class="form-group">
