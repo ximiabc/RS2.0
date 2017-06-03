@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,4 +17,5 @@ import com.zqrc.rs.pro.service.StatesService;
 @Service
 @Transactional
 public class StatesServiceImpl extends BaseDaoImpl<States> implements StatesService{
+
 }

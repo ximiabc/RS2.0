@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.service;
 
+import java.util.List;
+
 import com.zqrc.rs.base.BaseDao;
 import com.zqrc.rs.pro.entity.States;
 
@@ -9,4 +11,5 @@ import com.zqrc.rs.pro.entity.States;
  *
  */
 public interface StatesService extends BaseDao<States>{
+	
 }

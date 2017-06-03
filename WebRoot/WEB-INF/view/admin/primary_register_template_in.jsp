@@ -27,10 +27,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</button>
 						</div>
 						<div class="btn-group" role="group">
-							<button id="rs-down" type="button" class="btn btn-default btn-info btn-lg">
+							<a href="excelIn" id="rs-down" type="button" class="btn btn-default btn-info btn-lg">
 								<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
 								下载报名表
-							</button>
+							</a>
 						</div>
 					</div>
 					<button id="rs-saveItem" type="button" class="btn btn-warning btn-block hidden">保存</button>
@@ -95,6 +95,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<script src="js/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+<%-- 									<script>
+							$('#rs-down').click(function(){
+							window.location.href='Exporta');
+							});
+							</script> --%>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/dragslot.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/rs-registerTemplate.js" type="text/javascript" charset="utf-8"></script>
