@@ -16,6 +16,31 @@ import com.zqrc.rs.pro.entity.SchoolYear;
  *
  */
 public class FieldsAction extends BaseAction<Fields>{
+	private String result;
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
+	private String itemList;
+	public String getItemList() {
+		return itemList;
+	}
+	public void setItemList(String itemList) {
+		this.itemList = itemList;
+	}
+	/**
+	 * 小学辖区内异步
+	 * @return
+	 */
+	public String primaryInAdd(){
+		System.out.println("123==========================");
+		System.out.println(itemList);
+		setResult("true");
+		return "types";
+	}
+	
 	
 	/**
 	 * 小学辖区内

@@ -60,32 +60,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<table class="table table-striped table-bordered table-hover table-condensed text-center">
 					<thead>
 					<tr class="info">
+						<td></td>
 						<td>学校编号</td>
 						<td>学校名字</td>
 						<td>教师账号</td>
 						<td>教师姓名</td>
 						<td>联系电话</td>
-						<td>家庭地址</td>
 						<td>备注</td>
 						<td>操作</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>23743253</td>
-						<td>只用于</td>
-						<td>45374353</td>
-						<td>张一样</td>
-						<td>15132121515</td>
-						<td>国赛还得好贵的</td>
-						<td>国赛还得好贵的</td>
-						<td>
-							<div class="rs-school-space">
-							<input class="btn btn-default" type="submit" value="删除">
-							<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
-							</div>
-						</td>
-					</tr>
+					<s:iterator value="pageBean.recordList" status="indexs">
+						<tr>
+							<td>${indexs.index+1 }</td>
+							<td>${user.account }</td>
+							<td>${user.name }</td>
+							<td>${account }</td>
+							<td>${name }</td>
+							<td>${phone }</td>
+							<td>${info }</td>
+							<td>
+								<div class="rs-school-space">
+								<a href="admin_teacherDel?id=${id }" onclick="return confirm('确认删除此老师吗？');" class="btn btn-default">删除</a>
+								<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
+								</div>
+							</td>
+						</tr>
+					</s:iterator>
 				</tbody>
 				</table>
 		<!--分页开始-->
@@ -182,7 +184,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			        <h4 class="modal-title" id="myModalLabel">增加老师</h4>
 			      </div>
-			      <form class="form-horizontal">
+			      <form action="admin_teacherAdd" class="form-horizontal">
 				    <div class="modal-body">
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校编号</label>
@@ -205,19 +207,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师姓名</label>
 							    <div class="col-xs-5">
-							    	<input type="text" class="form-control" id="inputText" placeholder="描述信息" ></input>
+							    	<input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="描述信息" ></input>
 								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">联系电话</label>
 							    <div class="col-xs-5">
-							      <input type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">相关描述</label>
 							    <div class="col-xs-5">
-							      <input type="text" class="form-control" id="inputText" placeholder="描述信息" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭地址，只能为中文"/>
+							      <input name="info" value="${bean.info }" type="text" class="form-control" id="inputText" placeholder="描述信息" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭地址，只能为中文"/>
 							    </div>
 							</div>
 				    </div>

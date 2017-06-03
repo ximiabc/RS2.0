@@ -76,6 +76,14 @@
 			<!-- 教师浏览 -->
 			<result name="teacherList">/WEB-INF/view/teacher/list_view.jsp</result>
 		</action>
-	  
+	</package>
+	<package name="filter"  extends="json-default" namespace="/">
+	<!-- 字段异步 -->
+		<action name="asyn_fields_*" class="com.zqrc.rs.pro.action.FieldsAction" method="{1}">
+			<!-- 课程知识点类型-->
+			<result name="types" type="json">
+                <param name="root">result</param>
+            </result>
+		</action>
 	</package>
 </struts>

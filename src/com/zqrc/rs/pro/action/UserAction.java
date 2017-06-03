@@ -74,7 +74,37 @@ public class UserAction extends BaseAction<User>{
 		vs.set("pageBean", pageBean);
 		return "teacherList";
 	}
-	
+	/**
+	 * 添加教师
+	 * @return
+	 */
+	public String teacherAdd(){
+		User user=getModel();
+		User admin=getCurrentUser();
+		String str=admin.getAccount();
+		String phone=getModel().getPhone();
+		user.setAccount(DateUtil.getAccount(str.substring(str.length()-4, str.length())));//账号生成算法
+		user.setPass(phone.substring(phone.length()-6, phone.length()));
+		user.setRole(roleService.getById(4));
+		user.setUser(admin);
+		System.out.println(user.getAccount()+"=="+user.getPass());
+		userService.save(user);
+		teacherList();
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("bean", user);
+		addActionMessage("添加成功！");
+		return "teacherList";
+	}
+	/**
+	 * 删除教师
+	 * @return
+	 */
+	public String teacherDel(){
+		userService.delete(getModel().getId());
+		teacherList();
+		addActionMessage("删除教师成功！");
+		return "teacherList";
+	}
 	///////////////////////////////////////////////学校相关
 	/**
 	 * 列出所有学校
