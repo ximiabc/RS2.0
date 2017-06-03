@@ -16,9 +16,11 @@ public class User {
 	private Integer num;//报名人数限制
 	private String phone;//电话
 	private String info;//描述信息
-
 	private User user;//关联一个上级
 	private Set<User>users=new HashSet<User>();//关联多个下级
+	
+	private Set<Student> belongSchool=new HashSet<Student>();//所属学校
+	private Set<Student> belongTeacher=new HashSet<Student>();//所属操作老师
 
 	public User() {
 	}
@@ -101,5 +103,21 @@ public class User {
 
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+
+	public Set<Student> getBelongSchool() {
+		return belongSchool;
+	}
+
+	public void setBelongSchool(Set<Student> belongSchool) {
+		this.belongSchool = belongSchool;
+	}
+
+	public Set<Student> getBelongTeacher() {
+		return belongTeacher;
+	}
+
+	public void setBelongTeacher(Set<Student> belongTeacher) {
+		this.belongTeacher = belongTeacher;
 	}
 }

@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-		<title>中学报名表字段（辖区外）</title>
+		<title>小学报名表字段（辖区外）</title>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="css/rs-registerTemplate.css" />
 	</head>
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="col-xs-offset-1 col-xs-10">
 					<div class="btn-group btn-group-justified" role="group">
 						<div class="btn-group" role="group">
-							<button type="button" data-toggle="modal" data-target="#uploadModal" class="btn btn-default btn-info btn-lg">
+							<button id="rs-up" type="button" data-toggle="modal" data-target="#uploadModal" class="btn btn-default btn-info btn-lg">
 								<span class="glyphicon glyphicon-download" aria-hidden="true"></span>
 								上传报名表
 							</button>

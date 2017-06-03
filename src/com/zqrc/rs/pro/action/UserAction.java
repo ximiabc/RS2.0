@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.User;
+import com.zqrc.rs.until.DateUtil;
 import com.zqrc.rs.until.HqlHelper;
 import com.zqrc.rs.until.PageBean;
 
@@ -16,6 +17,11 @@ import com.zqrc.rs.until.PageBean;
  *
  */
 public class UserAction extends BaseAction<User>{
+	private String select_type;
+	private String values;
+	private String role_id;
+	private String pass0;
+	private String pass1;
 	private String checkCode;//验证码
 	public void setCheckCode(String checkCode) {
 		this.checkCode = checkCode;
@@ -23,7 +29,38 @@ public class UserAction extends BaseAction<User>{
 	public String getCheckCode() {
 		return checkCode;
 	}
+	public String getPass0() {
+		return pass0;
+	}
+	public void setPass0(String pass0) {
+		this.pass0 = pass0;
+	}
+	public String getPass1() {
+		return pass1;
+	}
+	public void setPass1(String pass1) {
+		this.pass1 = pass1;
+	}
+	public String getRole_id() {
+		return role_id;
+	}
+	public void setRole_id(String role_id) {
+		this.role_id = role_id;
+	}
+	public String getSelect_type() {
+		return select_type;
+	}
+	public void setSelect_type(String select_type) {
+		this.select_type = select_type;
+	}
+	public String getValues() {
+		return values;
+	}
+	public void setValues(String values) {
+		this.values = values;
+	}
 	
+	///////////////////////////////////////////////教师相关
 	/**
 	 * 列出所有教师
 	 * @return
@@ -38,34 +75,108 @@ public class UserAction extends BaseAction<User>{
 		return "teacherList";
 	}
 	
+	///////////////////////////////////////////////学校相关
 	/**
 	 * 列出所有学校
 	 * @return
 	 */
 	public String schoolList(){
-		PageBean pageBean =userService.getPageBean(pageNum,10, new HqlHelper(User.class, "u").
-				addOrderByProperty("id", false).
-				addWhereCondition("u.role.id = ?",3));
+		HqlHelper helper=new HqlHelper(User.class, "u").addOrderByProperty("id", false).addWhereCondition("u.role.id = ?",3);
+		if("4".equals(select_type)){//所有学校
+		}else if("2".equals(select_type)){//学校账号
+			helper=helper.addWhereCondition("u.account = ?",values);
+		}else if("3".equals(select_type)){//学校名称
+			helper=helper.addWhereCondition("u.name = ?",values);
+		}else if("1".equals(select_type)){//关联账号
+			helper=helper.addWhereCondition("u.user.account = ?",getCurrentUser().getAccount());
+		}
+		PageBean pageBean =userService.getPageBean(pageNum,10, helper);
 		pageBean.setCurrentPage(pageNum);
 		ValueStack vs = ServletActionContext.getContext().getValueStack();
 		vs.set("pageBean", pageBean);
 		return "schoolList";
 	}
+	/**
+	 * 添加学校
+	 * @return
+	 */
+	public String schoolAdd(){
+		User user=getModel();
+		User admin=getCurrentUser();
+		String str=admin.getAccount();
+		String phone=getModel().getPhone();
+		user.setAccount(DateUtil.getAccount(str.substring(str.length()-4, str.length())));//账号生成算法
+		user.setPass(phone.substring(phone.length()-6, phone.length()));
+		user.setRole(roleService.getById(3));
+		user.setUser(admin);
+		System.out.println(user.getAccount()+"=="+user.getPass());
+		userService.save(user);
+		schoolList();
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("bean", user);
+		addActionMessage("添加成功！");
+		return "schoolList";
+	}
+	/**
+	 * 删除学校
+	 * @return
+	 */
+	public String schoolDel(){
+		userService.delete(getModel().getId());
+		addActionMessage("删除成功！");
+		return schoolList();
+	}
 	
+	//////////////////////////////////////////////管理员相关
 	/**
 	 * 浏览所有管理员
 	 * @return
 	 */
 	public String manageList(){
-		PageBean pageBean =userService.getPageBean(pageNum,10, new HqlHelper(User.class, "u").
-				addOrderByProperty("id", false).
-				addWhereCondition("u.role.id = ?",2));
+		HqlHelper helper=new HqlHelper(User.class, "u").addOrderByProperty("id", false).addWhereCondition("u.role.id = ?",2);
+		if("1".equals(select_type)){//所有
+		}else if("2".equals(select_type)){
+			helper=helper.addWhereCondition("u.account = ?",values);
+		}else if("3".equals(select_type)){
+			helper=helper.addWhereCondition("u.name = ?",values);
+		}
+		PageBean pageBean =userService.getPageBean(pageNum,10, helper);
 		pageBean.setCurrentPage(pageNum);
 		ValueStack vs = ServletActionContext.getContext().getValueStack();
 		vs.set("pageBean", pageBean);
 		return "manageList";
 	}
+	/**
+	 * 添加管理员
+	 * @return
+	 */
+	public String manageAdd() {
+		User user=getModel();
+		User admin=getCurrentUser();
+		String str=admin.getAccount();
+		String phone=getModel().getPhone();
+		user.setAccount(DateUtil.getAccount(str.substring(str.length()-4, str.length())));//账号生成算法
+		user.setPass(phone.substring(phone.length()-6, phone.length()));
+		user.setRole(roleService.getById(2));
+		user.setUser(admin);
+		userService.save(user);
+		manageList();
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("bean", user);
+		addActionMessage("添加成功！");
+		return "manageList";
+	}
+	/**
+	 * 删除管理员
+	 * @return
+	 */
+	public String manageDel(){
+		userService.delete(getModel().getId());
+		addActionMessage("删除成功！");
+		return manageList();
+	}
 	
+	////////////////////////////////////////////////个人相关
 	/**
 	 * 个人管理
 	 * @return
@@ -93,8 +204,7 @@ public class UserAction extends BaseAction<User>{
 	}
 	
 	
-	
-	
+	//////////////////////////////////////////公共部分
 	/**
 	 * 帮助页
 	 * @return

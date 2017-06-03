@@ -42,13 +42,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加管理员</button>
 				</div>
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
-					<form class="form-inline pull-right">
+					<form action="admin_manageList" class="form-inline pull-right">
 						<select name="select_type" class="form-control col-md-2 col-sm-2 col-xs-2 rs-school-spacing">
 							<option selected="selected" value="1">所有</option>
 				    		<option value="2">账号</option>
 				    		<option value="3">名称</option>
 						</select>
-					    <input type="text" class="form-control" placeholder="number">
+					    <input name="values" type="text" class="form-control" placeholder="查询参数">
 					    <button type="submit" class="form-control">检索</button>	
 				    </form>
 				</div>
@@ -58,8 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<thead>
 						<tr class="info">
 							<td></td>
-							<td>学校账号</td>
-							<td>学校名称</td>
+							<td>账号</td>
+							<td>名称</td>
 							<td>备注</td>
 							<td>联系电话</td>
 							<td>管理人</td>
@@ -77,28 +77,99 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${user.name }</td>
 								<td>
 									<div class="rs-school-space">
-									<input class="btn btn-default" type="submit" value="删除">
-									<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
+									<a href="admin_manageDel?id=${id }" onclick="return confirm('确定删除该管理员吗？');" class="btn btn-default" >删除</a>
+									<button id="n${indexs.index }" class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
 									</div>
 								</td>
 							</tr>
 						</s:iterator>
 					</tbody>
 				</table>
-		<!--分页-->
+		<!--分页开始-->
 			<div class="clearfix">
+				<div class="message">
+					共<i class="blue_page">
+						<s:property value="pageBean.pageCount" />
+					</i>页， 
+					<i class="blue_page">
+						<s:property value="pageBean.recordCount" />
+					</i>条记录， 当前显示第&nbsp;<i class="blue_page"> 
+					<s:if test="pageBean.currentPage == 0">
+						1
+					</s:if>
+					<s:else>
+						<s:property value="pageBean.currentPage" />
+					</s:else>
+					&nbsp;</i>页
+				</div>
+				<s:set name="uri" value="admin_manageList"></s:set>
+				<div class="message pull-right">
 				<ul class="pagination pull-right">
-				  	<li><a href="#" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-				    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-				     <li><a href="#" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
+					<!-- 首页键 -->
+				  	<li>
+				  		<s:if test="pageBean.pageCount <= 1">
+							<a aria-label="Previous">
+					     		<span aria-hidden="true">首页</span>
+					     	</a>
+						</s:if>
+						<s:else>
+					  		<a href="${uri }?pageNum=1" aria-label="Previous">
+					  			<span aria-hidden="true">首页</span>
+					  		</a>
+				  		</s:else>
+				  	</li>
+				  	<!-- 上页键 -->
+				    <li>
+				    	<s:if test="pageBean.currentPage-1 > 0">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage-1 }" href="#" aria-label="Previous">
+					    		<span aria-hidden="true">&laquo;</span>
+					    	</a>
+				    	</s:if>
+				    	<s:else>
+					  		<a aria-label="Previous">
+					  			<span aria-hidden="true">&laquo;</span>
+					  		</a>
+				  		</s:else>
+				    </li>
+				    <!-- 分页键 -->
+				    <s:iterator begin="pageBean.beginPageIndex" end="pageBean.endPageIndex" var="pageNums">
+				    	<c:if test="${pageBean.currentPage == pageNums }">
+				    		<li><a>${pageNums }</a></li>
+				    	</c:if>
+				    	<c:if test="${pageBean.currentPage != pageNums }">
+				    		<li><a href="${uri }?pageNum=${pageNums }">${pageNums }</a></li>
+				    	</c:if>
+				    </s:iterator>
+					<!-- 下页键 -->
+				    <li>
+				    	<s:if test="pageBean.currentPage+1 <= pageBean.pageCount">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage+1 }" aria-label="Next">
+					    		<span aria-hidden="true">&raquo;</span>
+					    	</a>
+				    	</s:if>
+				    	<s:else>
+				    		<a href="#" aria-label="Next">
+					    		<span aria-hidden="true">&raquo;</span>
+					    	</a>
+				    	</s:else>
+				    </li>
+				    <!-- 尾页键 -->
+				    <li>
+				    	<s:if test="pageBean.pageCount <= 1">
+							<a aria-label="Previous">
+					     		<span aria-hidden="true">尾页</span>
+					     	</a>
+						</s:if>
+						<s:else>
+							<a href="${uri }?pageNum=${pageBean.pageCount }" aria-label="Previous">
+					     		<span aria-hidden="true">尾页</span>
+					     	</a>
+						</s:else>
+				    </li>
 				</ul>
+				</div>
 			</div>
+			<!-- 分页结束 -->
 		</div>
 		<!-- Modal 1-->
 		<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -106,51 +177,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">增加学校</h4>
+		        <h4 class="modal-title" id="myModalLabel">增加管理员</h4>
 		      </div>
 		    <div class="modal-body">
-		        <form class="form-horizontal">
+		        <form action="admin_manageAdd" class="form-horizontal">
 					<div class="form-group">
 					    <label for="inputEmail3" class="col-sm-4 control-label">权限类型</label>
 					    <div class="col-sm-6">
-					      <select class="form-control">
-						      	<option>校级管理</option>
+					      <select name="role_id" class="form-control">
+						      	<option value="2">普通管理</option>
 					      </select>
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="inputText" class="col-sm-4 control-label">学校账户</label>
+					    <label for="inputText" class="col-sm-4 control-label">管理账户</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" id="inputText" placeholder="自动生成" disabled>
+					      <input value="${bean.account }" type="text" class="form-control" id="inputText" placeholder="自动生成" disabled>
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="inputText" class="col-sm-4 control-label">登录密码</label>
 					    <div class="col-sm-6">
-					      <input type="password" class="form-control" id="inputText" placeholder="自动生成" disabled>
+					      <input value="${bean.pass }" type="password" class="form-control" id="inputText" placeholder="自动生成" disabled>
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="inputText" class="col-sm-4 control-label">学校名称</label>
+					    <label for="inputText" class="col-sm-4 control-label">人员名称</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" id="inputText" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
+					      <input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
 					    </div>
 					</div>
 					<div class="form-group">
 					    <label for="inputText" class="col-sm-4 control-label">联系电话</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+					      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
 					    </div>
 					</div>
 					<div class="form-group">
-					    <label for="inputText" class="col-sm-4 control-label">学校备注</label>
+					    <label for="inputText" class="col-sm-4 control-label">相关备注</label>
 					    <div class="col-sm-6">
-					      <input type="text" class="form-control" id="inputText" placeholder="学校备注" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写学校备注，只能为中文"/>
+					      <input name="info" value="${bean.info }" type="text" class="form-control" id="inputText" placeholder="备注信息" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写学校备注，只能为中文"/>
 					    </div>
 					</div>
 					<div class="modal-footer">
 				        <input type="button" class="btn btn-default less" data-dismiss="modal" value="取消"/>
-				        <input type="button" class="btn btn-primary less" value="修改信息"/>
+				        <input type="submit" class="btn btn-primary less" value="修改信息"/>
 				    </div>
                 </form>
 		      </div>
@@ -163,19 +234,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <div class="modal-content">
 				    <div class="modal-header">
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">更改学校信息</h4>
+				        <h4 class="modal-title" id="myModalLabel">更改管理信息</h4>
 				    </div>
 				    <div class="modal-body">
 				       <form class="form-horizontal">
 							<div class="form-group">
-							    <label for="inputText" class="col-sm-4 control-label">学校账号</label>
+							    <label for="inputText" class="col-sm-4 control-label">管理账号</label>
 							    <label for="inputText" class="col-sm-4 control-label">100145gdsgdg48</label>
 							    <!--<div class="col-sm-6">
 							      <input type="password" class="form-control" id="inputText" placeholder="自动生成！" disabled>
 							    </div>-->
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-sm-4 control-label">学校名称</label>
+							    <label for="inputText" class="col-sm-4 control-label">管理名称</label>
 							    <label for="inputText" class="col-sm-4 control-label">正清大对我国的</label>
 							    <!--<div class="col-sm-6">
 							      <input type="password" class="form-control" id="inputText" placeholder="已提交，无法更改！" disabled>
@@ -202,32 +273,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </div>
 			</div>
 		</div>
-		<!-- Modal 3-->
-		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
-			    <div class="modal-content">
-				    <div class="modal-header">
-				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">更改学生人数</h4>
-				    </div>
-				    <div class="modal-body">
-				        <form class="form-horizontal">
-							<div class="form-group">
-							    <label for="inputText" class="col-sm-4 control-label">更改人数</label>
-							    <div class="col-sm-6">
-							      <input type="text" class="form-control" id="inputText" placeholder="输入实际人数，认真核查！" data-vaild="/^[0-9]*$" data-errmsg="数字格式错误，只能填数字" >
-							    </div>
-							</div>
-							<div class="modal-footer">
-						        <button type="button" class="btn btn-default less" data-dismiss="modal">取消</button>
-						        <button type="button" class="btn btn-primary less">确认更改</button>
-						   </div>
-						</form>
-				    </div>
-			    </div>
-			</div>
-		</div>
 		<script type="text/javascript">
+			var num = 1;
+			var da = '${pageBean.recordList.get(num).account }';
+			console.log(da);
               $("form").Vaild();
               //	清除提示
             	setInterval(function(){

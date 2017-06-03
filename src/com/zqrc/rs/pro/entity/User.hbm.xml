@@ -26,6 +26,16 @@
             <key column="user_users"></key>
             <one-to-many class="com.zqrc.rs.pro.entity.User" />
         </set>
+        <!-- 关联所属学生 -->
+        <set name="belongSchool"  lazy="false" cascade="all" inverse="true" >
+            <key column="school_belong"></key>
+            <one-to-many class="com.zqrc.rs.pro.entity.Student" />
+        </set>
+        <!-- 关联负责学生 -->
+        <set name="belongTeacher"  lazy="false" cascade="all" inverse="true" >
+            <key column="teacher_belong"></key>
+            <one-to-many class="com.zqrc.rs.pro.entity.Student" />
+        </set>
 	</class>
 
 </hibernate-mapping>

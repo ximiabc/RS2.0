@@ -14,6 +14,8 @@ public class Student {
 	private States states;//学生报名
 	private Date date;
 	private SchoolYear years;
+	private User school;
+	private User teacher;
 	
 	private String item1;
 	private String item2;
@@ -105,6 +107,22 @@ public class Student {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public User getSchool() {
+		return school;
+	}
+
+	public void setSchool(User school) {
+		this.school = school;
+	}
+
+	public User getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(User teacher) {
+		this.teacher = teacher;
 	}
 
 	public String getItem1() {

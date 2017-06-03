@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -65,6 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</tr>
 					</tfoot>
 				</table>
+				<s:actionmessage/>
 			</div>
 			
 		<!-- 模态框（Modal） -->
@@ -129,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</button>
 							<input type="submit" class="btn btn-primary" value="提交更改">
 						</div>
-				   </form>	
+				   </form>
 				</div>
 						</div>
 				</div><!-- /.modal-content -->

@@ -86,52 +86,93 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<td>23743253</td>
-						<td>只用于</td>
-						<td>45374353</td>
-						<td>张一样</td>
-						<td>15132121515</td>
-						<td>国赛还得好贵的</td>
-						<td>国赛还得好贵的</td>
-						<td>
-							<div class="rs-school-space">
-							<input class="btn btn-default" type="submit" value="删除">
-							<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>23743253</td>
-						<td>只用于</td>
-						<td>45374353</td>
-						<td>张一样</td>
-						<td>15132121515</td>
-						<td>国赛还得好贵的</td>
-						<td>国赛还得好贵的</td>
-						<td>
-							<div class="rs-school-space">
-							<input class="btn btn-default" type="submit" value="删除">
-							<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
-							</div>
-						</td>
-					</tr>
 				</tbody>
 				</table>
-		<!--分页-->
+		<!--分页开始-->
 			<div class="clearfix">
+				<div class="message">
+					共<i class="blue_page">
+						<s:property value="pageBean.pageCount" />
+					</i>页， 
+					<i class="blue_page">
+						<s:property value="pageBean.recordCount" />
+					</i>条记录， 当前显示第&nbsp;<i class="blue_page"> 
+					<s:if test="pageBean.currentPage == 0">
+						1
+					</s:if>
+					<s:else>
+						<s:property value="pageBean.currentPage" />
+					</s:else>
+					&nbsp;</i>页
+				</div>
+				<s:set name="uri" value="admin_teacherList"></s:set>
+				<div class="message pull-right">
 				<ul class="pagination pull-right">
-				  	<li><a href="#" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-				    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-				     <li><a href="#" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
+					<!-- 首页键 -->
+				  	<li>
+				  		<s:if test="pageBean.pageCount <= 1">
+							<a aria-label="Previous">
+					     		<span aria-hidden="true">首页</span>
+					     	</a>
+						</s:if>
+						<s:else>
+					  		<a href="${uri }?pageNum=1" aria-label="Previous">
+					  			<span aria-hidden="true">首页</span>
+					  		</a>
+				  		</s:else>
+				  	</li>
+				  	<!-- 上页键 -->
+				    <li>
+				    	<s:if test="pageBean.currentPage-1 > 0">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage-1 }" href="#" aria-label="Previous">
+					    		<span aria-hidden="true">&laquo;</span>
+					    	</a>
+				    	</s:if>
+				    	<s:else>
+					  		<a aria-label="Previous">
+					  			<span aria-hidden="true">&laquo;</span>
+					  		</a>
+				  		</s:else>
+				    </li>
+				    <!-- 分页键 -->
+				    <s:iterator begin="pageBean.beginPageIndex" end="pageBean.endPageIndex" var="pageNums">
+				    	<c:if test="${pageBean.currentPage == pageNums }">
+				    		<li><a>${pageNums }</a></li>
+				    	</c:if>
+				    	<c:if test="${pageBean.currentPage != pageNums }">
+				    		<li><a href="${uri }?pageNum=${pageNums }">${pageNums }</a></li>
+				    	</c:if>
+				    </s:iterator>
+					<!-- 下页键 -->
+				    <li>
+				    	<s:if test="pageBean.currentPage+1 <= pageBean.pageCount">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage+1 }" aria-label="Next">
+					    		<span aria-hidden="true">&raquo;</span>
+					    	</a>
+				    	</s:if>
+				    	<s:else>
+				    		<a href="#" aria-label="Next">
+					    		<span aria-hidden="true">&raquo;</span>
+					    	</a>
+				    	</s:else>
+				    </li>
+				    <!-- 尾页键 -->
+				    <li>
+				    	<s:if test="pageBean.pageCount <= 1">
+							<a aria-label="Previous">
+					     		<span aria-hidden="true">尾页</span>
+					     	</a>
+						</s:if>
+						<s:else>
+							<a href="${uri }?pageNum=${pageBean.pageCount }" aria-label="Previous">
+					     		<span aria-hidden="true">尾页</span>
+					     	</a>
+						</s:else>
+				    </li>
 				</ul>
+				</div>
 			</div>
+			<!-- 分页结束 -->
 		</div>
 		<!-- Modal 1-->
 		<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -139,21 +180,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">增加学生</h4>
+			        <h4 class="modal-title" id="myModalLabel">增加老师</h4>
 			      </div>
 			      <form class="form-horizontal">
 				    <div class="modal-body">
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校编号</label>
-							    <label for="inputText" class="col-xs-5 control-label rs-text">100145</label>
+							    <div class="col-xs-5">
+							   		<input type="text" class="form-control" id="inputText" placeholder="学校编号" disabled></input>
+								</div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师编号</label>
-							    <label for="inputText" class="col-xs-5 control-label rs-text">245353</label>
+							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校名称</label>
+							    <div class="col-xs-5">
+							   		<input type="text" class="form-control" id="inputText" placeholder="学校名称" disabled></input>
+								</div>
+							</div>
+							<div class="form-group">
+							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师账号</label>
+							    <div class="col-xs-5">
+							    	<input type="text" class="form-control" id="inputText" placeholder="账号自动生成" disabled></input>
+								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师姓名</label>
-							    <label for="inputText" class="col-xs-5 control-label rs-text">都一样</label>
+							    <div class="col-xs-5">
+							    	<input type="text" class="form-control" id="inputText" placeholder="描述信息" ></input>
+								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">联系电话</label>
@@ -162,9 +215,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    </div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">家庭地址</label>
+							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">相关描述</label>
 							    <div class="col-xs-5">
-							      <input type="text" class="form-control" id="inputText" placeholder="家庭地址" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭地址，只能为中文"/>
+							      <input type="text" class="form-control" id="inputText" placeholder="描述信息" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭地址，只能为中文"/>
 							    </div>
 							</div>
 				    </div>

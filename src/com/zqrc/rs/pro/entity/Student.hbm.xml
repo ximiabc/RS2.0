@@ -19,6 +19,10 @@
 		<many-to-one name="grade" class="com.zqrc.rs.pro.entity.Grade" column="student_grade"></many-to-one>
 		<!-- 关联学生报名状态 -->
 		<many-to-one name="states" class="com.zqrc.rs.pro.entity.States" column="student_states"></many-to-one>
+		<!-- 关联学校 -->
+		<many-to-one name="school" class="com.zqrc.rs.pro.entity.User" column="school_belong"></many-to-one>
+		<!-- 关联负责教师 -->
+		<many-to-one name="teacher" class="com.zqrc.rs.pro.entity.User" column="teacher_belong"></many-to-one>
 		<!--普通属性 -->
 		<property name="item1" type="string"></property>
 		<property name="item2" type="string"></property>
