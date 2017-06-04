@@ -38,9 +38,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="container-fluid">
 			<!--表单查询及添加-->
 			<div class="rs-school-height row">
+			
+			<c:if test="${currentUser.role.value == '1'}">
 				<div class="col-xs-2">
 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学生</button>
 				</div>
+			</c:if>
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
 					<form class="form-inline pull-right">
 						<!--下拉选项框-->

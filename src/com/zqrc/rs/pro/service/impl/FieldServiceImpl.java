@@ -24,4 +24,5 @@ public class FieldServiceImpl extends BaseDaoImpl<Fields> implements FieldServic
 	public List<Fields> getByComposite(Integer grade, Integer type, Integer year) {
 		return (List<Fields>)getSession().createQuery("from Fields f where f.grade_id = ? and f.type_id = ? and f.year_id = ? order by f.orders asc").setInteger(0, grade).setInteger(1, type).setInteger(2, year).list();
 	}
+	
 }

@@ -1,5 +1,6 @@
 package com.zqrc.rs.pro.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zqrc.rs.base.BaseDao;
@@ -19,4 +20,5 @@ public interface FieldService extends BaseDao<Fields>{
 	 * @return
 	 */
 	List<Fields>getByComposite(Integer grade,Integer type,Integer year);
+	
 }

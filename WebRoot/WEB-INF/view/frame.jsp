@@ -56,6 +56,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="rs-pageMain">
 			<div class="rs-tab bg-info">
+			
+			
+			<!-- 教委高级 -->
+			<c:if test="${currentUser.role.value == '1' }">
+			
 			<!--Manager-->  
 			<div class="rs-summary">
 				<span class="glyphicon glyphicon-th-list"></span>权限管理
@@ -149,6 +154,112 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 			</div>
 			<!--end  -->
+			
+			</c:if>
+			
+			<!-- 普通教委 -->
+			<c:if test="${currentUser.role.value == '2'}">
+			
+			<!--School  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-briefcase"></span>学校管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_schoolList" target="center">学校浏览</a></li>
+				</ul>
+			</div>
+			<!--Teacher  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-inbox"></span>教师管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_teacherList" target="center">教师浏览</a></li>
+				</ul>
+			</div>
+			<!--Student  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-tasks"></span>学生管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_student_list" target="center">学生浏览</a></li>
+					<li><a href="admin_student_audit" target="center">报名审核</a></li>
+				</ul>
+			</div>
+			<!--Person  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-user"></span>个人管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_personal" target="center">我的信息</a></li>
+				</ul>
+			</div>
+			<!--end  -->
+			
+			</c:if>
+			
+			<!-- 学校管理员 -->
+			<c:if test="${currentUser.role.value == '3'}">
+			<!--Teacher  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-inbox"></span>教师管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_teacherList" target="center">教师浏览</a></li>
+				</ul>
+			</div>
+			<!--Student  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-tasks"></span>学生管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_student_list" target="center">学生浏览</a></li>
+					<li><a href="admin_student_audit" target="center">报名审核</a></li>
+				</ul>
+			</div>
+			<!--Person  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-user"></span>个人管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_personal" target="center">我的信息</a></li>
+				</ul>
+			</div>
+			<!--end  -->
+			</c:if>
+			
+			<!-- 教师管理员 -->
+			<c:if test="${currentUser.role.value == '4'}">
+			
+			<!--Student  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-tasks"></span>学生管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_student_list" target="center">学生浏览</a></li>
+					<li><a href="admin_student_audit" target="center">报名审核</a></li>
+				</ul>
+			</div>
+			<!--Person  -->
+			<div class="rs-summary">
+				<span class="glyphicon glyphicon-user"></span>个人管理
+			</div>
+			<div class="rs-detailed">
+				<ul>
+					<li><a href="admin_personal" target="center">我的信息</a></li>
+				</ul>
+			</div>
+			<!--end  -->
+			
+			</c:if>
+			
 		</div>
 		
 			<!-- center panel -->
