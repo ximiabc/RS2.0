@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/rs-registerTemplate.css" />
 	</head>
 	<body>
-		<div id="rs-wrap" class="container">
+		<div id="middleIn" class="container">
 			<div class="row">
 				<div class="col-xs-offset-1 col-xs-10">
 					<div class="btn-group btn-group-justified" role="group">

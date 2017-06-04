@@ -63,25 +63,28 @@ $('#rs-addItem').click(function(){
 });
 //点击保存
 $('#rs-saveItem').click(function(){
+	//ToWhere是设置post路径的变量
+	var ToWhere = $('.container').attr('id');
 	var itemList = [];
 	$('.slot-item').each(function(){
 		itemList.push($(this).attr('id')+':'+$.trim($(this).text()));
 	});
 //	console.log("itemList的类型为：" + typeof(itemList) + "\nitemList的长度为："+itemList.length + "\nitemList的值为："+itemList);
-
+	$('#rs-saveItem').addClass("hidden");
+	$('#rs-down').prop("disabled",false);
+//				$('#rs-down').removeProp("disabled");
 	//通过Ajax提交信息到后台
-			$.ajax({
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-				type: "POST",
-				url: "asyn_fields_primaryInAdd",/*地址*/
-				data: {itemList : itemList},/*传参*/
-				dataType: "json",
-				success: function(data){
-					$('#rs-saveItem').addClass("hidden");
-					$('#rs-down').prop("disabled",false);
-				},
-				error: function(jqXHR){alert(jqXHR.status);}
-			});
+				$.ajax({
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+					type: "POST",
+					url: "asyn_fields_"+ToWhere+"Add",/*地址*/
+					data: {itemList : JSON.stringify(itemList)},/*传参*/
+					dataType: "json",
+					success: function(data){
+						$('#rs-saveItem').addClass("hidden");
+					},
+					error: function(jqXHR){alert(jqXHR.status);}
+				});
 });
 jQuery(function($){
 	$('#dragslot').dragslot({

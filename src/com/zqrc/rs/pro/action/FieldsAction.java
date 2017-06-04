@@ -2,6 +2,9 @@ package com.zqrc.rs.pro.action;
 
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
@@ -35,8 +38,15 @@ public class FieldsAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String primaryInAdd(){
-		System.out.println("123==========================");
+		System.out.println("==========================");
 		System.out.println(itemList);
+		
+		JSONArray array=new JSONArray(itemList);
+		System.out.println();
+		String s=(String)array.get(2);
+		String[]str=s.split(":");
+		array.length();
+		ActionContext.getContext();
 		setResult("true");
 		return "types";
 	}

@@ -22,4 +22,6 @@ public class YearServiceImpl extends BaseDaoImpl<SchoolYear> implements YearServ
 	public SchoolYear getNews() {
 		return (SchoolYear)getSession().createQuery("from SchoolYear s order by s.date desc").list().get(0);
 	}
+	
+	
 }

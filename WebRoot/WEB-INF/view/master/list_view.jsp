@@ -1,3 +1,5 @@
+<%@page import="com.zqrc.rs.until.PageBean"%>
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -83,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>
 									<div class="rs-school-space">
 									<a href="admin_schoolDel?id=${id }" onclick="return confirm('确定删除该学校吗？')" class="btn btn-default">删除</a>
-									<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
+									<button id="n${indexs.index+1 }" class="btn btn-default rs-modalBtn" type="button">更改</button>
 									</div>
 								</td>
 							</tr>
@@ -250,23 +252,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <form  class="form-horizontal">
 				    <div class="modal-body">
 							<div class="form-group">
-							    <label class="control-label col-xs-offset-2 col-xs-2">学校账号</label>
-							    <label class="control-label col-xs-6 rs-text">100145gdsgdg48</label>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="control-label col-xs-offset-2 col-xs-2">学校名称</label>
-							    <label for="inputText" class="control-label col-xs-6 control-label rs-text">正清大对我国的</label>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-2 col-xs-2 control-label">联系电话</label>
+							    <label for="rs-school1" class="control-label col-xs-offset-2 col-xs-2">学校账号</label>
+							    <!--<label class="control-label col-xs-6 rs-text">100145gdsgdg48</label>-->
 							    <div class=" col-xs-6">
-							      <input type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input type="text" class="form-control" id="rs-school1" disabled/>
 							    </div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-2 col-xs-2 control-label">相关备注</label>
+							    <label for="rs-school2" class="control-label col-xs-offset-2 col-xs-2">学校名称</label>
+							    <!--<label for="inputText" class="control-label col-xs-6 control-label rs-text">正清大对我国的</label>-->
+							    <div class=" col-xs-6">
+							      <input type="text" class="form-control" id="rs-school2" disabled/>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-school3" class="col-xs-offset-2 col-xs-2 control-label">联系电话</label>
+							    <div class=" col-xs-6">
+							      <input type="text" class="form-control" id="rs-school3" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-school4" class="col-xs-offset-2 col-xs-2 control-label">招生人数</label>
+							    <div class=" col-xs-6">
+							      <input type="text" class="form-control" id="rs-school4" data-vaild="/^[0-9]*$" data-errmsg="数字格式错误，只能填数字" />
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-school5" class="col-xs-offset-2 col-xs-2 control-label">相关备注</label>
 							    <div class="col-xs-6">
-							      <input type="text" class="form-control" id="inputText" placeholder="学校备注" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校备注，只能为中文"/>
+							      <input type="text" class="form-control" id="rs-school5" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校备注，只能为中文"/>
 							    </div>
 							</div>
 				    </div>
@@ -324,5 +338,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.modal-body .form-group').find("div").removeClass("has-error");
 				$('.modal-body .form-group').find("div").removeClass("has-success");
 			}
+			//设置模态框值
+			$('.rs-modalBtn').click(function(){
+				var num = $(this).attr('id').slice(1);
+				//var data = '${pageBean.recordList }';
+				var data='${pageBean.recordList.get(1).account }';
+				console.log(data);
+				$('#rs-school1').val('${pageBean.recordList.get(num).account }');
+				$('#rs-school2').val('${pageBean.recordList.get(num).name }');
+				$('#rs-school3').val('${pageBean.recordList.get(num).phone }');
+				$('#rs-school4').val('${pageBean.recordList.get(num).num }');
+				$('#rs-school5').val('${pageBean.recordList.get(num).info }');
+				console.log(num);
+				$('#myModal-2').modal('show');
+			});
 		</script>
 </html>
