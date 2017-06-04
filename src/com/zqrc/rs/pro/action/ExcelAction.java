@@ -39,6 +39,7 @@ public class ExcelAction extends BaseAction<Fields>{
 	}
 
 
+//   导出小学辖区外的模板
 	public String Out(){  
 		ByteArrayOutputStream out = new ByteArrayOutputStream();  
 
@@ -75,7 +76,7 @@ public class ExcelAction extends BaseAction<Fields>{
 
 
 
-	//	导出小学辖区外报名表
+	//	导出小学辖区内报名表
 	public String In() throws Exception {
 
 
