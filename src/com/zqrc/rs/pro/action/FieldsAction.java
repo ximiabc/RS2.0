@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.action;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -11,6 +13,7 @@ import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.SchoolYear;
+import com.zqrc.rs.until.DateUtil;
 
 /**
  * 学生信息字段控制器
@@ -38,19 +41,63 @@ public class FieldsAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String primaryInAdd(){
-		System.out.println("==========================");
-		System.out.println(itemList);
-		
-		JSONArray array=new JSONArray(itemList);
-		System.out.println();
-		String s=(String)array.get(2);
-		String[]str=s.split(":");
-		array.length();
-		ActionContext.getContext();
+		saveFields(1, 1);
+		setResult("true");
+		return "types";
+	}
+	/**
+	 * 小学辖区外异步
+	 * @return
+	 */
+	public String primaryOutAdd(){
+		saveFields(1, 2);
+		setResult("true");
+		return "types";
+	}
+	/**
+	 * 中学辖区内异步
+	 * @return
+	 */
+	public String middleInAdd(){
+		saveFields(2, 1);
+		setResult("true");
+		return "types";
+	}
+	/**
+	 * 中学辖区外异步
+	 * @return
+	 */
+	public String middleOutAdd(){
+		saveFields(2, 2);
 		setResult("true");
 		return "types";
 	}
 	
+	/**
+	 * 保存更新字段
+	 */
+	private void saveFields(Integer grade,Integer type){
+		SchoolYear year=yearService.getNews();
+		DueTime dueTime=dueTimeService.getByComposite(grade, type, year.getId());
+		JSONArray array=new JSONArray(itemList);//接收到的数据解析
+		
+		if((new Date()).after(dueTime.getStartDate())){//报名日期前后判定(报名后)
+			System.out.println("=================");
+		}else{//报名前
+			for(int i=0;i<array.length();i++){
+				String str=((String)array.get(i)).split(":")[1];
+				System.out.println(str);
+				Fields entity=new Fields();
+				entity.setGrade_id(grade);
+				entity.setType_id(type);
+				entity.setYear_id(year.getId());
+				entity.setOrders(i+1);
+				entity.setName(str);
+				entity.setKeyName("item"+(i+1));
+				fieldService.saveOrUpdate(entity);
+			}
+		}
+	}
 	
 	/**
 	 * 小学辖区内

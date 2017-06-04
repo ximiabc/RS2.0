@@ -19,4 +19,5 @@ public interface FieldService extends BaseDao<Fields>{
 	 * @return
 	 */
 	List<Fields>getByComposite(Integer grade,Integer type,Integer year);
+	
 }

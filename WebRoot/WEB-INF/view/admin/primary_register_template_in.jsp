@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="dragslot" class="slot">
 						<ul id="slot-list" class="list-group slot-list text-center" style="margin-bottom: 0px;">
 							<s:iterator value="beans" status="indexs">
-								<li class="list-group-item slot-item">${indexs.index+1 }=${name }
+								<li class="list-group-item slot-item">${name }
 									<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
 								</li>
 							</s:iterator>

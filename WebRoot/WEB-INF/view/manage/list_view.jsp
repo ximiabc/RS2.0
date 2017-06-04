@@ -239,29 +239,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div class="modal-body">
 				       <form class="form-horizontal">
 							<div class="form-group">
-							    <label for="inputText" class="col-sm-4 control-label">管理账号</label>
-							    <label for="inputText" class="col-sm-4 control-label">100145gdsgdg48</label>
-							    <!--<div class="col-sm-6">
-							      <input type="password" class="form-control" id="inputText" placeholder="自动生成！" disabled>
-							    </div>-->
+							    <label for="inputText" class="col-sm-4 control-label">管理账户</label>
+							    <div class="col-sm-6">
+							      <input value="${bean.account }" type="text" class="form-control" id="inputText" placeholder="自动生成" disabled>
+							    </div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-sm-4 control-label">管理名称</label>
-							    <label for="inputText" class="col-sm-4 control-label">正清大对我国的</label>
-							    <!--<div class="col-sm-6">
-							      <input type="password" class="form-control" id="inputText" placeholder="已提交，无法更改！" disabled>
-							    </div>-->
+							    <label for="inputText" class="col-sm-4 control-label">人员名称</label>
+							    <div class="col-sm-6">
+							      <input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
+							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-sm-4 control-label">联系电话</label>
 							    <div class="col-sm-6">
-							      <input type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-sm-4 control-label">相关备注</label>
 							    <div class="col-sm-6">
-							      <input type="text" class="form-control" id="inputText" placeholder="学校备注" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校备注，只能为中文"/>
+							      <input name="info" value="${bean.info }" type="text" class="form-control" id="inputText" placeholder="备注信息" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写学校备注，只能为中文"/>
 							    </div>
 							</div>
 							<div class="modal-footer">

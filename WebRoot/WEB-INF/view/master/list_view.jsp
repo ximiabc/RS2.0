@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${name }</td>
 								<td>${info }</td>
 								<td>${phone }</td>
-								<td>${num }</td>
+								<td>${belongSchool.size() }</td>
 								<td><a class="rs-people" data-toggle="modal" data-target="#myModal-3" title="限制报名人数">${num }</a></td>
 								<td>${user.name }</td>
 								<td>

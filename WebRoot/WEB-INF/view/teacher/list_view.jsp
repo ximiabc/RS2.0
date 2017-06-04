@@ -243,32 +243,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    <div class="modal-body">
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校编号</label>
-							    <label for="inputText" class="col-xs-5 control-label rs-text">100145</label>
+							    <div class="col-xs-5">
+							   		<input value="${currentUser.account }" type="text" class="form-control" id="inputText" placeholder="学校编号" disabled></input>
+								</div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师编号</label>
-							    <label for="inputText" class="col-xs-5 control-label rs-text">245353</label>
+							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校名称</label>
+							    <div class="col-xs-5">
+							   		<input value="${currentUser.name }" type="text" class="form-control" id="inputText" placeholder="学校名称" disabled></input>
+								</div>
+							</div>
+							<div class="form-group">
+							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师账号</label>
+							    <div class="col-xs-5">
+							    	<input value="${bean.account }"  type="text" class="form-control" id="inputText" placeholder="账号自动生成" disabled></input>
+								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师姓名</label>
-							    <label for="inputText" class="col-xs-5 control-label rs-text">都一样</label>
+							    <div class="col-xs-5">
+							    	<input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="描述信息" ></input>
+								</div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">联系电话</label>
 							    <div class="col-xs-5">
-							      <input type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
 							    </div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">家庭地址</label>
+							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">相关描述</label>
 							    <div class="col-xs-5">
-							      <input type="text" class="form-control" id="inputText" placeholder="家庭地址" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭住址，只能为中文"/>
-							    </div>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">相关备注</label>
-							    <div class="col-xs-5">
-							      <input type="text" class="form-control" id="inputText" placeholder="相关备注" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写相关备注，只能为中文"/>
+							      <input name="info" value="${bean.info }" type="text" class="form-control" id="inputText" placeholder="描述信息" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭地址，只能为中文"/>
 							    </div>
 							</div>
 				    </div>
