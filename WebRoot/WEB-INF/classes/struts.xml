@@ -47,7 +47,11 @@
         <result name="excel" type="stream">
             <param name="contentType">application/vnd.ms-excel</param>    <!-- 注意这里的ContentType -->
             <param name="inputName">excelStream</param>                   <!-- 这里需要和Action里的变量名一致 -->
+<<<<<<< HEAD
+            <param name="contentDisposition">filename="standard.xls"</param> <!-- 下载文件的名字 -->
+=======
             <param name="contentDisposition">filename="Demo.xls"</param> <!-- 下载文件的名字 -->
+>>>>>>> refs/remotes/origin/master
             <param name="bufferSize">10240</param>  <!-- 下载文件的大小 10485760=10M -->
         </result>
     </action>

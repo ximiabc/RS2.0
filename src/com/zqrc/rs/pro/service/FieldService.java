@@ -1,5 +1,6 @@
 package com.zqrc.rs.pro.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.zqrc.rs.base.BaseDao;
@@ -20,6 +21,8 @@ public interface FieldService extends BaseDao<Fields>{
 	 */
 	List<Fields>getByComposite(Integer grade,Integer type,Integer year);
 	
+<<<<<<< HEAD
+=======
 	/**
 	 * 删除指定外键的数据
 	 * @param grade
@@ -29,4 +32,5 @@ public interface FieldService extends BaseDao<Fields>{
 	 */
 	void delByComposite(Integer grade,Integer type,Integer year,Integer orders);
 	
+>>>>>>> refs/remotes/origin/master
 }

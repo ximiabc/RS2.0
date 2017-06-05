@@ -1,5 +1,9 @@
 config/db.properties
 .settings/org.eclipse.core.resources.prefs
 .settings/org.eclipse.core.resources.prefs
+<<<<<<< HEAD
+*.bak
+=======
 *.properties
 *.properties
+>>>>>>> refs/remotes/origin/master
