@@ -52,7 +52,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>{
 	public void update(T entity) {
 		getSession().update(entity);
 	}
-
+	
 	public void delete(Integer id) {
 		Object obj = getById(id);
 		if (obj != null) {

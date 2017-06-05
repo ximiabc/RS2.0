@@ -12,6 +12,12 @@
                 <param name="root">result</param>
             </result>
 		</action>
+		<!-- 用户查询 -->
+		<action name="asyn_user_*" class="com.zqrc.rs.pro.action.UserAction" method="{1}">
+			<result name="types" type="json">
+                <param name="root">result</param>
+            </result>
+		</action>
 	</package>
 
 	<!-- 高级管理员 -->

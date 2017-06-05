@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>
 									<div class="rs-school-space">
 									<a href="admin_manageDel?id=${id }" onclick="return confirm('确定删除该管理员吗？');" class="btn btn-default" >删除</a>
-									<button id="n${indexs.index }" class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
+									<button id="n${id }" class="btn btn-default rs-modalBtn">更改</button>
 									</div>
 								</td>
 							</tr>
@@ -204,7 +204,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="form-group">
 					    <label for="inputText" class="col-sm-4 control-label">人员名称</label>
 					    <div class="col-sm-6">
-					      <input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
+					      <input name="name" value="${bean.name }"  type="text" class="form-control" id="inputText" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
 					    </div>
 					</div>
 					<div class="form-group">
@@ -237,34 +237,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <h4 class="modal-title" id="myModalLabel">更改管理信息</h4>
 				    </div>
 				    <div class="modal-body">
-				       <form class="form-horizontal">
+				       <form action="admin_manageUpdate" class="form-horizontal">
 							<div class="form-group">
 							    <label for="inputText" class="col-sm-4 control-label">管理账户</label>
 							    <div class="col-sm-6">
-							      <input value="${bean.account }" type="text" class="form-control" id="inputText" placeholder="自动生成" disabled>
+							      <input value="${bean.account }" type="text" class="form-control" id="rs-school1" placeholder="自动生成" disabled>
+							    	<input id="rs-id" name="id" hidden="true">
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-sm-4 control-label">人员名称</label>
 							    <div class="col-sm-6">
-							      <input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
+							      <input name="name" disabled value="${bean.name }" type="text" class="form-control" id="rs-school2" placeholder="提交后无法修改，请认真核对！" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校名称，只能为中文"/>
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-sm-4 control-label">联系电话</label>
 							    <div class="col-sm-6">
-							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="rs-school3" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="inputText" class="col-sm-4 control-label">相关备注</label>
 							    <div class="col-sm-6">
-							      <input name="info" value="${bean.info }" type="text" class="form-control" id="inputText" placeholder="备注信息" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写学校备注，只能为中文"/>
+							      <input name="info" value="${bean.info }" type="text" class="form-control" id="rs-school5" placeholder="备注信息" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写学校备注，只能为中文"/>
 							    </div>
 							</div>
 							<div class="modal-footer">
 						        <input type="button" class="btn btn-default less" data-dismiss="modal" value="取消"/>
-						        <input type="button" class="btn btn-primary less" value="确认更改"/>
+						        <input type="submit" class="btn btn-primary less" value="确认更改"/>
 						    </div>
 		                </form>
 				    </div>
@@ -294,6 +295,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.modal-body .form-group').find("div").removeClass("has-error");
 				$('.modal-body .form-group').find("div").removeClass("has-success");
 			}
+			
+			//设置模态框值
+			$('.rs-modalBtn').click(function(e){
+				var num = $(this).attr('id').slice(1);
+				$.ajax({ 
+					type: "GET",
+					url: "asyn_user_manageById?id="+num,
+					dataType: "json",
+					success: function(data){
+						var data = $.parseJSON(data);
+						$('#rs-id').val(data.id);
+						$('#rs-school1').val(data.account);
+						$('#rs-school2').val(data.name);
+						$('#rs-school3').val(data.phone);
+						$('#rs-school5').val(data.info);
+						$('#myModal-2').modal('show');
+					},
+					error: function(XHR){alert("获取信息失败");}
+				});
+			});
 		</script>
 	</body>
 </html>

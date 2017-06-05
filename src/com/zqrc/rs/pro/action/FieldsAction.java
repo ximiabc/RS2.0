@@ -1,11 +1,9 @@
 package com.zqrc.rs.pro.action;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
@@ -13,7 +11,6 @@ import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.SchoolYear;
-import com.zqrc.rs.until.DateUtil;
 
 /**
  * 学生信息字段控制器
@@ -86,7 +83,6 @@ public class FieldsAction extends BaseAction<Fields>{
 		}else{//报名前
 			for(int i=0;i<array.length();i++){
 				String str=((String)array.get(i)).split(":")[1];
-				System.out.println(str);
 				Fields entity=new Fields();
 				entity.setGrade_id(grade);
 				entity.setType_id(type);
@@ -95,6 +91,9 @@ public class FieldsAction extends BaseAction<Fields>{
 				entity.setName(str);
 				entity.setKeyName("item"+(i+1));
 				fieldService.saveOrUpdate(entity);
+			}
+			for(int i=array.length()+1;i<40;i++){
+				fieldService.delByComposite(grade, type, year.getId(), i);
 			}
 		}
 	}

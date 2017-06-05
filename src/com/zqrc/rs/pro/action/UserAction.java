@@ -1,6 +1,9 @@
 package com.zqrc.rs.pro.action;
 
+import net.sf.json.JSONArray;
+
 import org.apache.struts2.ServletActionContext;
+import org.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
@@ -59,6 +62,13 @@ public class UserAction extends BaseAction<User>{
 	public void setValues(String values) {
 		this.values = values;
 	}
+	private String result;
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
 	
 	///////////////////////////////////////////////教师相关
 	/**
@@ -70,7 +80,7 @@ public class UserAction extends BaseAction<User>{
 				addOrderByProperty("id", false).
 				addWhereCondition("u.role.id = ?",4));
 		pageBean.setCurrentPage(pageNum);
-		ValueStack vs = ServletActionContext.getContext().getValueStack();
+		ValueStack vs = ActionContext.getContext().getValueStack();
 		vs.set("pageBean", pageBean);
 		return "teacherList";
 	}
@@ -104,6 +114,29 @@ public class UserAction extends BaseAction<User>{
 		teacherList();
 		addActionMessage("删除教师成功！");
 		return "teacherList";
+	}
+	/**
+	 * 更新教师
+	 * @return
+	 */
+	public String teacherUpdate() {
+		User user=userService.getById(getModel().getId());
+		user.setPhone(getModel().getPhone());
+		user.setNum(getModel().getNum());
+		user.setInfo(getModel().getInfo());
+		userService.update(user);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("bean", user);
+		addActionMessage("修改成功！");
+		return teacherList();
+	}
+	/**
+	 * 通过ID查找教师
+	 * @return
+	 */
+	public String teacherById(){
+		getJsonUser();
+		return "types";
 	}
 	///////////////////////////////////////////////学校相关
 	/**
@@ -156,6 +189,59 @@ public class UserAction extends BaseAction<User>{
 		addActionMessage("删除成功！");
 		return schoolList();
 	}
+	/**
+	 * 学校更新
+	 * @return
+	 */
+	public String schoolUpdate() {
+		User user=userService.getById(getModel().getId());
+		user.setPhone(getModel().getPhone());
+		user.setNum(getModel().getNum());
+		user.setInfo(getModel().getInfo());
+		userService.update(user);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("bean", user);
+		addActionMessage("修改成功！");
+		return schoolList();
+	}
+	/**
+	 * 获取学校通过id
+	 * @return
+	 */
+	public String schoolById(){
+		
+		getJsonUser();
+		return "types";
+	}
+	
+	/**
+	 * 获取对象json
+	 */
+	private void getJsonUser() {
+		User user=userService.getById(getModel().getId());
+		System.out.println(getModel().getId());
+		StringBuffer buffer=new StringBuffer("{\"code\":");
+		if(user==null){
+			buffer.append("\"0\"}");
+		}else{
+			if(user.getUser()==null){
+				user.setUser(new User());
+			}
+			JSONObject object=new JSONObject();
+			object.put("upaccount", user.getUser().getAccount());
+			object.put("upname", user.getUser().getName());
+			object.put("id", user.getId());
+			object.put("name", user.getName());
+			object.put("account", user.getAccount());
+			object.put("phone", user.getPhone());
+			object.put("info", user.getInfo());
+			object.put("num", user.getNum());
+			System.out.println(object.toString());
+			setResult(object.toString());
+		}
+	}
+	
+	
 	
 	//////////////////////////////////////////////管理员相关
 	/**
@@ -204,6 +290,29 @@ public class UserAction extends BaseAction<User>{
 		userService.delete(getModel().getId());
 		addActionMessage("删除成功！");
 		return manageList();
+	}
+	/**
+	 * 管理更新
+	 * @return
+	 */
+	public String manageUpdate() {
+		User user=userService.getById(getModel().getId());
+		user.setPhone(getModel().getPhone());
+		user.setNum(getModel().getNum());
+		user.setInfo(getModel().getInfo());
+		userService.update(user);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("bean", user);
+		addActionMessage("修改成功！");
+		return manageList();
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public String manageById(){
+		getJsonUser();
+		return "types";
 	}
 	
 	////////////////////////////////////////////////个人相关

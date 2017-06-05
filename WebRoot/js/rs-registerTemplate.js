@@ -73,17 +73,17 @@ $('#rs-saveItem').click(function(){
 	$('#rs-down').removeClass("disabled");
 //				$('#rs-down').removeProp("disabled");
 	//通过Ajax提交信息到后台
-//				$.ajax({
-//					contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-//					type: "POST",
-//					url: "",/*地址*/
-//					data: {itemList : itemList},/*传参*/
-//					dataType: "json",
-//					success: function(data){
-//						$('#rs-saveItem').addClass("hidden");
-//					},
-//					error: function(jqXHR){alert(jqXHR.status);}
-//				});
+				$.ajax({
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
+					type: "POST",
+					url: "asyn_fields_"+ToWhere+"Add",/*地址*/
+					data: {itemList : JSON.stringify(itemList)},/*传参*/
+					dataType: "json",
+					success: function(data){
+						$('#rs-saveItem').addClass("hidden");
+					},
+					error: function(jqXHR){alert(jqXHR.status);}
+				});
 });
 jQuery(function($){
 	$('#dragslot').dragslot({

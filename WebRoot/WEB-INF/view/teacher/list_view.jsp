@@ -83,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>
 								<div class="rs-school-space">
 								<a href="admin_teacherDel?id=${id }" onclick="return confirm('确认删除此老师吗？');" class="btn btn-default">删除</a>
-								<button class="btn btn-default" type="submit" data-toggle="modal" data-target="#myModal-2">更改</button>
+								<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
 								</div>
 							</td>
 						</tr>
@@ -239,42 +239,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">更改学校信息</h4>
 				    </div>
-				    <form  class="form-horizontal">
+				    <form action="admin_teacherUpdate" class="form-horizontal">
 				    <div class="modal-body">
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校编号</label>
+							    <label for="rs-schoolAcc" class="col-xs-offset-3 col-xs-2 control-label">学校编号</label>
 							    <div class="col-xs-5">
-							   		<input value="${currentUser.account }" type="text" class="form-control" id="inputText" placeholder="学校编号" disabled></input>
-								</div>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">学校名称</label>
-							    <div class="col-xs-5">
-							   		<input value="${currentUser.name }" type="text" class="form-control" id="inputText" placeholder="学校名称" disabled></input>
-								</div>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师账号</label>
-							    <div class="col-xs-5">
-							    	<input value="${bean.account }"  type="text" class="form-control" id="inputText" placeholder="账号自动生成" disabled></input>
-								</div>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">教师姓名</label>
-							    <div class="col-xs-5">
-							    	<input name="name" value="${bean.name }" type="text" class="form-control" id="inputText" placeholder="描述信息" ></input>
-								</div>
-							</div>
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">联系电话</label>
-							    <div class="col-xs-5">
-							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="inputText" placeholder="联系电话" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input value="${currentUser.account }" type="text" class="form-control" id="rs-schoolAcc" disabled/>
+							      <input id="rs-id" name="id" hidden="true">
 							    </div>
 							</div>
 							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-3 col-xs-2 control-label">相关描述</label>
+							    <label for="rs-schoolNam" class="col-xs-offset-3 col-xs-2 control-label">学校名字</label>
 							    <div class="col-xs-5">
-							      <input name="info" value="${bean.info }" type="text" class="form-control" id="inputText" placeholder="描述信息" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写家庭地址，只能为中文"/>
+							      <input value="${currentUser.name }" type="text" class="form-control" id="rs-schoolNam" disabled/>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-teacherAcc" class="col-xs-offset-3 col-xs-2 control-label">教师编号</label>
+							    <div class="col-xs-5">
+							      <input value="${bean.account }" type="text" class="form-control" id="rs-teacherAcc" disabled/>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-teacherNam" class="col-xs-offset-3 col-xs-2 control-label">教师姓名</label>
+							    <div class="col-xs-5">
+							      <input name="name" value="${bean.name }" type="text" class="form-control" id="rs-teacherNam" disabled/>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-teacherCal" class="col-xs-offset-3 col-xs-2 control-label">联系电话</label>
+							    <div class="col-xs-5">
+							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="rs-teacherCal" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="rs-teacherTxt" class="col-xs-offset-3 col-xs-2 control-label">相关备注</label>
+							    <div class="col-xs-5">
+							      <input name="info" value="${bean.info }" type="text" class="form-control" id="rs-teacherTxt" data-vaild="^[\u4e00-\u9fa5]{2,36}$" data-errmsg="请填写相关备注，只能为中文"/>
 							    </div>
 							</div>
 				    </div>
@@ -282,97 +283,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					        <input type="button" class="btn btn-default less" data-dismiss="modal" value="取消"/>
 					        <input type="submit" class="btn btn-primary" value="确认更改"/>
 				    </div>
-					</form>
-			    </div>
-			</div>
-		</div>
-		<!-- Modal 3-->
-		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog modal-lg" role="document">
-			    <div class="modal-content">
-				    <div class="modal-header">
-				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">更改学生人数</h4>
-				    </div> 
-				    <form class="form-horizontal">
-					    <div class="modal-body row">
-							<div class="form-group col-xs-6">
-								    <label for="inputText" class="col-xs-4 control-label">学生编号</label>
-								    <label for="inputText" class="col-xs-4 control-label">216000062105478985</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学生姓名</label>
-							    <label for="inputText" class="col-xs-4 control-label">张宇说</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">性别</label>
-							    <label for="inputText" class="col-xs-4 control-label">男</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">民族</label>
-							    <label for="inputText" class="col-xs-4 control-label">汉族</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">身份证号</label>
-							    <label for="inputText" class="col-xs-4 control-label">410106201005150034</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">报名学校</label>
-							    <label for="inputText" class="col-xs-4 control-label">201600000621</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">入学前幼儿园</label>
-							    <label for="inputText" class="col-xs-4 control-label">实验幼儿园</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">家庭地址</label>
-							    <label for="inputText" class="col-xs-4 control-label">我凛真乌云社区</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">家庭电话</label>
-							    <label for="inputText" class="col-xs-4 control-label">135255880563</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">所在居委会</label>
-							    <label for="inputText" class="col-xs-4 control-label">老在和促进</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人1姓名</label>
-							    <label for="inputText" class="col-xs-4 control-label">张贝</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人1电话</label>
-							    <label for="inputText" class="col-xs-4 control-label">1362588062</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人1身份证</label>
-							    <label for="inputText" class="col-xs-4 control-label">410121198009125432</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人2姓名</label>
-							     <label for="inputText" class="col-xs-4 control-label">陈伟欧</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人2电话</label>
-							    <label for="inputText" class="col-xs-4 control-label">13679850000</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人2身份证</label>
-							     <label for="inputText" class="col-xs-4 control-label">410121198009125432</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学生类型</label>
-							    <label for="inputText" class="col-xs-4 control-label">辖区内学生</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">报名状态</label>
-							    <label for="inputText" class="col-xs-4 control-label">已报名</label>
-							</div>
-					    </div>
-					    <div class="modal-footer">
-					        <button type="button" class="btn btn-default less" data-dismiss="modal">取消</button>
-					        <button type="submit" class="btn btn-primary less">审核通过</button>
-						</div>
 					</form>
 			    </div>
 			</div>
@@ -397,6 +307,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.modal-body .form-group').find("div").removeClass("has-error");
 				$('.modal-body .form-group').find("div").removeClass("has-success");
 			}
+			//设置模态框值
+			$('.rs-modalBtn').click(function(){
+				var num = $(this).attr('id').slice(1);
+				$.ajax({
+					type: "GET",
+					url: "asyn_user_teacherById?id="+num,
+					dataType: "json",
+					success: function(data){
+					var data = $.parseJSON(data);
+						$('#rs-id').val(data.id);
+						$('#rs-schoolAcc').val(data.upaccount);
+						$('#rs-schoolNam').val(data.upname);
+						$('#rs-teacherAcc').val(data.account);
+						$('#rs-teacherNam').val(data.name);
+						$('#rs-teacherCal').val(data.phone);
+						$('#rs-teacherTxt').val(data.info);
+						$('#myModal-2').modal('show');
+					},
+					error: function(XHR){alert("获取信息失败");}
+				});
+			});
 		</script>
 	</body>
 </html>

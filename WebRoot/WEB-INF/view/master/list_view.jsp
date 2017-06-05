@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>
 									<div class="rs-school-space">
 									<a href="admin_schoolDel?id=${id }" onclick="return confirm('确定删除该学校吗？')" class="btn btn-default">删除</a>
-									<button id="n${indexs.index+1 }" class="btn btn-default rs-modalBtn" type="button">更改</button>
+									<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
 									</div>
 								</td>
 							</tr>
@@ -249,38 +249,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabele">更改学校信息</h4>
 				    </div>
-				    <form  class="form-horizontal">
+				    <form action="admin_schoolUpdate"  class="form-horizontal">
 				    <div class="modal-body">
 							<div class="form-group">
 							    <label for="rs-school1" class="control-label col-xs-offset-2 col-xs-2">学校账号</label>
 							    <!--<label class="control-label col-xs-6 rs-text">100145gdsgdg48</label>-->
 							    <div class=" col-xs-6">
-							      <input type="text" class="form-control" id="rs-school1" disabled/>
+							      <input value="${bean.account }" type="text" class="form-control" id="rs-school1" disabled/>
+							      <input id="rs-id" name="id" hidden="true">
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="rs-school2" class="control-label col-xs-offset-2 col-xs-2">学校名称</label>
 							    <!--<label for="inputText" class="control-label col-xs-6 control-label rs-text">正清大对我国的</label>-->
 							    <div class=" col-xs-6">
-							      <input type="text" class="form-control" id="rs-school2" disabled/>
+							      <input value="${bean.name }"  type="text" class="form-control" id="rs-school2" disabled/>
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="rs-school3" class="col-xs-offset-2 col-xs-2 control-label">联系电话</label>
 							    <div class=" col-xs-6">
-							      <input type="text" class="form-control" id="rs-school3" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
+							      <input name="phone" value="${bean.phone }" type="text" class="form-control" id="rs-school3" data-vaild="^(1[\d]{10}|0\d{2,3}\-\d{7,8})$" data-errmsg="联系电话格式错误"/>
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="rs-school4" class="col-xs-offset-2 col-xs-2 control-label">招生人数</label>
 							    <div class=" col-xs-6">
-							      <input type="text" class="form-control" id="rs-school4" data-vaild="/^[0-9]*$" data-errmsg="数字格式错误，只能填数字" />
+							      <input name="num" value="${bean.num }" type="text" class="form-control" id="rs-school4" data-vaild="^[0-9]*$" data-errmsg="数字格式错误，只能填数字" />
 							    </div>
 							</div>
 							<div class="form-group">
 							    <label for="rs-school5" class="col-xs-offset-2 col-xs-2 control-label">相关备注</label>
 							    <div class="col-xs-6">
-							      <input type="text" class="form-control" id="rs-school5" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校备注，只能为中文"/>
+							      <input name="info" value="${bean.info }" type="text" class="form-control" id="rs-school5" data-vaild="^[\u4e00-\u9fa5]{2,30}$" data-errmsg="请填写学校备注，只能为中文"/>
 							    </div>
 							</div>
 				    </div>
@@ -340,12 +341,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			//设置模态框值
 			$('.rs-modalBtn').click(function(e){
 				var num = $(this).attr('id').slice(1);
-				$('#rs-school1').val('${pageBean.recordList.get(num).account }');
-				$('#rs-school2').val('${pageBean.recordList.get(num).name }');
-				$('#rs-school3').val('${pageBean.recordList.get(num).phone }');
-				$('#rs-school4').val('${pageBean.recordList.get(num).num }');
-				$('#rs-school5').val('${pageBean.recordList.get(num).info }');
-				$('#myModal-2').modal('show');
+				$.ajax({ 
+					type: "GET",
+					url: "asyn_user_schoolById?id=" + num,
+					dataType: "json",
+					success: function(data){
+						var data = $.parseJSON(data);
+						$('#rs-id').val(data.id);
+						$('#rs-school1').val(data.account);
+						$('#rs-school2').val(data.name);
+						$('#rs-school3').val(data.phone);
+						$('#rs-school4').val(data.num);
+						$('#rs-school5').val(data.info);
+						$('#myModal-2').modal('show');
+					},
+					error: function(XHR){alert("获取信息失败");}
+				});
 			});
 		</script>
 </html>

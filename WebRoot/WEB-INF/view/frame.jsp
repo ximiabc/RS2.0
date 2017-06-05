@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#rs-pageHeader{top:0;background-color: #0BF;padding-left:20px;color: #FFF;box-shadow: 0 -1px 5px #666 inset;}
 			#rs-userInfo{position:relative;display:block;text-align: right;vertical-align: middle;color: inherit;}
 			#rs-userInfo>span{color: #666;}
-			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 50px;}
+			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 31px;}
 			#rs-frameCenter{margin-left:200px;height: 100%;}
 			#rs-pageFooter{bottom:0;text-align: center;background-color: #FFF;}
 			.rs-tab {padding-top: 103px;padding-bottom: 50px;width: 200px;height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;position: absolute;top: 0px;}
@@ -72,32 +72,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span class="glyphicon glyphicon-list-alt"></span>报名管理
 			</div>
 			<div class="rs-detailed">
-				<div class="rs-summary">小学报名时间</div>
+				<div class="rs-summary">小学报名</div>
 				<div class="rs-detailed">
 					<ul>
-						<li><a href="admin_date_primaryIn" target="center">辖区内</a></li>
-						<li><a href="admin_date_primaryOut" target="center">辖区外</a></li>
+						<li><a href="admin_date_primaryIn" target="center">辖区内时间</a></li>
+						<li><a href="admin_date_primaryOut" target="center">辖区外时间</a></li>
+						<li><a href="admin_fields_primaryIn" target="center">辖区内字段</a></li>
+						<li><a href="admin_fields_primaryOut" target="center">辖区外字段</a></li>
+						<li><a target="center">辖区内审核</a></li>
+						<li><a target="center">辖区外审核</a></li>
 					</ul>
 				</div>
-				<div class="rs-summary">中学报名时间</div>
+				<div class="rs-summary">中学报名</div>
 				<div class="rs-detailed">
 					<ul>
-						<li><a href="admin_date_middleIn" target="center">辖区内</a></li>
-						<li><a href="admin_date_middleOut" target="center">辖区外</a></li>
-					</ul>
-				</div>
-				<div class="rs-summary">小学报名字段</div>
-				<div class="rs-detailed">
-					<ul>
-						<li><a href="admin_fields_primaryIn" target="center">辖区内</a></li>
-						<li><a href="admin_fields_primaryOut" target="center">辖区外</a></li>
-					</ul>
-				</div>
-				<div class="rs-summary">中学报名字段</div>
-				<div class="rs-detailed">
-					<ul>
-						<li><a href="admin_fields_middleIn" target="center">辖区内</a></li>
-						<li><a href="admin_fields_middleOut" target="center">辖区外</a></li>
+						<li><a href="admin_date_middleIn" target="center">辖区内时间</a></li>
+						<li><a href="admin_date_middleOut" target="center">辖区外时间</a></li>
+						<li><a href="admin_fields_middleIn" target="center">辖区内字段</a></li>
+						<li><a href="admin_fields_middleOut" target="center">辖区外字段</a></li>
+						<li><a target="center">辖区内审核</a></li>
+						<li><a target="center">辖区外审核</a></li>
 					</ul>
 				</div>
 			</div>
