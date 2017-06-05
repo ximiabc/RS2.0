@@ -26,6 +26,12 @@ public interface BaseDao<T> {
 	 * @param id
 	 */
 	void delete(Integer id);
+	
+	/**
+	 * 保存或更新
+	 * @param entity
+	 */
+	void saveOrUpdate(T entity);
 
 	/**
 	 * 更新实体

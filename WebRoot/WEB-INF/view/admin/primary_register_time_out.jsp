@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			                </div>
 			                <label for="endTime" class="col-xs-offset-2 control-label">结束报名日期：</label>
 			                <div id="endTime" class="input-group date form_date col-xs-offset-2 col-xs-8" data-date="">
-			                    <input name="endDates" class="form-control" size="16" type="text" value="<s:date name="bean.endDate" format="yyyy-mm-dd"/>" readonly>
+			                    <input name="endDates" class="form-control" size="16" type="text" value="<s:date name="bean.endDate" format="yyyy-MM-dd"/>" readonly>
 			                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 			                </div>

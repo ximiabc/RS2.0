@@ -21,4 +21,16 @@ public interface FieldService extends BaseDao<Fields>{
 	 */
 	List<Fields>getByComposite(Integer grade,Integer type,Integer year);
 	
+<<<<<<< HEAD
+=======
+	/**
+	 * 删除指定外键的数据
+	 * @param grade
+	 * @param type
+	 * @param year
+	 * @param orders
+	 */
+	void delByComposite(Integer grade,Integer type,Integer year,Integer orders);
+	
+>>>>>>> refs/remotes/origin/master
 }

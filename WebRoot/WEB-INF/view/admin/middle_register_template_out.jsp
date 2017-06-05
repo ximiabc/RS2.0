@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -14,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/rs-registerTemplate.css" />
 	</head>
 	<body>
-		<div id="rs-wrap" class="container">
+		<div id="middleOut" class="container">
 			<div class="row">
 				<div class="col-xs-offset-1 col-xs-10">
 					<div class="btn-group btn-group-justified" role="group">
@@ -25,7 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</button>
 						</div>
 						<div class="btn-group" role="group">
+<<<<<<< HEAD
 							<a href="excelmiddelOut" id="rs-down" type="button" class="btn btn-default btn-info btn-lg">
+=======
+							<a href="excelmiddelOut" id="rs-down" class="btn btn-default btn-info btn-lg">
+>>>>>>> refs/remotes/origin/master
 								<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
 								下载报名表
 							</a>
@@ -34,51 +40,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<button id="rs-saveItem" type="button" class="btn btn-warning btn-block hidden">保存</button>
 					<div id="dragslot" class="slot">
 						<ul id="slot-list" class="list-group slot-list text-center" style="margin-bottom: 0px;">
-							<li class="list-group-item slot-item">姓名
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">性别
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">民族
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">身份证号
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">报名学校
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">入学前幼儿园
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">家庭地址
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">所在居委会
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">监护人1姓名
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">监护人1电话
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">监护人1身份证号
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">监护人2姓名
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">监护人2电话
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">监护人2身份证号
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
-							<li class="list-group-item slot-item">学生类型
-								<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
-							</li>
+							<s:iterator value="beans" status="indexs">
+								<li class="list-group-item slot-item">${name }
+									<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
+								</li>
+							</s:iterator>
 						</ul>
 					</div>
 					<div class="input-group">

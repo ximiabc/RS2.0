@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/rs-registerTemplate.css" />
 	</head>
 	<body>
-		<div id="rs-wrap" class="container">
+		<div id="primaryIn" class="container">
 			<div class="row">
 				<div class="col-xs-offset-1 col-xs-10">
 					<div class="btn-group btn-group-justified" role="group">
@@ -27,7 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</button>
 						</div>
 						<div class="btn-group" role="group">
+<<<<<<< HEAD
 							<a href="excelIn" id="rs-down" type="button" class="btn btn-default btn-info btn-lg">
+=======
+							<a href="excelIn" id="rs-down" class="btn btn-default btn-info btn-lg">
+>>>>>>> refs/remotes/origin/master
 								<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
 								下载报名表
 							</a>
@@ -37,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="dragslot" class="slot">
 						<ul id="slot-list" class="list-group slot-list text-center" style="margin-bottom: 0px;">
 							<s:iterator value="beans" status="indexs">
-								<li class="list-group-item slot-item">${indexs.index+1 }=${name }
+								<li class="list-group-item slot-item">${name }
 									<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
 								</li>
 							</s:iterator>
