@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -98,54 +100,93 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>已提交</td>
 						<td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-3">详情</button></td>
 					</tr>
-					<tr>
-						<td>1</td>
-						<td>2016000015648484845</td>
-						<td>张雨欣</td>
-						<td>男</td>
-						<td>汉族</td>
-						<td>41060151548541517442</td>
-						<td>实验小学</td>
-						<td>周伟伟</td>
-						<td>实验有认识</td>
-						<td>事估计钙一个</td>
-						<td>13456487224</td>
-						<td>辖区内儿童</td>
-						<td>已提交</td>
-						<td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-3">详情</button></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2016000015648484845</td>
-						<td>张雨欣</td>
-						<td>男</td>
-						<td>汉族</td>
-						<td>41060151548541517442</td>
-						<td>实验小学</td>
-						<td>周伟伟</td>
-						<td>实验有认识</td>
-						<td>事估计钙一个</td>
-						<td>13456487224</td>
-						<td>辖区内儿童</td>
-						<td>已提交</td>
-						<td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-3">详情</button></td>
-					</tr>
 				</tbody>
 				</table>
-		<!--分页-->
+			<!--分页开始-->
+			<s:set name="uri" value="admin_student_audit"></s:set>
 			<div class="clearfix">
+				<div class="message">
+					共<i class="blue_page">
+						<s:property value="pageBean.pageCount" />
+					</i>页， 
+					<i class="blue_page">
+						<s:property value="pageBean.recordCount" />
+					</i>条记录， 当前显示第&nbsp;<i class="blue_page"> 
+					<s:if test="pageBean.currentPage == 0">
+						1
+					</s:if>
+					<s:else>
+						<s:property value="pageBean.currentPage" />
+					</s:else>
+					&nbsp;</i>页
+				</div>
+				<div class="message pull-right">
 				<ul class="pagination pull-right">
-				  	<li><a href="#" aria-label="Previous"><span aria-hidden="true">首页</span></a></li>
-				    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-				    <li><a href="#">1</a></li>
-				    <li><a href="#">2</a></li>
-				    <li><a href="#">3</a></li>
-				    <li><a href="#">4</a></li>
-				    <li><a href="#">5</a></li>
-				    <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-				     <li><a href="#" aria-label="Previous"><span aria-hidden="true">尾页</span></a></li>
+					<!-- 首页键 -->
+				  	<li>
+				  		<s:if test="pageBean.pageCount <= 1">
+							<a aria-label="Previous">
+					     		<span aria-hidden="true">首页</span>
+					     	</a>
+						</s:if>
+						<s:else>
+					  		<a href="${uri }?pageNum=1" aria-label="Previous">
+					  			<span aria-hidden="true">首页</span>
+					  		</a>
+				  		</s:else>
+				  	</li>
+				  	<!-- 上页键 -->
+				    <li>
+				    	<s:if test="pageBean.currentPage-1 > 0">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage-1 }" href="#" aria-label="Previous">
+					    		<span aria-hidden="true">&laquo;</span>
+					    	</a>
+				    	</s:if>
+				    	<s:else>
+					  		<a aria-label="Previous">
+					  			<span aria-hidden="true">&laquo;</span>
+					  		</a>
+				  		</s:else>
+				    </li>
+				    <!-- 分页键 -->
+				    <s:iterator begin="pageBean.beginPageIndex" end="pageBean.endPageIndex" var="pageNums">
+				    	<c:if test="${pageBean.currentPage == pageNums }">
+				    		<li><a>${pageNums }</a></li>
+				    	</c:if>
+				    	<c:if test="${pageBean.currentPage != pageNums }">
+				    		<li><a href="${uri }?pageNum=${pageNums }">${pageNums }</a></li>
+				    	</c:if>
+				    </s:iterator>
+					<!-- 下页键 -->
+				    <li>
+				    	<s:if test="pageBean.currentPage+1 <= pageBean.pageCount">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage+1 }" aria-label="Next">
+					    		<span aria-hidden="true">&raquo;</span>
+					    	</a>
+				    	</s:if>
+				    	<s:else>
+				    		<a href="#" aria-label="Next">
+					    		<span aria-hidden="true">&raquo;</span>
+					    	</a>
+				    	</s:else>
+				    </li>
+				    <!-- 尾页键 -->
+				    <li>
+				    	<s:if test="pageBean.pageCount <= 1">
+							<a aria-label="Previous">
+					     		<span aria-hidden="true">尾页</span>
+					     	</a>
+						</s:if>
+						<s:else>
+							<a href="${uri }?pageNum=${pageBean.pageCount }" aria-label="Previous">
+					     		<span aria-hidden="true">尾页</span>
+					     	</a>
+						</s:else>
+				    </li>
 				</ul>
+				</div>
 			</div>
+			<!-- 分页结束 -->
 		</div>
 		<!-- Modal 3-->
 		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -179,12 +179,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!-- 分页结束 -->
 		</div>
 		<!-- Modal 1-->
-		<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabelp">
 			<div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			        <h4 class="modal-title" id="myModalLabel">增加学校</h4>
+			        <h4 class="modal-title" id="myModalLabelp">增加学校</h4>
 			      </div>
 			      <form action="admin_schoolAdd" class="form-horizontal">
 				    <div class="modal-body">
@@ -242,12 +242,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<!-- Modal 2-->
-		<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabele">
 			<div class="modal-dialog" role="document">
 			    <div class="modal-content">
 				    <div class="modal-header">
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">更改学校信息</h4>
+				        <h4 class="modal-title" id="myModalLabele">更改学校信息</h4>
 				    </div>
 				    <form  class="form-horizontal">
 				    <div class="modal-body">
@@ -293,12 +293,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<!-- Modal 3-->
-		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabeln">
 			<div class="modal-dialog" role="document">
 			    <div class="modal-content">
 				    <div class="modal-header">
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">更改学生人数</h4>
+				        <h4 class="modal-title" id="myModalLabeln">更改学生人数</h4>
 				    </div> 
 				    <form class="form-horizontal">
 					    <div class="modal-body">
@@ -318,7 +318,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 		<script type="text/javascript">
-				/* var date = '${pageBean.recordList.get(2).name }'; */
               $("form").Vaild();
               //	清除提示
             	setInterval(function(){
@@ -339,17 +338,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.modal-body .form-group').find("div").removeClass("has-success");
 			}
 			//设置模态框值
-			$('.rs-modalBtn').click(function(){
+			$('.rs-modalBtn').click(function(e){
 				var num = $(this).attr('id').slice(1);
-				//var data = '${pageBean.recordList }';
-				var data='${pageBean.recordList.get(1).account }';
-				console.log(data);
 				$('#rs-school1').val('${pageBean.recordList.get(num).account }');
 				$('#rs-school2').val('${pageBean.recordList.get(num).name }');
 				$('#rs-school3').val('${pageBean.recordList.get(num).phone }');
 				$('#rs-school4').val('${pageBean.recordList.get(num).num }');
 				$('#rs-school5').val('${pageBean.recordList.get(num).info }');
-				console.log(num);
 				$('#myModal-2').modal('show');
 			});
 		</script>
