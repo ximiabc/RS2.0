@@ -17,6 +17,10 @@
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
 		<property name="keyName" type="string"></property>
+		<!-- 附加信息 -->
+		<property name="checks" type="string"></property>
+		<property name="checkError" type="string"></property>
+		<property name="titles" type="string"></property>
 	</class>
 	
 </hibernate-mapping>

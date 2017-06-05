@@ -134,8 +134,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="rs-detailed">
 				<ul>
 					<li><a href="admin_student_list" target="center">学生浏览</a></li>
-					<li><a href="admin_student_audit" target="center">报名审核</a></li>
 					<li><a href="admin_student_addExcel" target="center">批量导入</a></li>
+					<li><a href="admin_student_audit" target="center">学生报名</a></li>
 				</ul>
 			</div>
 			<!--Person  -->

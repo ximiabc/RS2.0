@@ -86,12 +86,13 @@ public class StudentAction extends BaseAction<Student>{
 		if(year_id==null){year_id=String.valueOf(years.get(0).getId());}
 		
 		List<Fields>fields=fieldService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), Integer.parseInt(year_id));
+		List<Fields>fields2=new ArrayList<Fields>(6);
 		if(fields.size()>=6){
-			List<Fields>fields2=new ArrayList<Fields>(6);
 			for(int i=0;i<6;i++){
 				fields2.add(fields.get(i));
 			}
-			fields=fields2;
+		}else{
+			fields2=fields;
 		}
 		PageBean pageBean =studentService.getPageBean(pageNum,10, new HqlHelper(Student.class, "s").
 				addOrderByProperty("id", false)
@@ -99,7 +100,8 @@ public class StudentAction extends BaseAction<Student>{
 				);
 		pageBean.setCurrentPage(pageNum);
 		ValueStack vs = ServletActionContext.getContext().getValueStack();
-		vs.set("fields", fields);
+		vs.set("fields", fields2);
+		vs.set("fieldAll", fields);
 		vs.set("years", years);
 		vs.set("pageBean", pageBean);
 		return "list";
@@ -112,6 +114,15 @@ public class StudentAction extends BaseAction<Student>{
 	public String del() {
 		statesService.delete(getModel().getId());
 		addActionMessage("删除学生成功！");
+		return list();
+	}
+	
+	/**
+	 * 添加学生
+	 * @return
+	 */
+	public String add(){
+		studentService.save(model);
 		return list();
 	}
 	
