@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.service;
 
+import java.util.List;
+
 import com.zqrc.rs.base.BaseDao;
 import com.zqrc.rs.pro.entity.SchoolYear;
 
@@ -10,4 +12,6 @@ import com.zqrc.rs.pro.entity.SchoolYear;
  */
 public interface YearService extends BaseDao<SchoolYear>{
 	SchoolYear getNews();
+	
+	List<SchoolYear> getAllByNews();
 }

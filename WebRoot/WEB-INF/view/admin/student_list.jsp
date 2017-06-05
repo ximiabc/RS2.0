@@ -1,3 +1,4 @@
+<%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -39,23 +40,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--表单查询及添加-->
 			<div class="rs-school-height row">
 			
-			<c:if test="${currentUser.role.value == '1'}">
+			<%-- <c:if test="${currentUser.role.value == '1'}"> --%>
 				<div class="col-xs-2">
 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学生</button>
 				</div>
-			</c:if>
+			<%-- </c:if> --%>
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
 					<form class="form-inline pull-right">
 						<!--下拉选项框-->
-					   <select name="select_year" class="form-control">
-							<option selected="selected" value="1">2017</option>
-							<option value="2">2016</option>
+					   <select name="year_id" class="form-control">
+					   		<s:iterator value="years">
+					   			<option value="${id }"><s:date name="date" format="yyyy"/> </option>
+					   		</s:iterator>
 						</select>
-						<select name="select_local" class="form-control">
-							<option selected="selected" value="1">辖区内小学</option>
-							<option value="2">辖区外中学</option>
-							<option selected="selected" value="1">辖区外小学</option>
-							<option value="2">辖区外中学</option>
+						<select name="grade_id" class="form-control">
+							<option selected="selected" value="1">小学</option>
+							<option value="2">中学</option>
+						</select>
+						<select name="type_id" class="form-control">
+							<option selected="selected" value="1">辖区内</option>
+							<option value="2">辖区外</option>
 						</select>
 						<select name="select_name" class="form-control">
 							<option selected="selected" value="1">关联查询</option>
@@ -67,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    		<option value="7">已报名</option>
 				    		<option value="8">申请撤回</option>
 						</select>
-					    <input type="text" class="form-control" placeholder="number">
+					    <input name="datas" type="text" class="form-control" placeholder="输入查询参数">
 					    <button type="submit" class="form-control">检索</button>	
 				    </form>
 				</div>
@@ -76,41 +80,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<table class="table table-striped table-bordered table-hover table-condensed text-center">
 					<thead>
 					<tr class="info">
-						<td>编号</td>
-						<td>序列号</td>
-						<td>姓名</td>
-						<td>性别</td>
-						<td>民族</td>
-						<td>身份证号</td>
+						<td></td>
+						<s:iterator value="fields">
+							<td id>${name }</td>
+						</s:iterator>
+						<td>学历</td>
+						<td>范围内外</td>
 						<td>报名学校</td>
-						<td>报名老师</td>
-						<td>毕业学校</td>
-						<td>家庭地址</td>
-						<td>联系电话</td>
-						<td>学生类型</td>
+						<td>报名日期</td>
 						<td>报名状态</td>
 						<td>操作</td>
 					</tr>
 				</thead>
 				<tbody>
+					<!-- 纵排处理行 -->
 					<s:iterator value="pageBean.recordList" status="indexs">
 						<tr>
 							<td>${indexs.index+1 }</td>
-							<td>${item1 }</td>
-							<td>${item2 }</td>
-							<td>${item3 }</td>
-							<td>${item4 }</td>
-							<td>${item5 }</td>
-							<td>${item6 }</td>
-							<td>${item7 }</td>
-							<td>${item8 }</td>
-							<td>${item9 }</td>
-							<td>${item10 }</td>
-							<td>${item11 }</td>
-							<td>已提交</td>
+							<!-- 横排处理列 -->
+							<s:iterator value="fields" status="indexs"> 
+								<td>
+									<c:if test="${keyName=='item1' }">${item1 }</c:if>
+									<c:if test="${keyName=='item2' }">${item2 }</c:if>
+									<c:if test="${keyName=='item3' }">${item3 }</c:if>
+									<c:if test="${keyName=='item4' }">${item4 }</c:if>
+									<c:if test="${keyName=='item5' }">${item5 }</c:if>
+									<c:if test="${keyName=='item6' }">${item6 }</c:if>
+									<c:if test="${keyName=='item7' }">${item7 }</c:if>
+									<c:if test="${keyName=='item8' }">${item8 }</c:if>
+									<c:if test="${keyName=='item9' }">${item9 }</c:if>
+									<c:if test="${keyName=='item10' }">${item10 }</c:if>
+									<c:if test="${keyName=='item11' }">${item11 }</c:if>
+									<c:if test="${keyName=='item12' }">${item12 }</c:if>
+									<c:if test="${keyName=='item13' }">${item13 }</c:if>
+									<c:if test="${keyName=='item14' }">${item14 }</c:if>
+									<c:if test="${keyName=='item15' }">${item15 }</c:if>
+									<c:if test="${keyName=='item16' }">${item16 }</c:if>
+									<c:if test="${keyName=='item17' }">${item17 }</c:if>
+									<c:if test="${keyName=='item18' }">${item18 }</c:if>
+									<c:if test="${keyName=='item19' }">${item19 }</c:if>
+									<c:if test="${keyName=='item20' }">${item20 }</c:if>
+									<c:if test="${keyName=='item21' }">${item21 }</c:if>
+									<c:if test="${keyName=='item22' }">${item22 }</c:if>
+									<c:if test="${keyName=='item23' }">${item23 }</c:if>
+									<c:if test="${keyName=='item24' }">${item24 }</c:if>
+									<c:if test="${keyName=='item25' }">${item25 }</c:if>
+									<c:if test="${keyName=='item26' }">${item26 }</c:if>
+									<c:if test="${keyName=='item27' }">${item27 }</c:if>
+									<c:if test="${keyName=='item28' }">${item28 }</c:if>
+									<c:if test="${keyName=='item29' }">${item29 }</c:if>
+									<c:if test="${keyName=='item30' }">${item30 }</c:if>
+									<c:if test="${keyName=='item31' }">${item31 }</c:if>
+									<c:if test="${keyName=='item32' }">${item32 }</c:if>
+									<c:if test="${keyName=='item33' }">${item33 }</c:if>
+									<c:if test="${keyName=='item34' }">${item34 }</c:if>
+									<c:if test="${keyName=='item35' }">${item35 }</c:if>
+									<c:if test="${keyName=='item36' }">${item36 }</c:if>
+									<c:if test="${keyName=='item37' }">${item37 }</c:if>
+									<c:if test="${keyName=='item38' }">${item38 }</c:if>
+									<c:if test="${keyName=='item39' }">${item39 }</c:if>
+									<c:if test="${keyName=='item40' }">${item40 }</c:if>
+								 </td>
+							</s:iterator>
+							<td>${grade.name }</td>
+							<td>${type.name }</td>
+							<td>${school.name }</td>
+							<td><s:date name="date" format="yyyy-MM-dd"/></td>
+							<td>${states.name }</td>
 							<td>
 								<div class="rs-school-space">
-								<button class="btn btn-default" type="button" >删除</button>
+								<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除该学生？');" class="btn btn-default" type="button" >删除</a>
 								<button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal-2">更改</button>
 								</div>
 							</td>

@@ -59,9 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			
 			<!-- 教委高级 -->
-			<c:if test="${currentUser.role.value == '1' }">
+			<%-- <c:if test="${currentUser.role.value == '1' }"> --%>
 			
-			<!--Manager-->  
+			<!--Manager-->
 			<div class="rs-summary">
 				<span class="glyphicon glyphicon-th-list"></span>权限管理
 			</div>
@@ -149,10 +149,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--end  -->
 			
-			</c:if>
+			<%-- </c:if> --%>
 			
 			<!-- 普通教委 -->
-			<c:if test="${currentUser.role.value == '2'}">
+			<%-- <%-- <c:if test="${currentUser.role.value == '2'}">
 			
 			<!--School  -->
 			<div class="rs-summary">
@@ -193,10 +193,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--end  -->
 			
-			</c:if>
+			</c:if> --%> --%>
 			
 			<!-- 学校管理员 -->
-			<c:if test="${currentUser.role.value == '3'}">
+			<%-- <%-- <c:if test="${currentUser.role.value == '3'}">
 			<!--Teacher  -->
 			<div class="rs-summary">
 				<span class="glyphicon glyphicon-inbox"></span>教师管理
@@ -226,10 +226,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 			</div>
 			<!--end  -->
-			</c:if>
+			</c:if> --%> --%>
 			
 			<!-- 教师管理员 -->
-			<c:if test="${currentUser.role.value == '4'}">
+			<%-- <%-- <c:if test="${currentUser.role.value == '4'}">
 			
 			<!--Student  -->
 			<div class="rs-summary">
@@ -252,7 +252,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!--end  -->
 			
-			</c:if>
+			</c:if> --%> --%>
 			
 		</div>
 		

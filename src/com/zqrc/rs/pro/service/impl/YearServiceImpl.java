@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,10 @@ public class YearServiceImpl extends BaseDaoImpl<SchoolYear> implements YearServ
 	 */
 	public SchoolYear getNews() {
 		return (SchoolYear)getSession().createQuery("from SchoolYear s order by s.date desc").list().get(0);
+	}
+
+	public List<SchoolYear> getAllByNews() {
+		return (List<SchoolYear>)getSession().createQuery("from SchoolYear s order by s.date desc").list();
 	}
 	
 	
