@@ -38,7 +38,7 @@ function itemListfunc(){
 		slotItem.html(editText);
 		slotItem.append('<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>');
 		$('#editModal').modal('hide');
-		$('#rs-down').prop("disabled",true);
+		$('#rs-down').addClass("disabled");
 		$('#rs-saveItem').removeClass("hidden");
 	});
 })();
@@ -57,7 +57,7 @@ $('#rs-addItem').click(function(){
 	$('#slot-list').append('<li id='+addId+' class="list-group-item slot-item">'+addText+
 		'<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span></li>');
 	$('#rs-addItemText').val('');
-	$('#rs-down').prop("disabled",true);
+	$('#rs-down').addClass("disabled");
 	$('#rs-saveItem').removeClass("hidden");
 });
 //点击保存
@@ -70,7 +70,7 @@ $('#rs-saveItem').click(function(){
 	});
 //	console.log("itemList的类型为：" + typeof(itemList) + "\nitemList的长度为："+itemList.length + "\nitemList的值为："+itemList);
 	$('#rs-saveItem').addClass("hidden");
-	$('#rs-down').prop("disabled",false);
+	$('#rs-down').removeClass("disabled");
 //				$('#rs-down').removeProp("disabled");
 	//通过Ajax提交信息到后台
 //				$.ajax({

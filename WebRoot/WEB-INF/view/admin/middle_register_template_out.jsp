@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</button>
 						</div>
 						<div class="btn-group" role="group">
-							<a href="excelmiddelOut" id="rs-down" type="button" class="btn btn-default btn-info btn-lg">
+							<a href="excelmiddelOut" id="rs-down" class="btn btn-default btn-info btn-lg">
 								<span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
 								下载报名表
 							</a>

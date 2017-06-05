@@ -138,7 +138,7 @@
             	self.slotlist.closest('.' + self.options.slotClass).addClass(self.options.emptySlotClass);
             	self.slotlist[0].parentNode.removeChild(self.slotlist[0]);
             }
-            $('#rs-down').prop("disabled",true);
+            $('#rs-down').addClass("disabled");
             $('#rs-saveItem').removeClass("hidden");
 		}
 	}
