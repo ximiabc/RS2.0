@@ -6,6 +6,7 @@
 <hibernate-mapping>
 	<!--学生字段 -->
 	<class name="com.zqrc.rs.pro.entity.Audit" table="t_audit">
+		<!-- 复合主键 -->
 		<composite-id>
 			<key-property name="grade_id" type="integer"></key-property>
 			<key-property name="type_id" type="integer"></key-property>
@@ -13,11 +14,8 @@
 		</composite-id>
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
+		<property name="field_id" type="integer"></property>
 		
-		<set name="fields" lazy="false" cascade="all" inverse="true">
-			<key column="audit_fields"></key>
-			<one-to-many class="com.zqrc.rs.pro.entity.Fields"/>
-		</set>
 	</class>
 	
 </hibernate-mapping>

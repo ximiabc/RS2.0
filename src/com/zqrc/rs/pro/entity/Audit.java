@@ -1,6 +1,7 @@
 package com.zqrc.rs.pro.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -9,14 +10,23 @@ import java.util.Set;
  *
  */
 public class Audit implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private Integer grade_id;
 	private Integer type_id;
 	private Integer year_id;
 	
+	private Integer field_id;
 	private String name;
-	private Set<Fields> fields;
 	
 	public Audit() {
+	}
+	
+	public Integer getField_id() {
+		return field_id;
+	}
+
+	public void setField_id(Integer field_id) {
+		this.field_id = field_id;
 	}
 
 	public Integer getGrade_id() {
@@ -51,11 +61,4 @@ public class Audit implements Serializable{
 		this.name = name;
 	}
 
-	public Set<Fields> getFields() {
-		return fields;
-	}
-
-	public void setFields(Set<Fields> fields) {
-		this.fields = fields;
-	}
 }
