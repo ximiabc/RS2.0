@@ -27,7 +27,27 @@
 
 	<!-- 高级管理员 -->
 	<package name="admin" extends="struts-default" namespace="/">
-		
+		<!-- 注意： action 的名称不能用关键字"fileUpload" -->
+		<action name="uploads" class="com.zqrc.rs.pro.action.ExcelAction">
+			<!-- 限制运行上传的文件的类型 -->
+			<interceptor-ref name="defaultStack">
+				<!-- 限制运行的文件的扩展名 -->
+				<param name="fileUpload.allowedExtensions">xls,xlsx</param>
+				<!-- 限制运行的类型   【与上面同时使用，取交集】
+				<param name="fileUpload.allowedTypes">text/plain</param>-->
+			</interceptor-ref>
+			
+			<!-- 小学字段 -->
+			<result name="primaryIn">/WEB-INF/view/admin/primary_register_template_in.jsp</result>
+			<result name="primaryOut">/WEB-INF/view/admin/primary_register_template_out.jsp</result>
+			<!-- 中学字段 -->
+			<result name="middleIn">/WEB-INF/view/admin/middle_register_template_in.jsp</result>
+			<result name="middleOut">/WEB-INF/view/admin/middle_register_template_out.jsp</result>
+			
+			<result name="success">/success.jsp</result>
+			<!-- 配置错误视图 -->
+			<result name="input">/error.jsp</result>
+		</action>
 		<!-- 日期-->
 		<action name="admin_date_*" class="com.zqrc.rs.pro.action.DateAction" method="{1}">
 			<!-- 小学日期 -->

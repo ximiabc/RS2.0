@@ -59,17 +59,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="uploadModalLabel">上传表格</h4>
-					</div>
-					<div class="modal-body">
-						<input type="file" class="form-control">
-					</div>
-		    		<div class="modal-footer">
-		    			<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-		    			<button type="button" id="rs-modalUp" class="btn btn-primary">上传</button>
-		    		</div>
+					<form action="uploads" method="post" enctype="multipart/form-data">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="uploadModalLabel">上传表格</h4>
+						</div>
+						<div class="modal-body">
+							<input name="grade_id" value="2" hidden>
+							<input name="type_id" value="1" hidden>
+							<input name="file" type="file" class="form-control">
+						</div>
+			    		<div class="modal-footer">
+			    			<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			    			<button type="submit" id="rs-modalUp" class="btn btn-primary">上传</button>
+			    		</div>
+		    		</form>
 				</div>
 			</div>
 		</div>
