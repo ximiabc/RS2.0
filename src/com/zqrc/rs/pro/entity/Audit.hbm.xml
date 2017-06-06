@@ -5,24 +5,19 @@
 
 <hibernate-mapping>
 	<!--学生字段 -->
-	<class name="com.zqrc.rs.pro.entity.Fields" table="t_fields">
-		<!-- 复合主键 -->
+	<class name="com.zqrc.rs.pro.entity.Audit" table="t_audit">
 		<composite-id>
 			<key-property name="grade_id" type="integer"></key-property>
 			<key-property name="type_id" type="integer"></key-property>
 			<key-property name="year_id" type="integer"></key-property>
-			<key-property name="orders" type="integer"></key-property>
 		</composite-id>
-		
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
-		<property name="keyName" type="string"></property>
 		
-		<many-to-one name="audit" class="com.zqrc.rs.pro.entity.Audit" column="audit_fields"></many-to-one>
-		<!-- 附加信息 -->
-		<property name="checks" type="string"></property>
-		<property name="checkError" type="string"></property>
-		<property name="titles" type="string"></property>
+		<set name="fields" lazy="false" cascade="all" inverse="true">
+			<key column="audit_fields"></key>
+			<one-to-many class="com.zqrc.rs.pro.entity.Fields"/>
+		</set>
 	</class>
 	
 </hibernate-mapping>

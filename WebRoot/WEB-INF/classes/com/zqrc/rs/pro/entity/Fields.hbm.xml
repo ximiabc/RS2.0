@@ -17,6 +17,8 @@
 		<!--普通属性 -->
 		<property name="name" type="string"></property>
 		<property name="keyName" type="string"></property>
+		
+		<many-to-one name="audit" class="com.zqrc.rs.pro.entity.Audit" column="audit_fields"></many-to-one>
 		<!-- 附加信息 -->
 		<property name="checks" type="string"></property>
 		<property name="checkError" type="string"></property>

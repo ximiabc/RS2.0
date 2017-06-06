@@ -21,9 +21,19 @@ public class Fields implements Serializable{
 	private String checkError;//校验失败提醒字段
 	private String titles;//提醒字段
 	
+	private Audit audit;//关联校验字段
+	
 	public Fields() {
 	}
 	
+	public Audit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Audit audit) {
+		this.audit = audit;
+	}
+
 	public Integer getGrade_id() {
 		return grade_id;
 	}

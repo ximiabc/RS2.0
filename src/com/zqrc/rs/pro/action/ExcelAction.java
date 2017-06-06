@@ -211,6 +211,10 @@ public class ExcelAction extends BaseAction<Fields>{
 			
 			// 把上传的文件，拷贝到目标文件中
 			FileUtils.copyFile(file, destFile);
+			/**
+			 * file解析
+			 */
+			//file
 			return "primaryIn";
 		}
 }
