@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td id>${name }</td>
 						</s:iterator>
 						<td>学历</td>
-						<td>范围内外</td>
+						<td>辖区内外</td>
 						<td>报名学校</td>
 						<td>报名状态</td>
 						<td>操作</td>
@@ -280,11 +280,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    </div>
 							</div>
 							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">范围内/外</label>
+							    <label for="inputText" class="col-xs-4 control-label">辖区内/外</label>
 							    <div class="col-xs-8">
 							      <select name="type_id" class="form-control">
-										<option value="1">范围内</option>
-										<option value="2">范围外</option>
+										<option value="1">辖区内</option>
+										<option value="2">辖区外</option>
 				                  </select>
 							    </div>
 							</div>
@@ -317,7 +317,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">更改学生信息</h4>
 				    </div>
-				    <form  class="form-horizontal">
+				    <form action="admin_student_update" method="post" class="form-horizontal">
 				    <div class="modal-body row">
 						<s:iterator value="fieldAll" status="indexs">
 							<div class="form-group col-xs-6">
@@ -329,18 +329,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</s:iterator>
 							
 							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学历</label>
+							    <label for="grade" class="col-xs-4 control-label">学历</label>
 							    <div class="col-xs-8">
-							      <select name="grade_id" class="form-control">
+							      <input id="id" name="id" hidden="true">
+							      <select id="grade" name="grade_id" class="form-control">
 										<option value="1">小学</option>
 										<option value="2">中学</option>
 				                  </select>
 							    </div>
 							</div>
 							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">报名年份</label>
+							    <label for="years" class="col-xs-4 control-label">报名年份</label>
 							    <div class="col-xs-8">
-							      <select name="year_id" class="form-control">
+							      <select id="years" name="year_id" class="form-control">
 										<s:iterator value="years">
 								   			<option value="${id }"><s:date name="date" format="yyyy"/> </option>
 								   		</s:iterator>
@@ -348,18 +349,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    </div>
 							</div>
 							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">范围内/外</label>
+							    <label for="type" class="col-xs-4 control-label">辖区内/外</label>
 							    <div class="col-xs-8">
-							      <select name="type_id" class="form-control">
-										<option value="1">范围内</option>
-										<option value="2">范围外</option>
+							      <select id="type" name="type_id" class="form-control">
+										<option value="1">辖区内</option>
+										<option value="2">辖区外</option>
 				                  </select>
 							    </div>
 							</div>
 							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学生类型</label>
+							    <label for="stutype" class="col-xs-4 control-label">学生类型</label>
 							    <div class="col-xs-8">
-							      <select name="stuType_id" class="form-control">
+							      <select id="stutype" name="stuType_id" class="form-control">
 							      		<option value="0">辖区内儿童</option>
 										<option value="1">留守儿童</option>
 										<option value="2">三类儿童</option>
@@ -405,14 +406,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					url: "asyn_studentById?id="+num,
 					dataType: "json",
 					success: function(data){
-						var key;
 						var data = $.parseJSON(data);
-						for(key in data){
-							//console.log(key);console.log(data[key]);console.log('***');
+						for(var key in data){
+							//console.group(key);console.log(data[key]);console.groupEnd();
 							$('#'+key).val(data[key]);
 						}
-						//console.log(data);
-						//for(i;i<data.length;i++){}
 						$('#myModal-2').modal('show');
 					},
 					error: function(XHR){alert("获取信息失败");}

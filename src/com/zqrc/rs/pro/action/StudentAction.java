@@ -78,6 +78,26 @@ public class StudentAction extends BaseAction<Student>{
 	}
 	
 	/**
+	 * 更新数据
+	 * @return
+	 */
+	public String update() {
+		Grade grade=gradeService.getById(Integer.parseInt(grade_id));
+		Type type=typeService.getById(Integer.parseInt(type_id));
+		SchoolYear year=yearService.getById(Integer.parseInt(year_id));
+		States states=statesService.getById(1);
+		model.setGrade(grade);
+		model.setType(type);
+		model.setYears(year);
+		model.setStates(states);
+		model.setStutype(Integer.parseInt(stuType_id));
+		model.setDate(new Date());
+		studentService.update(getModel());
+		addActionMessage("修改学生成功！");
+		return list();
+	}
+	
+	/**
 	 * 添加学生
 	 * @return
 	 */
@@ -110,10 +130,10 @@ public class StudentAction extends BaseAction<Student>{
 			if(user2==null){user2=new User();}
 			if(user3==null){user3=new User();}
 			object.put("id", user.getId());
-			object.put("type", user.getType().getName());
-			object.put("grade", user.getGrade().getName());
+			object.put("type", user.getType().getId());
+			object.put("grade", user.getGrade().getId());
 			object.put("date", user.getDate());
-			object.put("years", user.getYears());
+			object.put("years", user.getYears().getId());
 			object.put("stutype", user.getStutype());
 			object.put("school", user2.getName());
 			object.put("teacher", user3.getName());

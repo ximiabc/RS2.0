@@ -12,7 +12,7 @@ public class Student {
 	private Type type;//学生范围类型
 	private Grade grade;//学生届别类型
 	private States states;//学生报名
-	private Date date;
+	private Date date;//报名日期
 	private SchoolYear years;
 	private Integer stutype;//0辖区内儿童1留守儿童2三类儿童3外来务工子弟4其他
 	
