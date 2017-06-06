@@ -11,6 +11,8 @@
 		</id>
 		<!-- 学生报名日期 -->
 		<property name="date" type="date"></property>
+		<!-- 学生范围累 -->
+		<property name="stutype" type="integer"></property>
 		<!-- 学年 -->
 		<many-to-one name="years" class="com.zqrc.rs.pro.entity.SchoolYear" column="year_stus"></many-to-one>
 		<!-- 关联范围类型 -->

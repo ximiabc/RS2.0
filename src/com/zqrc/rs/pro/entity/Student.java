@@ -14,6 +14,8 @@ public class Student {
 	private States states;//学生报名
 	private Date date;
 	private SchoolYear years;
+	private Integer stutype;//0辖区内儿童1留守儿童2三类儿童3外来务工子弟4其他
+	
 	private User school;
 	private User teacher;
 	
@@ -61,6 +63,14 @@ public class Student {
 	public Student() {
 	}
 	
+	public Integer getStutype() {
+		return stutype;
+	}
+
+	public void setStutype(Integer stutype) {
+		this.stutype = stutype;
+	}
+
 	public SchoolYear getYears() {
 		return years;
 	}

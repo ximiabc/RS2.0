@@ -18,6 +18,11 @@
                 <param name="root">result</param>
             </result>
 		</action>
+		<action name="asyn_*" class="com.zqrc.rs.pro.action.StudentAction" method="{1}">
+			<result name="types" type="json">
+                <param name="root">result</param>
+            </result>
+		</action>
 	</package>
 
 	<!-- 高级管理员 -->

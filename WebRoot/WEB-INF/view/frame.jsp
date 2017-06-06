@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 31px;}
 			#rs-frameCenter{margin-left:200px;height: 100%;}
 			#rs-pageFooter{bottom:0;text-align: center;background-color: #FFF;}
-			.rs-tab {padding-top: 103px;padding-bottom: 50px;width: 200px;height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;position: absolute;top: 0px;}
+			.rs-tab {padding-top: 103px;padding-bottom: 31px;width: 200px;height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;position: absolute;top: 0px;overflow:hidden;}
 			.rs-summary {line-height: 40px;cursor: pointer;font-size: 16px;position: relative;border-bottom: #ccc 1px dotted;transition: background-color .6s linear;-moz-transition: background-color .6s linear;-webkit-transition: background-color .6s linear;-o-transition: background-color .6s linear;}
 			.rs-summary:hover{color:#000;}
 			.rs-summary.rs-active{background-color:#0BF;}
@@ -148,112 +148,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</ul>
 			</div>
 			<!--end  -->
-			
-			<%-- </c:if> --%>
-			
-			<!-- 普通教委 -->
-			<%-- <%-- <c:if test="${currentUser.role.value == '2'}">
-			
-			<!--School  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-briefcase"></span>学校管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_schoolList" target="center">学校浏览</a></li>
-				</ul>
-			</div>
-			<!--Teacher  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-inbox"></span>教师管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_teacherList" target="center">教师浏览</a></li>
-				</ul>
-			</div>
-			<!--Student  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-tasks"></span>学生管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_student_list" target="center">学生浏览</a></li>
-					<li><a href="admin_student_audit" target="center">报名审核</a></li>
-				</ul>
-			</div>
-			<!--Person  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-user"></span>个人管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_personal" target="center">我的信息</a></li>
-				</ul>
-			</div>
-			<!--end  -->
-			
-			</c:if> --%> --%>
-			
-			<!-- 学校管理员 -->
-			<%-- <%-- <c:if test="${currentUser.role.value == '3'}">
-			<!--Teacher  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-inbox"></span>教师管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_teacherList" target="center">教师浏览</a></li>
-				</ul>
-			</div>
-			<!--Student  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-tasks"></span>学生管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_student_list" target="center">学生浏览</a></li>
-					<li><a href="admin_student_audit" target="center">报名审核</a></li>
-				</ul>
-			</div>
-			<!--Person  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-user"></span>个人管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_personal" target="center">我的信息</a></li>
-				</ul>
-			</div>
-			<!--end  -->
-			</c:if> --%> --%>
-			
-			<!-- 教师管理员 -->
-			<%-- <%-- <c:if test="${currentUser.role.value == '4'}">
-			
-			<!--Student  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-tasks"></span>学生管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_student_list" target="center">学生浏览</a></li>
-					<li><a href="admin_student_audit" target="center">报名审核</a></li>
-				</ul>
-			</div>
-			<!--Person  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-user"></span>个人管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_personal" target="center">我的信息</a></li>
-				</ul>
-			</div>
-			<!--end  -->
-			
-			</c:if> --%> --%>
-			
 		</div>
 		
 			<!-- center panel -->
