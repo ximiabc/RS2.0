@@ -67,39 +67,77 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<table class="table table-striped table-bordered table-hover table-condensed text-center">
 					<thead>
 					<tr class="info">
-						<td>编号</td>
-						<td>序列号</td>
-						<td>姓名</td>
-						<td>性别</td>
-						<td>民族</td>
-						<td>身份证号</td>
+						<td></td>
+						<s:iterator value="fields">
+							<td id>${name }</td>
+						</s:iterator>
+						<td>学历</td>
+						<td>辖区内外</td>
 						<td>报名学校</td>
-						<td>报名老师</td>
-						<td>毕业学校</td>
-						<td>家庭地址</td>
-						<td>联系电话</td>
-						<td>学生类型</td>
 						<td>报名状态</td>
 						<td>操作</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>2016000015648484845</td>
-						<td>张雨欣</td>
-						<td>男</td>
-						<td>汉族</td>
-						<td>41060151548541517442</td>
-						<td>实验小学</td>
-						<td>周伟伟</td>
-						<td>实验有认识</td>
-						<td>事估计钙一个</td>
-						<td>13456487224</td>
-						<td>辖区内儿童</td>
-						<td>已提交</td>
-						<td><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-3">详情</button></td>
-					</tr>
+					<s:iterator value="pageBean.recordList" status="indexs">
+						<tr>
+							<td>${indexs.index+1 }</td>
+							<!-- 横排处理列 -->
+							<s:iterator value="fields" status="indexs"> 
+								<td>
+									<c:if test="${keyName=='item1' }">${item1 }</c:if>
+									<c:if test="${keyName=='item2' }">${item2 }</c:if>
+									<c:if test="${keyName=='item3' }">${item3 }</c:if>
+									<c:if test="${keyName=='item4' }">${item4 }</c:if>
+									<c:if test="${keyName=='item5' }">${item5 }</c:if>
+									<c:if test="${keyName=='item6' }">${item6 }</c:if>
+									<c:if test="${keyName=='item7' }">${item7 }</c:if>
+									<c:if test="${keyName=='item8' }">${item8 }</c:if>
+									<c:if test="${keyName=='item9' }">${item9 }</c:if>
+									<c:if test="${keyName=='item10' }">${item10 }</c:if>
+									<c:if test="${keyName=='item11' }">${item11 }</c:if>
+									<c:if test="${keyName=='item12' }">${item12 }</c:if>
+									<c:if test="${keyName=='item13' }">${item13 }</c:if>
+									<c:if test="${keyName=='item14' }">${item14 }</c:if>
+									<c:if test="${keyName=='item15' }">${item15 }</c:if>
+									<c:if test="${keyName=='item16' }">${item16 }</c:if>
+									<c:if test="${keyName=='item17' }">${item17 }</c:if>
+									<c:if test="${keyName=='item18' }">${item18 }</c:if>
+									<c:if test="${keyName=='item19' }">${item19 }</c:if>
+									<c:if test="${keyName=='item20' }">${item20 }</c:if>
+									<c:if test="${keyName=='item21' }">${item21 }</c:if>
+									<c:if test="${keyName=='item22' }">${item22 }</c:if>
+									<c:if test="${keyName=='item23' }">${item23 }</c:if>
+									<c:if test="${keyName=='item24' }">${item24 }</c:if>
+									<c:if test="${keyName=='item25' }">${item25 }</c:if>
+									<c:if test="${keyName=='item26' }">${item26 }</c:if>
+									<c:if test="${keyName=='item27' }">${item27 }</c:if>
+									<c:if test="${keyName=='item28' }">${item28 }</c:if>
+									<c:if test="${keyName=='item29' }">${item29 }</c:if>
+									<c:if test="${keyName=='item30' }">${item30 }</c:if>
+									<c:if test="${keyName=='item31' }">${item31 }</c:if>
+									<c:if test="${keyName=='item32' }">${item32 }</c:if>
+									<c:if test="${keyName=='item33' }">${item33 }</c:if>
+									<c:if test="${keyName=='item34' }">${item34 }</c:if>
+									<c:if test="${keyName=='item35' }">${item35 }</c:if>
+									<c:if test="${keyName=='item36' }">${item36 }</c:if>
+									<c:if test="${keyName=='item37' }">${item37 }</c:if>
+									<c:if test="${keyName=='item38' }">${item38 }</c:if>
+									<c:if test="${keyName=='item39' }">${item39 }</c:if>
+									<c:if test="${keyName=='item40' }">${item40 }</c:if>
+								 </td>
+							</s:iterator>
+							<td>${grade.name }</td>
+							<td>${type.name }</td>
+							<td>${school.name }</td>
+							<td>${states.name }</td>
+							<td>
+								<div class="rs-school-space">
+								<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">报名</button>
+								</div>
+							</td>
+						</tr>
+					</s:iterator>
 				</tbody>
 				</table>
 			<!--分页开始-->
@@ -188,96 +226,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!-- 分页结束 -->
 		</div>
-		<!-- Modal 3-->
-		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
 			    <div class="modal-content">
 				    <div class="modal-header">
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">更改学生人数</h4>
 				    </div> 
-				    <form class="form-horizontal">
+				    <form class="form-horizontal container-fluid">
 					    <div class="modal-body row">
-							<div class="form-group col-xs-6">
-								    <label for="inputText" class="col-xs-4 control-label">学生编号</label>
-								    <label for="inputText" class="col-xs-4 control-label">216000062105478985</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学生姓名</label>
-							    <label for="inputText" class="col-xs-4 control-label">张宇说</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">性别</label>
-							    <label for="inputText" class="col-xs-4 control-label">男</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">民族</label>
-							    <label for="inputText" class="col-xs-4 control-label">汉族</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">身份证号</label>
-							    <label for="inputText" class="col-xs-4 control-label">410106201005150034</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">报名学校</label>
-							    <label for="inputText" class="col-xs-4 control-label">201600000621</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">入学前幼儿园</label>
-							    <label for="inputText" class="col-xs-4 control-label">实验幼儿园</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">家庭地址</label>
-							    <label for="inputText" class="col-xs-4 control-label">我凛真乌云社区</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">家庭电话</label>
-							    <label for="inputText" class="col-xs-4 control-label">135255880563</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">所在居委会</label>
-							    <label for="inputText" class="col-xs-4 control-label">老在和促进</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人1姓名</label>
-							    <label for="inputText" class="col-xs-4 control-label">张贝</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人1电话</label>
-							    <label for="inputText" class="col-xs-4 control-label">1362588062</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人1身份证</label>
-							    <label for="inputText" class="col-xs-4 control-label">410121198009125432</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人2姓名</label>
-							     <label for="inputText" class="col-xs-4 control-label">陈伟欧</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人2电话</label>
-							    <label for="inputText" class="col-xs-4 control-label">13679850000</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">监护人2身份证</label>
-							     <label for="inputText" class="col-xs-4 control-label">410121198009125432</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学生类型</label>
-							    <label for="inputText" class="col-xs-4 control-label">辖区内学生</label>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">报名状态</label>
-							    <label for="inputText" class="col-xs-4 control-label">已报名</label>
-							</div>
+							<s:iterator value="fieldAll" status="indexs">
+								<div class="form-group col-xs-6">
+									<label class="col-xs-6 control-label">${name }</label>
+							   		<label id="${keyName }"  class="col-xs-6 control-label rs-text"></label>
+								</div>
+							</s:iterator>
+							
 					    </div>
 					    <div class="modal-footer">
 					        <div class="input-group pull-right" style="width: 260px; margin-right: 40px;">
 							    <input type="text" class="form-control" placeholder="输入验证信息">
-								    <span class="input-group-btn">
-								        <button class="btn btn-info" type="button">审核通过</button>
-								    </span>
-							    </div>
+							    <span class="input-group-btn">
+							        <button class="btn btn-info" type="button">审核通过</button>
+							    </span>
+						    </div>
 						</div>
 					</form>
 			    </div>
@@ -303,6 +275,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$('.modal-body .form-group').find("div").removeClass("has-error");
 				$('.modal-body .form-group').find("div").removeClass("has-success");
 			}
+			//设置模态框值
+			$('.rs-modalBtn').click(function(){
+				var num = $(this).attr('id').slice(1);
+				$.ajax({
+					type: "GET",
+					url: "asyn_studentById?id="+num,
+					dataType: "json",
+					success: function(data){
+						var data = $.parseJSON(data);
+						for(var key in data){
+							console.group(key);console.log(data[key]);console.groupEnd();
+							$('#'+key).text(data[key]);
+						}
+						$('#myModal').modal('show');
+					},
+					error: function(XHR){alert("获取信息失败");}
+				});
+			});
 		</script>
 	</body>
 </html>

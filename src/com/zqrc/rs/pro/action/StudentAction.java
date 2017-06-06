@@ -187,6 +187,7 @@ public class StudentAction extends BaseAction<Student>{
 	 * 审批学生
 	 */
 	public String audit() {
+		list();
 		return "audit";
 	}
 	
