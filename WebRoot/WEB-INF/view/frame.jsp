@@ -60,7 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<!-- 教委高级 -->
 			<%-- <c:if test="${currentUser.role.value == '1' }"> --%>
-			
 			<!--Manager-->
 			<div class="rs-summary">
 				<span class="glyphicon glyphicon-th-list"></span>权限管理
@@ -84,8 +83,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a href="admin_date_primaryOut" target="center">辖区外时间</a></li>
 						<li><a href="admin_fields_primaryIn" target="center">辖区内字段</a></li>
 						<li><a href="admin_fields_primaryOut" target="center">辖区外字段</a></li>
-						<li><a target="center">辖区内审核</a></li>
-						<li><a target="center">辖区外审核</a></li>
+						<li><a href="auditfindPrimaryIn"  target="center">辖区内审核</a></li>
+						<li><a href="auditfindPrimaryOut" target="center">辖区外审核</a></li>
 					</ul>
 				</div>
 				<div class="rs-summary">中学报名</div>
@@ -95,8 +94,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li><a href="admin_date_middleOut" target="center">辖区外时间</a></li>
 						<li><a href="admin_fields_middleIn" target="center">辖区内字段</a></li>
 						<li><a href="admin_fields_middleOut" target="center">辖区外字段</a></li>
-						<li><a target="center">辖区内审核</a></li>
-						<li><a target="center">辖区外审核</a></li>
+						<li><a href="auditfindMiddleIn" target="center">辖区内审核</a></li>
+						<li><a href="auditfindMiddleOut" target="center">辖区外审核</a></li>
 					</ul>
 				</div>
 			</div>

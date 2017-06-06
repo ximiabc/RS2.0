@@ -31,4 +31,8 @@ public class FieldServiceImpl extends BaseDaoImpl<Fields> implements FieldServic
 	public void delByComposite(Integer grade, Integer type, Integer year,Integer orders) {
 		getSession().createQuery("Delete FROM Fields f Where f.grade_id = ? and f.type_id = ? and f.year_id = ? and f.orders = ?").setInteger(0, grade).setInteger(1, type).setInteger(2, year).setInteger(3, orders).executeUpdate();
 	}
+	
+	public Fields findByComposite(Integer grade, Integer type, Integer year,Integer orders) {
+		return (Fields)getSession().createQuery("from Fields f where f.grade_id = ? and f.type_id = ? and f.year_id = ? and f.orders = ?").setInteger(0, grade).setInteger(1, type).setInteger(2, year).setInteger(3, orders).uniqueResult();
+	}
 }

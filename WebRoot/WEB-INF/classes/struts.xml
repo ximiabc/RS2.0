@@ -52,7 +52,12 @@
         </result>
     </action>
 		
-		
+		<action name="audit*" method="{1}" class="com.zqrc.rs.pro.action.AuditAction">
+			<result name="PrimaryIn">/WEB-INF/view/admin/primary_Parameter_In.jsp</result>
+			<result name="PrimaryOut">/WEB-INF/view/admin/primary_Parameter_Out.jsp</result>
+			<result name="MiddleIn">/WEB-INF/view/admin/primary_middle_In.jsp</result>
+			<result name="MiddleOut">/WEB-INF/view/admin/primary_middle_Out.jsp</result>
+		</action>
 		
 	</package>
 

@@ -26,7 +26,16 @@ import com.zqrc.rs.until.DateUtil;
 public class ExcelAction extends BaseAction<Fields>{
 	private String grade_id;
 	private String type_id;
+	private String optionsRadios;
 	
+	public String getOptionsRadios() {
+		return optionsRadios;
+	}
+
+	public void setOptionsRadios(String optionsRadios) {
+		this.optionsRadios = optionsRadios;
+	}
+
 	public String getGrade_id() {
 		return grade_id;
 	}
@@ -71,7 +80,7 @@ public class ExcelAction extends BaseAction<Fields>{
 	}
 
 //   导出小学辖区外的模板
-	public String Out(){  
+	public String Out(){
 		ByteArrayOutputStream out = new ByteArrayOutputStream();  
 		jxl.write.Label label;  
 		WritableWorkbook workbook;  

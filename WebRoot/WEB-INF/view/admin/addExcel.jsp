@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<p>1.上传时请注意文件格式</p>
 				<p>2.每次只能上传一个文件</p>
 			</div>
+			<form action="uploads" method="post" enctype="multipart/form-data">
 			<div class="radio">
 				<label>
 					<input type="radio" name="optionsRadios" id="optionsRadios1" value="1">
@@ -44,7 +45,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					辖区外中学
 				</label>
 			</div>
-			<input type="file" name="files[]" id="demo-fileInput" multiple="multiple">
+			<input name="file" type="file" id="demo-fileInput"/>
+			</form>
 		</div>
 		<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>

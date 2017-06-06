@@ -328,47 +328,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 						</s:iterator>
 							
-							<div class="form-group col-xs-6">
-							    <label for="grade" class="col-xs-4 control-label">学历</label>
-							    <div class="col-xs-8">
-							      <input id="id" name="id" hidden="true">
-							      <select id="grade" name="grade_id" class="form-control">
-										<option value="1">小学</option>
-										<option value="2">中学</option>
-				                  </select>
-							    </div>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="years" class="col-xs-4 control-label">报名年份</label>
-							    <div class="col-xs-8">
-							      <select id="years" name="year_id" class="form-control">
-										<s:iterator value="years">
-								   			<option value="${id }"><s:date name="date" format="yyyy"/> </option>
-								   		</s:iterator>
-				                  </select>
-							    </div>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="type" class="col-xs-4 control-label">辖区内/外</label>
-							    <div class="col-xs-8">
-							      <select id="type" name="type_id" class="form-control">
-										<option value="1">辖区内</option>
-										<option value="2">辖区外</option>
-				                  </select>
-							    </div>
-							</div>
-							<div class="form-group col-xs-6">
-							    <label for="stutype" class="col-xs-4 control-label">学生类型</label>
-							    <div class="col-xs-8">
-							      <select id="stutype" name="stuType_id" class="form-control">
-							      		<option value="0">辖区内儿童</option>
-										<option value="1">留守儿童</option>
-										<option value="2">三类儿童</option>
-										<option value="3">外来务工子弟</option>
-										<option value="4">其他</option>
-				                  </select>
-							    </div>
-							</div>
+						<div class="form-group col-xs-6">
+						    <label for="grade" class="col-xs-4 control-label">学历</label>
+						    <div class="col-xs-8">
+						      <input id="id" name="id" hidden="true">
+						      <select id="grade" name="grade_id" class="form-control">
+									<option value="1">小学</option>
+									<option value="2">中学</option>
+			                  </select>
+						    </div>
+						</div>
+						<div class="form-group col-xs-6">
+						    <label for="years" class="col-xs-4 control-label">报名年份</label>
+						    <div class="col-xs-8">
+						      <select id="years" name="year_id" class="form-control">
+									<s:iterator value="years">
+							   			<option value="${id }"><s:date name="date" format="yyyy"/> </option>
+							   		</s:iterator>
+			                  </select>
+						    </div>
+						</div>
+						<div class="form-group col-xs-6">
+						    <label for="type" class="col-xs-4 control-label">辖区内/外</label>
+						    <div class="col-xs-8">
+						      <select id="type" name="type_id" class="form-control">
+									<option value="1">辖区内</option>
+									<option value="2">辖区外</option>
+			                  </select>
+						    </div>
+						</div>
+						<div class="form-group col-xs-6">
+						    <label for="stutype" class="col-xs-4 control-label">学生类型</label>
+						    <div class="col-xs-8">
+						      <select id="stutype" name="stuType_id" class="form-control">
+						      		<option value="0">辖区内儿童</option>
+									<option value="1">留守儿童</option>
+									<option value="2">三类儿童</option>
+									<option value="3">外来务工子弟</option>
+									<option value="4">其他</option>
+			                  </select>
+						    </div>
+						</div>
 				    </div>
 				    <div class="modal-footer">
 					        <input type="button" class="btn btn-default less" data-dismiss="modal" value="取消"/>
