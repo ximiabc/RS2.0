@@ -80,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${info }</td>
 								<td>${phone }</td>
 								<td>${belongSchool.size() }</td>
-								<td><a class="rs-people" data-toggle="modal" data-target="#myModal-3" title="限制报名人数">${num }</a></td>
+								<td>${num }</td>
 								<td>${user.name }</td>
 								<td>
 									<div class="rs-school-space">
@@ -293,36 +293,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </div>
 			</div>
 		</div>
-		<!-- Modal 3-->
-		<div class="modal fade" id="myModal-3" tabindex="-1" role="dialog" aria-labelledby="myModalLabeln">
-			<div class="modal-dialog" role="document">
-			    <div class="modal-content">
-				    <div class="modal-header">
-				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabeln">更改学生人数</h4>
-				    </div> 
-				    <form class="form-horizontal">
-					    <div class="modal-body">
-							<div class="form-group">
-							    <label for="inputText" class="col-xs-offset-2 col-xs-2 control-label">更改人数</label>
-							    <div class="col-sm-6">
-							      <input type="text" class="form-control" id="inputText" placeholder="输入实际人数，认真核查！" data-vaild="/^[0-9]*$" data-errmsg="数字格式错误，只能填数字" >
-							    </div>
-							</div>
-					    </div>
-					    <div class="modal-footer">
-					        <button type="button" class="btn btn-default less" data-dismiss="modal">取消</button>
-					        <button type="submit" class="btn btn-primary less">确认更改</button>
-						</div>
-					</form>
-			    </div>
-			</div>
-		</div>
 		<script type="text/javascript">
               $("form").Vaild();
               //	清除提示
             	setInterval(function(){
-            	if($('#myModal-1').css("display") == "block" || $('#myModal-2').css("display") == "block" || $('#myModal-3').css("display") == "block"){
+            	if($('#myModal-1').css("display") == "block" || $('#myModal-2').css("display") == "block"){
 					return true;
 				}else{
 				   posclear();

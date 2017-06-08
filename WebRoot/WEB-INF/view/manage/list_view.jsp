@@ -221,7 +221,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					<div class="modal-footer">
 				        <input type="button" class="btn btn-default less" data-dismiss="modal" value="取消"/>
-				        <input type="submit" class="btn btn-primary less" value="修改信息"/>
+				        <input type="submit" class="btn btn-primary less" value="立即添加"/>
 				    </div>
                 </form>
 		      </div>

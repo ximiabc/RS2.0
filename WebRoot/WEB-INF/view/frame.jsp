@@ -22,10 +22,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#rs-pageHeader{top:0;background-color: #0BF;padding-left:20px;color: #FFF;box-shadow: 0 -1px 5px #666 inset;}
 			#rs-userInfo{position:relative;display:block;text-align: right;vertical-align: middle;color: inherit;}
 			#rs-userInfo>span{color: #666;}
-			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 31px;}
+			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 50px;}
 			#rs-frameCenter{margin-left:200px;height: 100%;}
 			#rs-pageFooter{bottom:0;text-align: center;background-color: #FFF;}
-			.rs-tab {padding-top: 103px;padding-bottom: 31px;width: 200px;height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;position: absolute;top: 0px;overflow:hidden;}
+			.rs-sider{position: absolute;top: 0px;width: 200px;height:100%;padding-top: 103px;padding-bottom: 50px;overflow:hidden;}
+			.rs-tab {height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;overflow:auto;}
 			.rs-summary {line-height: 40px;cursor: pointer;font-size: 16px;position: relative;border-bottom: #ccc 1px dotted;transition: background-color .6s linear;-moz-transition: background-color .6s linear;-webkit-transition: background-color .6s linear;-o-transition: background-color .6s linear;}
 			.rs-summary:hover{color:#000;}
 			.rs-summary.rs-active{background-color:#0BF;}
@@ -55,108 +56,179 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</span>
 		</div>
 		<div id="rs-pageMain">
-			<div class="rs-tab bg-info">
-			
-			
-			<!-- 教委高级 -->
-			<%-- <c:if test="${currentUser.role.value == '1' }"> --%>
-			<!--Manager-->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-th-list"></span>权限管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_authority_manage" target="center">教委权限</a></li>
-					<li><a href="admin_authority_master" target="center">学校权限</a></li>
-					<li><a href="admin_authority_teacher" target="center">教师权限</a></li>
-				</ul>
-			</div>
-			<!--Apply  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-list-alt"></span>报名管理
-			</div>
-			<div class="rs-detailed">
-				<div class="rs-summary">小学报名</div>
-				<div class="rs-detailed">
-					<ul>
-						<li><a href="admin_date_primaryIn" target="center">辖区内时间</a></li>
-						<li><a href="admin_date_primaryOut" target="center">辖区外时间</a></li>
-						<li><a href="admin_fields_primaryIn" target="center">辖区内字段</a></li>
-						<li><a href="admin_fields_primaryOut" target="center">辖区外字段</a></li>
-						<li><a href="auditfindPrimaryIn"  target="center">辖区内审核</a></li>
-						<li><a href="auditfindPrimaryOut" target="center">辖区外审核</a></li>
-					</ul>
+			<div class="rs-sider">
+				<div class="rs-tab bg-info">
+					<c:set var="juint" value="1"></c:set>
+					
+					<!-- 教委高级 -->
+					<c:if test="${currentUser.role.value == '1' || juint == '1' }">
+						<!-- 小学  -->
+						<div class="rs-summary">
+							<span class="glyphicon glyphicon-list-alt"></span>小学管理
+						</div>
+						<div class="rs-detailed">
+							<!-- 报名时间 -->
+							<div class="rs-summary">报名时间</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_date_primaryIn" target="center">辖区内时间</a></li>
+									<li><a href="admin_date_primaryOut" target="center">辖区外时间</a></li>
+								</ul>
+							</div>
+							<!-- 报名字段 -->
+							<div class="rs-summary">报名字段</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_fields_primaryIn" target="center">辖区内字段</a></li>
+									<li><a href="admin_fields_primaryOut" target="center">辖区外字段</a></li>
+								</ul>
+							</div>
+							<!-- 审核字段 -->
+							<div class="rs-summary">审核字段</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="auditfindPrimaryIn"  target="center">辖区内审核</a></li>
+									<li><a href="auditfindPrimaryOut" target="center">辖区外审核</a></li>
+								</ul>
+							</div>
+						</div>
+						
+						<!-- 中学  -->
+						<div class="rs-summary">
+							<span class="glyphicon glyphicon-list-alt"></span>中学管理
+						</div>
+						<div class="rs-detailed">
+							<!-- 时间 -->
+							<div class="rs-summary">报名时间</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_date_middleIn" target="center">辖区内时间</a></li>
+									<li><a href="admin_date_middleOut" target="center">辖区外时间</a></li>
+								</ul>
+							</div>
+							<!-- 字段 -->
+							<div class="rs-summary">报名字段</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_fields_middleIn" target="center">辖区内字段</a></li>
+									<li><a href="admin_fields_middleOut" target="center">辖区外字段</a></li>
+								</ul>
+							</div>
+							<!-- 审核 -->
+							<div class="rs-summary">审核字段</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="auditfindMiddleIn" target="center">辖区内审核</a></li>
+									<li><a href="auditfindMiddleOut" target="center">辖区外审核</a></li>
+								</ul>
+							</div>
+						</div>
+						
+						<!--Manager-->
+						<div class="rs-summary">
+							<span class="glyphicon glyphicon-th-list"></span>权限管理
+						</div>
+						<div class="rs-detailed">
+							<ul>
+								<li><a href="admin_authority_manage" target="center">教委权限</a></li>
+								<li><a href="admin_authority_master" target="center">学校权限</a></li>
+								<li><a href="admin_authority_teacher" target="center">教师权限</a></li>
+							</ul>
+						</div>
+					
+						<!--manage  -->
+						<div class="rs-summary">
+							<div class="rs-teacher glyphicon glyphicon-inbox"></div>教委管理
+						</div>
+						<div class="rs-detailed">
+							<ul>
+								<li><a href="admin_manageList" target="center">浏览管理员</a></li>
+							</ul>
+						</div>
+					</c:if>
+					
+					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2') || juint == '1'}">
+						<!--School  -->
+						<div class="rs-summary">
+							<span class="glyphicon glyphicon-briefcase"></span>学校管理
+						</div>
+						<div class="rs-detailed">
+							<ul>
+								<li><a href="admin_schoolList" target="center">学校浏览</a></li>
+							</ul>
+						</div>
+					</c:if>
+					
+					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2' || currentUser.role.value == '3') || juint == '1' }">
+						<!--Teacher  -->
+						<div class="rs-summary">
+							<span class="glyphicon glyphicon-inbox"></span>教师管理
+						</div>
+						<div class="rs-detailed">
+							<ul>
+								<li><a href="admin_teacherList" target="center">教师浏览</a></li>
+							</ul>
+						</div>
+					</c:if>
+					
+					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '3' || currentUser.role.value == '4') || juint == '1' }">
+						<!--Student  -->
+						<div class="rs-summary">
+							<span class="glyphicon glyphicon-tasks"></span>学生管理
+						</div>
+						<div class="rs-detailed">
+							<%-- <ul>
+								<c:if test="${currentUser.role.value == '1' && juint == '1' }">
+									<li><a href="admin_student_list" target="center">学生浏览</a></li>
+									<li><a href="admin_student_addExcel" target="center">批量导入</a></li>
+								</c:if>
+							</ul> --%>
+							<c:if test="${currentUser.role.value == '1' || juint == '1' }">
+								<div class="rs-summary">学生浏览</div>
+								<div class="rs-detailed">
+									<ul>
+										<li><a href="admin_student_list?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
+										<li><a href="admin_student_list?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
+										<li><a href="admin_student_list?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
+										<li><a href="admin_student_list?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
+									</ul>
+								</div>
+								<div class="rs-summary">批量导入</div>
+								<div class="rs-detailed">
+									<ul>
+										<li><a href="admin_student_addExcel?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
+										<li><a href="admin_student_addExcel?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
+										<li><a href="admin_student_addExcel?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
+										<li><a href="admin_student_addExcel?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
+									</ul>
+								</div>
+							</c:if>
+							<c:if test="${(currentUser.role.value == '3' || currentUser.role.value == '4') || juint == '1' }">
+								<a class="rs-summary" href="admin_student_audit" target="center">报名审核</a>
+							</c:if>
+						</div>
+					</c:if>
+					
+					<!--Person  -->
+					<div class="rs-summary">
+						<span class="glyphicon glyphicon-user"></span>个人管理
+					</div>
+					<div class="rs-detailed">
+						<ul>
+							<li><a href="admin_personal" target="center">我的信息</a></li>
+						</ul>
+					</div>
+				<!--end  -->
 				</div>
-				<div class="rs-summary">中学报名</div>
-				<div class="rs-detailed">
-					<ul>
-						<li><a href="admin_date_middleIn" target="center">辖区内时间</a></li>
-						<li><a href="admin_date_middleOut" target="center">辖区外时间</a></li>
-						<li><a href="admin_fields_middleIn" target="center">辖区内字段</a></li>
-						<li><a href="admin_fields_middleOut" target="center">辖区外字段</a></li>
-						<li><a href="auditfindMiddleIn" target="center">辖区内审核</a></li>
-						<li><a href="auditfindMiddleOut" target="center">辖区外审核</a></li>
-					</ul>
-				</div>
 			</div>
-			<!--manage  -->
-			<div class="rs-summary">
-				<div class="rs-teacher glyphicon glyphicon-inbox"></div>教委管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_manageList" target="center">浏览管理员</a></li>
-				</ul>
-			</div>
-			<!--School  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-briefcase"></span>学校管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_schoolList" target="center">学校浏览</a></li>
-				</ul>
-			</div>
-			<!--Teacher  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-inbox"></span>教师管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_teacherList" target="center">教师浏览</a></li>
-				</ul>
-			</div>
-			<!--Student  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-tasks"></span>学生管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_student_list" target="center">学生浏览</a></li>
-					<li><a href="admin_student_addExcel" target="center">批量导入</a></li>
-					<li><a href="admin_student_audit" target="center">学生报名</a></li>
-				</ul>
-			</div>
-			<!--Person  -->
-			<div class="rs-summary">
-				<span class="glyphicon glyphicon-user"></span>个人管理
-			</div>
-			<div class="rs-detailed">
-				<ul>
-					<li><a href="admin_personal" target="center">我的信息</a></li>
-				</ul>
-			</div>
-			<!--end  -->
-		</div>
-		
 			<!-- center panel -->
 			<div class="embed-responsive" id="rs-frameCenter">
 				<iframe class="embed-responsive-item" name="center" src="admin_mainView" width="100%" height="100%"></iframe>
 			</div>
 		</div>
 		<div id="rs-pageFooter">
-			<hr style="padding: 0px;margin: 0px;">
-			<p>版权所有:zzuli-zqrc &copy; 2017&nbsp;&nbsp;&nbsp;&nbsp;<a href="admin_help" target="center">使用指南</a></p>
+			<a href="admin_help" target="center">使用指南</a>
+			<p>版权所有:zzuli-zqrc &copy; 2017</p>
 		</div>
 	</body>
 </html>

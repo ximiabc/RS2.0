@@ -22,4 +22,11 @@ public class UserServiceImpl extends BaseDaoImpl<User> implements UserService{
 	public User login(String account, String pass) {
 		return (User)getSession().createQuery("from User u where u.account = ? and u.pass = ?").setString(0, account).setString(1,pass).uniqueResult();
 	}
+
+	/**
+	 * 账号查找
+	 */
+	public User findByAccount(String account) {
+		return (User)getSession().createQuery("from User u where u.account = ? ").setString(0, account).uniqueResult();
+	}
 }

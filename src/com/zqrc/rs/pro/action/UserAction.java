@@ -70,15 +70,38 @@ public class UserAction extends BaseAction<User>{
 		this.result = result;
 	}
 	
+	/**
+	 * 检查账号，存在返回true
+	 * @param account
+	 * @return
+	 */
+	private boolean checkAccount(String account){
+		if(userService.findByAccount(account)!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
 	///////////////////////////////////////////////教师相关
 	/**
 	 * 列出所有教师
 	 * @return
 	 */
 	public String teacherList(){
-		PageBean pageBean =userService.getPageBean(pageNum,10, new HqlHelper(User.class, "u").
-				addOrderByProperty("id", false).
-				addWhereCondition("u.role.id = ?",4));
+		HqlHelper helper=new HqlHelper(User.class, "u").addOrderByProperty("id", false).addWhereCondition("u.role.id = ?",4);
+		if("1".equals(select_type)){//所有学校
+		}else if("2".equals(select_type)){//学校账号
+			helper=helper.addWhereCondition("u.user.account = ?",values);
+		}else if("3".equals(select_type)){//学校名称
+			helper=helper.addWhereCondition("u.user.name = ?",values);
+		}else if("4".equals(select_type)){//教师账号
+			helper=helper.addWhereCondition("u.account = ?",values);
+		}else if("5".equals(select_type)){//教师名
+			helper=helper.addWhereCondition("u.name = ?",values);
+		}
+		
+		PageBean pageBean =userService.getPageBean(pageNum,10,helper);
 		pageBean.setCurrentPage(pageNum);
 		ValueStack vs = ActionContext.getContext().getValueStack();
 		vs.set("pageBean", pageBean);
@@ -93,7 +116,11 @@ public class UserAction extends BaseAction<User>{
 		User admin=getCurrentUser();
 		String str=admin.getAccount();
 		String phone=getModel().getPhone();
-		user.setAccount(DateUtil.getAccount(str.substring(str.length()-4, str.length())));//账号生成算法
+		String accounts=DateUtil.getAccount(str.substring(str.length()-4, str.length()));//账号生成算法
+		while(checkAccount(accounts)){//检查账号是否存在
+			accounts=DateUtil.getAccount(str.substring(str.length()-4, str.length()));
+		}
+		user.setAccount(accounts);
 		user.setPass(phone.substring(phone.length()-6, phone.length()));
 		user.setRole(roleService.getById(4));
 		user.setUser(admin);
@@ -168,7 +195,11 @@ public class UserAction extends BaseAction<User>{
 		User admin=getCurrentUser();
 		String str=admin.getAccount();
 		String phone=getModel().getPhone();
-		user.setAccount(DateUtil.getAccount(str.substring(str.length()-4, str.length())));//账号生成算法
+		String accounts=DateUtil.getAccount(str.substring(str.length()-4, str.length()));//账号生成算法
+		while(checkAccount(accounts)){//检查账号是否存在
+			accounts=DateUtil.getAccount(str.substring(str.length()-4, str.length()));
+		}
+		user.setAccount(accounts);//账号生成算法
 		user.setPass(phone.substring(phone.length()-6, phone.length()));
 		user.setRole(roleService.getById(3));
 		user.setUser(admin);
@@ -271,7 +302,11 @@ public class UserAction extends BaseAction<User>{
 		User admin=getCurrentUser();
 		String str=admin.getAccount();
 		String phone=getModel().getPhone();
-		user.setAccount(DateUtil.getAccount(str.substring(str.length()-4, str.length())));//账号生成算法
+		String accounts=DateUtil.getAccount(str.substring(str.length()-4, str.length()));//账号生成算法
+		while(checkAccount(accounts)){//检查账号是否存在
+			accounts=DateUtil.getAccount(str.substring(str.length()-4, str.length()));
+		}
+		user.setAccount(accounts);//账号生成算法
 		user.setPass(phone.substring(phone.length()-6, phone.length()));
 		user.setRole(roleService.getById(2));
 		user.setUser(admin);

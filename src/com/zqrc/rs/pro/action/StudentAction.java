@@ -28,10 +28,13 @@ import com.zqrc.rs.until.PageBean;
  */
 public class StudentAction extends BaseAction<Student>{
 	/**
-	 * 批量导入学生
+	 * 批量导入学生页跳转
 	 * @return
 	 */
 	public String addExcel() {
+		ValueStack vs = ServletActionContext.getContext().getValueStack();
+		vs.set("grade_id", grade_id);
+		vs.set("type_id", type_id);
 		return "addExcel";
 	}
 	
@@ -40,6 +43,18 @@ public class StudentAction extends BaseAction<Student>{
 	 * @return
 	 */
 	public String list() {
+		/**
+		 * new QueryHelper(Topic.class, "t")//
+				.addWhereCondition("t.forum=?", forum)//
+				.addWhereCondition((viewType == 1), "t.type=?", Topic.TYPE_BEST) // 1 表示仅仅看精华帖
+				.addOrderByProperty((orderBy == 1), "t.lastUpdateTime", asc) // 1 表示仅仅按最后更新时间排序
+				.addOrderByProperty((orderBy == 2), "t.postTime", asc) // 表示仅仅按主题发表时间排序
+				.addOrderByProperty((orderBy == 3), "t.replyCount", asc) // 表示仅仅按回复数量排序
+				.addOrderByProperty((orderBy == 0), "(CASE t.type WHEN 2 THEN 2 ELSE 0 END)", false)//
+				.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false) // 0 表示默认排序(全部置顶帖在前面。并按最后更新时间降序排列)
+				.preparePageBean(topicService, pageNum);
+		 */
+		
 		List<SchoolYear>years=yearService.getAllByNews();
 		if(grade_id==null){grade_id="1";}
 		if(type_id==null){type_id="1";}
@@ -64,6 +79,8 @@ public class StudentAction extends BaseAction<Student>{
 		vs.set("fieldAll", fields);
 		vs.set("years", years);
 		vs.set("pageBean", pageBean);
+		vs.set("grade_id", grade_id);
+		vs.set("type_id", type_id);
 		return "list";
 	}
 	

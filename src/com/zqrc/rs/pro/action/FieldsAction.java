@@ -1,13 +1,7 @@
 package com.zqrc.rs.pro.action;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import jxl.Cell;
-import jxl.Sheet;
-import jxl.Workbook;
 
 import org.json.JSONArray;
 
@@ -17,7 +11,6 @@ import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.SchoolYear;
-import com.zqrc.rs.pro.entity.Student;
 
 /**
  * 学生信息字段控制器
@@ -104,70 +97,6 @@ public class FieldsAction extends BaseAction<Fields>{
 			}
 		}
 	}
-	
-	/**
-	 * 检验字段合法性
-	 * @param sheet
-	 * @param grade
-	 * @param type
-	 * @param year
-	 * @return
-	 */
-	public Boolean check(Sheet sheet,Integer grade,Integer type,Integer year){
-		Boolean b = true;
-		List<Fields> list_fields = fieldService.getByComposite(grade,type,year);
-		for (int j = 0; j < sheet.getColumns(); j++) {//sheet.getColumns():获得表格文件列数
-            Cell cell = sheet.getCell(j,1);
-            System.out.print(cell.getContents());
-            if(cell.getContents().equals(list_fields.get(j).getName())){
-            }else{
-            	b = false;
-            }
-        }
-		return b;
-	}
-	
-	/**
-	 * 获取表头
-	 * @return
-	 */
-	public String SheetTitles(){
-		
-		return "";
-	}
-	
-//	写入数据库
-	public void Demo(File files) {
-        File file = files;
-        try{
-            if(file.exists()){//判断文件是否存在
-                //创建工作簿
-                Workbook workbook = Workbook.getWorkbook(file);
-                //获得第一个工作表sheet1
-                Sheet sheet = workbook.getSheet(0);
-                
-                List<Student> list_fields = new ArrayList<Student>();
-                
-                if(check(sheet,1,1,1)){
-//                	获取排序表
-                	List<Fields> list_orders = fieldService.getByComposite(1,1,1);//表头
-                	int[] orders = new int[list_orders.size()];
-                    //获得数据
-                    for (int i = 0; i < sheet.getRows(); i++) {//sheet.getRows():获得表格文件行数
-                        for (int j = 0; j < sheet.getColumns(); j++) {//sheet.getColumns():获得表格文件列数
-                            Cell cell = sheet.getCell(j,i);
-                        }
-                    }
-                }
-                workbook.close();//关闭
-            }else{
-                System.out.println("文件不存在");
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 	
 	/**
 	 * 小学辖区内

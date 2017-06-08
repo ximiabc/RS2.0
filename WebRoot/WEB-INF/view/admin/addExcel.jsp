@@ -13,40 +13,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" href="css/jquery.filer.css"/>
 		<link rel="stylesheet" type="text/css" href="css/jquery.filer-dragdropbox-theme.css"/>
 		<link rel="stylesheet" href="css/custom.css" />
-		<style>
-			.rs-title{margin: 50px auto 25px;}
-			.rs-title h1,.radio{color: #0BF;}
-			.radio label{margin:5px;padding:10px 20px 10px 40px;border-radius:6px;border: 2px dashed #C8CBCE;}
-		</style>
 	</head>
 	<body>
 		<div class="center-block text-center">
 			<div class="rs-title">
-				<h1>批量导入相关文件</h1>
-				<p>1.上传时请注意文件格式</p>
-				<p>2.每次只能上传一个文件</p>
+				<h1 style="color: #0BF;">批量导入相关文件</h1>
 			</div>
-			<form action="uploads" method="post" enctype="multipart/form-data">
-			<div class="radio">
-				<label>
-					<input type="radio" name="optionsRadios" id="optionsRadios1" value="1">
-					辖区内小学
-				</label>
-				<label>
-					<input type="radio" name="optionsRadios" id="optionsRadios2" value="2">
-					辖区内中学
-				</label>
-				<label>
-					<input type="radio" name="optionsRadios" id="optionsRadios3" value="3">
-					辖区外小学
-				</label>
-				<label>
-					<input type="radio" name="optionsRadios" id="optionsRadios4" value="4">
-					辖区外中学
-				</label>
-			</div>
-			<input name="file" type="file" id="demo-fileInput"/>
-			</form>
+			<form action="uploads" method="post" enctype="multipart/form-data" class="text-center">
+				<input name="grade_id" value="${grade_id }" hidden/>
+				<input name="type_id" value="${type_id }" hidden/>
+				<input name="action_id" value="1" hidden/>
+              <input type="file" name="file">
+              <input type="submit" class="btn-custom blue-light" value="上传电子表格" style="margin-top: 20px;margin-bottom: 25px;">
+            </form>
 		</div>
 		<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>

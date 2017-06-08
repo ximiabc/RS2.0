@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-		<title>学生管理</title>
+		<title>教师管理</title>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.css"/>
 		<script src="js/jquery-3.0.0.min.js"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -39,23 +39,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--表单查询及添加-->
 			<div class="rs-school-height row">
 			
-			<c:if test="${currentUser.role.value == '3'}">
-				<div class="col-xs-2">
+			<div class="col-xs-2">
+				<c:if test="${currentUser.role.value == '3'}">
 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加教师</button>
-				</div>
-			</c:if>
+				</c:if>
+			</div>
 			
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
 					<form class="form-inline pull-right">
 						<!--下拉选项框-->
-						<select name="select_name" class="form-control">
+						<select name="select_type" class="form-control">
 							<option selected="selected" value="1">所有学校</option>
 							<option value="2">学校账号</option>
 				    		<option value="3">学校名称</option>
 				    		<option value="4">教师账号</option>
-				    		<option value="4">教师名称</option>
+				    		<option value="5">教师名称</option>
 						</select>
-					    <input type="text" class="form-control" placeholder="number">
+					    <input name="values" type="text" class="form-control" placeholder="number">
 					    <button type="submit" class="form-control">检索</button>	
 				    </form>
 				</div>

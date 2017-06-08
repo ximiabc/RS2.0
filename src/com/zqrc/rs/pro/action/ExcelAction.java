@@ -26,16 +26,13 @@ import com.zqrc.rs.until.DateUtil;
 public class ExcelAction extends BaseAction<Fields>{
 	private String grade_id;
 	private String type_id;
-	private String optionsRadios;
-	
-	public String getOptionsRadios() {
-		return optionsRadios;
+	private String action_id;//区分上传文件1、模板的动作0
+	public void setAction_id(String action_id) {
+		this.action_id = action_id;
 	}
-
-	public void setOptionsRadios(String optionsRadios) {
-		this.optionsRadios = optionsRadios;
+	public String getAction_id() {
+		return action_id;
 	}
-
 	public String getGrade_id() {
 		return grade_id;
 	}
@@ -78,118 +75,83 @@ public class ExcelAction extends BaseAction<Fields>{
 		SchoolYear year = yearService.getNews();
 		return year.getId();
 	}
+	
+	/**
+	 * 文件输出流
+	 * @param title
+	 * @param out
+	 * @param grade
+	 * @param type
+	 * @param year
+	 */
+	private void getExcelByte(String title,ByteArrayOutputStream out,Integer grade,Integer type,Integer year){
+		WritableWorkbook workbook;
+		jxl.write.Label label;  
+		try {
+			workbook = Workbook.createWorkbook(out);  
+			WritableSheet sheet = workbook.createSheet(title, 0);  
+			List<Fields> list_fields = fieldService.getByComposite(1,2,year);
+			int i=0;
+			while(i < list_fields.size()){
+				label = new jxl.write.Label(i, 0, list_fields.get(i).getName());  
+				sheet.addCell(label);  
+				i++;
+			}
+			workbook.write();  
+			workbook.close();  
+		} catch (Exception e) {  
+			e.printStackTrace();  
+		}  
+	}
 
-//   导出小学辖区外的模板
+	/**
+	 * 导出小学辖区外的模板
+	 * @return
+	 */
 	public String Out(){
 		ByteArrayOutputStream out = new ByteArrayOutputStream();  
-		jxl.write.Label label;  
-		WritableWorkbook workbook;  
-		try {  
-			workbook = Workbook.createWorkbook(out);  
-			WritableSheet sheet = workbook.createSheet("Sheet1", 0);  
-			List<Fields> list_fields = fieldService.getByComposite(1,2,getNewDate());
-			label = new jxl.write.Label(0, 0, "序号");  
-			int i = 0;
-			sheet.addCell(label);
-			while(i < list_fields.size()){
-				label = new jxl.write.Label(i+1, 0, list_fields.get(i).getName());  
-				sheet.addCell(label);  
-				i++;
-			}
-			workbook.write();  
-			workbook.close();  
-		} catch (Exception e) {  
-			e.printStackTrace();  
-		}  
-		excelStream = new ByteArrayInputStream(out.toByteArray());  
-		return "excel";  
-	}  
-
-	//	导出小学辖区内报名表
-	public String In() throws Exception {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();  
-
-		jxl.write.Label label;  
-		WritableWorkbook workbook;  
-		try {  
-			workbook = Workbook.createWorkbook(out);  
-			WritableSheet sheet = workbook.createSheet("Sheet1", 0);  
-
-			List<Fields> list_fields = fieldService.getByComposite(1,1,getNewDate());
-
-			label = new jxl.write.Label(0, 0, "序号");  
-			int i = 0;
-			sheet.addCell(label);
-			while(i < list_fields.size()){
-				label = new jxl.write.Label(i+1, 0, list_fields.get(i).getName());  
-				sheet.addCell(label);  
-				i++;
-			}
-
-			workbook.write();  
-			workbook.close();  
-		} catch (Exception e) {  
-			e.printStackTrace();  
-		}  
-
+		getExcelByte("上街区小学范围外入学报名表",out,1,2,getNewDate());
 		excelStream = new ByteArrayInputStream(out.toByteArray());  
 		return "excel";  
 	}
 
-	//	导出中学学辖区外报名表
+	/**
+	 * 导出小学辖区内报名表
+	 * @return
+	 * @throws Exception
+	 */
+	public String In() throws Exception {
+		ByteArrayOutputStream out = new ByteArrayOutputStream();  
+		getExcelByte("上街区小学范围内入学报名表",out,1,1,getNewDate());
+		excelStream = new ByteArrayInputStream(out.toByteArray());  
+		return "excel";  
+	}
+
+	/**
+	 * 导出中学学辖区外报名表
+	 * @return
+	 * @throws Exception
+	 */
 	public String middelOut() throws Exception {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();  
-		jxl.write.Label label;  
-		WritableWorkbook workbook;  
-		try {  
-			workbook = Workbook.createWorkbook(out);  
-			WritableSheet sheet = workbook.createSheet("Sheet1", 0);  
-			List<Fields> list_fields = fieldService.getByComposite(2,2,getNewDate());
-			label = new jxl.write.Label(0, 0, "序号");  
-			int i = 0;
-			sheet.addCell(label);
-			while(i < list_fields.size()){
-				label = new jxl.write.Label(i+1, 0, list_fields.get(i).getName());  
-				sheet.addCell(label);  
-				i++;
-			}
-			workbook.write();  
-			workbook.close();  
-		} catch (Exception e) {  
-			e.printStackTrace();  
-		}  
+		getExcelByte("上街区中学范围外入学报名表",out,2,2,getNewDate());
 		excelStream = new ByteArrayInputStream(out.toByteArray());  
 		return "excel"; 
 	}
 
-	//	导出中学学辖区内报名表
+	/**
+	 * 导出中学学辖区内报名表
+	 * @return
+	 * @throws Exception
+	 */
 	public String middelIn() throws Exception {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();  
-		jxl.write.Label label;  
-		WritableWorkbook workbook;  
-		try {  
-			workbook = Workbook.createWorkbook(out);  
-			WritableSheet sheet = workbook.createSheet("Sheet1", 0);  
-			List<Fields> list_fields = fieldService.getByComposite(2,1,getNewDate());
-
-			label = new jxl.write.Label(0, 0, "序号");  
-			int i = 0;
-			sheet.addCell(label);
-			while(i < list_fields.size()){
-				label = new jxl.write.Label(i+1, 0, list_fields.get(i).getName());  
-				sheet.addCell(label);  
-				i++;
-			}
-			workbook.write();  
-			workbook.close();  
-		} catch (Exception e) {  
-			e.printStackTrace();  
-		}  
+		getExcelByte("上街区中学范围内入学报名表",out,2,2,getNewDate());
 		excelStream = new ByteArrayInputStream(out.toByteArray());  
 		return "excel"; 
 	}
 	
-	// 对应表单：<input type="file" name="file">
+		// 对应表单：<input type="file" name="file">
 		private File file;
 		// 文件名
 		private String fileFileName;

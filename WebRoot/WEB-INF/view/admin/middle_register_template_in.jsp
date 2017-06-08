@@ -65,6 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<h4 class="modal-title" id="uploadModalLabel">上传表格</h4>
 						</div>
 						<div class="modal-body">
+							<input name="action_id" value="0" hidden/>
 							<input name="grade_id" value="2" hidden>
 							<input name="type_id" value="1" hidden>
 							<input name="file" type="file" class="form-control">

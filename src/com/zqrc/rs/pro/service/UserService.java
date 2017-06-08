@@ -13,4 +13,6 @@ public interface UserService extends BaseDao<User>{
 	
 	User login(String account,String pass);
 	
+	User findByAccount(String account);
+	
 }

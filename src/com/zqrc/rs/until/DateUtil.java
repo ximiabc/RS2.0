@@ -3,6 +3,7 @@ import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 /**
  * 时间辅助
  * @author Administrator
@@ -15,16 +16,18 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String getAccount(String sups){
-		Format format = new SimpleDateFormat("yyyy-SSSS");
+		Random random=new Random();
+		int i=random.nextInt(10);
+		Format format = new SimpleDateFormat("yyyy-SSS");
 		String str=format.format(new Date());
 		switch (sups.length()) {
-		case 0:sups="0000";
+		case 0:sups="0000"+i;
 			break;
-		case 1:sups="000"+sups;
+		case 1:sups="000"+sups+i;
 			break;
-		case 2:sups="00"+sups;
+		case 2:sups="00"+sups+i;
 			break;
-		case 3:sups="0"+sups;
+		case 3:sups="0"+sups+i;
 			break;
 		default:
 			break;

@@ -56,7 +56,7 @@
 		<value>
 			hibernate.hbm2ddl.auto=update
 				hibernate.show_sql=true
-			<!-- 	hibernate.format_sql=true -->
+			    hibernate.format_sql=true
 				hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
 				current_session_context_class=thread
 				javax.persistence.validation.mode=none

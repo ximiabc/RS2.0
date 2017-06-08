@@ -40,11 +40,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--表单查询及添加-->
 			<div class="rs-school-height row">
 			
-			<%-- <c:if test="${currentUser.role.value == '1'}"> --%>
-				<div class="col-xs-2">
+			<div class="col-xs-2">
+				<c:if test="${currentUser.role.value == '1'}">
 					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学生</button>
-				</div>
-			<%-- </c:if> --%>
+				</c:if>
+			</div>
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
 					<form class="form-inline pull-right">
 						<!--下拉选项框-->
@@ -54,12 +54,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   		</s:iterator>
 						</select>
 						<select name="grade_id" class="form-control">
-							<option selected="selected" value="1">小学</option>
-							<option value="2">中学</option>
+							<option <c:if test="${grade_id == '1' }">selected</c:if> value="1">小学</option>
+							<option <c:if test="${grade_id == '2' }">selected</c:if> value="2">中学</option>
 						</select>
 						<select name="type_id" class="form-control">
-							<option selected="selected" value="1">辖区内</option>
-							<option value="2">辖区外</option>
+							<option <c:if test="${type_id == '1' }">selected</c:if> selected="selected" value="1">辖区内</option>
+							<option <c:if test="${type_id == '2' }">selected</c:if> value="2">辖区外</option>
 						</select>
 						<select name="select_name" class="form-control">
 							<option selected="selected" value="1">关联查询</option>
@@ -88,7 +88,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>辖区内外</td>
 						<td>报名学校</td>
 						<td>报名状态</td>
-						<td>操作</td>
+						<c:if test="${currentUser.role.value == '1'}">
+							<td>操作</td>
+						</c:if>
 					</tr>
 				</thead>
 				<tbody>
@@ -145,12 +147,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>${type.name }</td>
 							<td>${school.name }</td>
 							<td>${states.name }</td>
-							<td>
-								<div class="rs-school-space">
-								<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除此学生');" class="btn btn-default" type="button" >删除</a>
-								<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
-								</div>
-							</td>
+							<c:if test="${currentUser.role.value == '1'}">
+								<td>
+									<div class="rs-school-space">
+									<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除此学生');" class="btn btn-default" type="button" >删除</a>
+									<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
+									</div>
+								</td>
+							</c:if>
 						</tr>
 					</s:iterator>
 				</tbody>
