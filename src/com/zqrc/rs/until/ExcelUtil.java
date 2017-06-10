@@ -29,11 +29,12 @@ public class ExcelUtil{
 			Sheet sheet = workbook.getSheet(0);//获得第一个工作表sheet1
 			str=new String[sheet.getColumns()];
 			for (int j = 0; j < sheet.getColumns(); j++) {//sheet.getColumns():获得表格文件列数
-				str[j]=sheet.getCell(j,1).getContents();
+				str[j]=sheet.getCell(j,0).getContents();
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally{
+			
 			workbook.close();//关闭
 		}
 		return str;

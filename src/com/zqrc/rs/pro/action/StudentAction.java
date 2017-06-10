@@ -207,6 +207,28 @@ public class StudentAction extends BaseAction<Student>{
 		list();
 		return "audit";
 	}
+	/**
+	 * 审批学生
+	 * 报名功能
+	 */
+	public String auditPass() {
+		
+		User user=getCurrentUser();
+		States states=statesService.getById(2);
+		Student student=studentService.getById(getModel().getId());
+		student.setStates(states);
+		student.setDate(new Date());
+		if(user.getRole().getId()==4){
+			student.setTeacher(user);
+			student.setSchool(user.getUser());
+		}else if(user.getRole().getId()==3){
+			student.setTeacher(user);
+			student.setSchool(user);
+		}
+		studentService.update(student);
+		list();
+		return "audit";
+	}
 	
 	
 	private String year_id;

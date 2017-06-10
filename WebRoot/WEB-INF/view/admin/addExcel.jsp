@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input name="grade_id" value="${grade_id }" hidden/>
 				<input name="type_id" value="${type_id }" hidden/>
 				<input name="action_id" value="1" hidden/>
-              <input type="file" name="file">
+              <center style="margin-left: 70px;"><input type="file" name="file"></center>
               <input type="submit" class="btn-custom blue-light" value="上传电子表格" style="margin-top: 20px;margin-bottom: 25px;">
             </form>
 		</div>

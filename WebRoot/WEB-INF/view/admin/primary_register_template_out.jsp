@@ -59,15 +59,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel">
 			<div class="modal-dialog modal-sm" role="document">
 				<div class="modal-content">
-					<form action="uploads" method="post" enctype="multipart/form-data">
+					<form action="upload_InPrimaryOut" method="post" enctype="multipart/form-data">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<h4 class="modal-title" id="uploadModalLabel">上传表格</h4>
 						</div>
 						<div class="modal-body">
-							<input name="action_id" value="0" hidden/>
-							<input name="grade_id" value="1" hidden>
-							<input name="type_id" value="2" hidden>
 							<input name="file" type="file" class="form-control">
 						</div>
 			    		<div class="modal-footer">

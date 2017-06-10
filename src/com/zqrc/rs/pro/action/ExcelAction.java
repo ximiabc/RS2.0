@@ -175,8 +175,71 @@ public class ExcelAction extends BaseAction<Fields>{
 	public void setFileContentType(String fileContentType) {
 		this.fileContentType = fileContentType;
 	}
-
-	public String execute() throws Exception {
+	
+	/**
+	 * 小学辖区内
+	 * 模板excel导入
+	 */
+	public String InPrimaryIn(){
+		try {
+			updateExcel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[]titles=ExcelUtil.getTitles(file);
+		saveFieldsTitles(1,1,titles);
+		return "primaryIn";
+	}
+	
+	/**
+	 * 小学辖区外
+	 * 模板excel导入
+	 */
+	public String InPrimaryOut(){
+		try {
+			updateExcel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[]titles=ExcelUtil.getTitles(file);
+		saveFieldsTitles(1,2,titles);
+		return "primaryOut";
+	}
+	
+	/**
+	 * 中学辖区内
+	 * 模板excel导入
+	 */
+	public String InMiddleIn(){
+		try {
+			updateExcel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[]titles=ExcelUtil.getTitles(file);
+		saveFieldsTitles(2,1,titles);
+		return "middleIn";
+	}
+	
+	/**
+	 * 中学辖区外
+	 * 模板excel导入
+	 */
+	public String InMiddleOut(){
+		try {
+			updateExcel();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		String[]titles=ExcelUtil.getTitles(file);
+		saveFieldsTitles(2,2,titles);
+		return "middleOut";
+	}
+	
+	/**
+	 * Excel上传文件备份
+	 */
+	private void updateExcel() throws Exception{
 		/******拿到上传的文件，上传到upload目录******/
 		File destFile = null;
 		// 获取上传的目录路径
@@ -185,12 +248,17 @@ public class ExcelAction extends BaseAction<Fields>{
 		String types;
 		String[] tempType=fileFileName.split("\\.");
 		types=tempType[tempType.length-1];
-
 		destFile = new File(path, DateUtil.getUUID()+"."+types);
-
 		// 把上传的文件，拷贝到目标文件中
 		FileUtils.copyFile(file, destFile);
-
+	}
+	
+	/**
+	 * 默认解析方式
+	 * 不可用
+	 */
+	@Deprecated
+	public String execute() throws Exception {
 		if("1".equals(action_id)){//解析数据
 			Integer year=yearService.getNews().getId();
 			List<String[]>list=null;
@@ -202,6 +270,8 @@ public class ExcelAction extends BaseAction<Fields>{
 				}else if(type_id.equals("2")){//范围外
 					fields=fieldService.getByComposite(1, 2,year);
 					list=ExcelUtil.sax(file, fields);
+				}else{
+					System.out.println("请求参数有误！");
 				}
 			}else if(grade_id.equals("2")){//中学
 				if(type_id.equals("1")){//范围内
@@ -210,6 +280,8 @@ public class ExcelAction extends BaseAction<Fields>{
 				}else if(type_id.equals("2")){//范围外
 					fields=fieldService.getByComposite(2, 2,year);
 					list=ExcelUtil.sax(file, fields);
+				}else{
+					System.out.println("请求参数有误！");
 				}
 			}
 			//保存学生
@@ -217,25 +289,59 @@ public class ExcelAction extends BaseAction<Fields>{
 
 		}else if("0".equals(action_id)){//解析模板
 			String[]titles=ExcelUtil.getTitles(file);
-			if(grade_id.equals("1")){//小学
-				if(type_id.equals("1")){//范围内
+			if("1".equals(grade_id)){//小学
+				if("1".equals(type_id)){//范围内
 					saveFieldsTitles(1,1,titles);
-				}else if(type_id.equals("2")){//范围外
+				}else if("2".equals(type_id)){//范围外
 					saveFieldsTitles(1,2,titles);
+				}else{
+					System.out.println("请求参数有误！");
 				}
-			}else if(grade_id.equals("2")){//中学
-				if(type_id.equals("1")){//范围内
+			}else if("2".equals(grade_id)){//中学
+				if("1".equals(type_id)){//范围内
 					saveFieldsTitles(2,1,titles);
-				}else if(type_id.equals("2")){//范围外
+				}else if("2".equals(type_id)){//范围外
 					saveFieldsTitles(2,2,titles);
+				}else{
+					System.out.println("请求参数有误！");
 				}
 			}
 		}
-		/**
-		 * file解析
-		 */
-		//file
+		System.out.println("grade_id="+grade_id+",type_id="+type_id);
 		return "primaryIn";
+	}
+	
+	/**
+	 * 小学辖区内
+	 * 数据解析
+	 * @return
+	 */
+	public String DatePrimaryIn(){
+		return "addExcel";
+	}
+	/**
+	 * 小学辖区内
+	 * 数据解析
+	 * @return
+	 */
+	public String DatePrimaryOut(){
+		return "addExcel";
+	}
+	/**
+	 * 小学辖区内
+	 * 数据解析
+	 * @return
+	 */
+	public String DateMiddleIn(){
+		return "addExcel";
+	}
+	/**
+	 * 小学辖区内
+	 * 数据解析
+	 * @return
+	 */
+	public String DateMiddleOut(){
+		return "addExcel";
 	}
 
 	/**
@@ -343,7 +449,6 @@ public class ExcelAction extends BaseAction<Fields>{
 			student.setStates(states);
 			studentService.save(student);
 		}
-
 	}
 
 	/**

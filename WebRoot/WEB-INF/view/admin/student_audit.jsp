@@ -230,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">更改学生人数</h4>
 				    </div> 
-				    <form class="form-horizontal container-fluid">
+				    <form action="admin_student_auditPass" class="form-horizontal container-fluid">
 					    <div class="modal-body row">
 							<s:iterator value="fieldAll" status="indexs">
 								<div class="form-group col-xs-6">
@@ -238,13 +238,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							   		<label id="${keyName }"  class="col-xs-6 control-label rs-text"></label>
 								</div>
 							</s:iterator>
-							
 					    </div>
 					    <div class="modal-footer">
 					        <div class="input-group pull-right" style="width: 260px; margin-right: 40px;">
+					        	<input id="ids" type="text" name="id" hidden>
 							    <input type="text" class="form-control" placeholder="输入验证信息">
 							    <span class="input-group-btn">
-							        <button class="btn btn-info" type="button">审核通过</button>
+							        <button class="btn btn-info" type="submit">审核通过</button>
 							    </span>
 						    </div>
 						</div>
@@ -281,6 +281,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					dataType: "json",
 					success: function(data){
 						var data = $.parseJSON(data);
+						$('#ids').val(data.id);
 						for(var key in data){
 							console.group(key);console.log(data[key]);console.groupEnd();
 							$('#'+key).text(data[key]);
