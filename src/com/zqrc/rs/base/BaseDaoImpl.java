@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -125,8 +126,6 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>{
 
 		return new PageBean(pageNum, pageSize, count.intValue(), list);
 	}
-
-	
-	}
+}
 	
 

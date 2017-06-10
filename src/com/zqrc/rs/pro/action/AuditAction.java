@@ -8,6 +8,7 @@ import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.Audit;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.SchoolYear;
+import com.zqrc.rs.pro.entity.Student;
 
 /**
  * 审核字段
@@ -16,7 +17,16 @@ import com.zqrc.rs.pro.entity.SchoolYear;
  */
 public class AuditAction extends BaseAction<Audit>{
 	private Integer selectId;
+	private Integer stu_id;
 	
+	public Integer getStu_id() {
+		return stu_id;
+	}
+
+	public void setStu_id(Integer stu_id) {
+		this.stu_id = stu_id;
+	}
+
 	public Integer getSelectId() {
 		return selectId;
 	}
@@ -24,6 +34,8 @@ public class AuditAction extends BaseAction<Audit>{
 	public void setSelectId(Integer selectId) {
 		this.selectId = selectId;
 	}
+	
+	
 
 	//	获取小学辖区内审核字段
 	public String findPrimaryIn(){
@@ -152,5 +164,4 @@ public class AuditAction extends BaseAction<Audit>{
 		return "MiddleIn";
 	}
 //	/////////////////////////////////////////////////
-	
 }

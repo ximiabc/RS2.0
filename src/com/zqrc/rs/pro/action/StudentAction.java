@@ -3,12 +3,15 @@ package com.zqrc.rs.pro.action;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.components.ActionMessage;
 import org.json.JSONObject;
 
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
+import com.zqrc.rs.pro.entity.Audit;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.Grade;
 import com.zqrc.rs.pro.entity.SchoolYear;
@@ -290,5 +293,32 @@ public class StudentAction extends BaseAction<Student>{
 	}
 	public String getResult() {
 		return result;
+	}
+	
+	
+	private String audit_str;
+	
+	public String getAudit_str() {
+		return audit_str;
+	}
+
+	public void setAudit_str(String audit_str) {
+		this.audit_str = audit_str;
+	}
+
+	//	验证字段
+	public String inspect(){
+		
+		Student student = studentService.getById(getModel().getId());
+		Map<String, String> stu_map = studentService.findStudentMap(student.getId());
+		Audit audit = auditService.findByComposite(student.getGrade().getId(), student.getType().getId(), student.getYears().getId());
+		Fields fields = fieldService.findByComposite(student.getGrade().getId(), student.getType().getId(), student.getYears().getId(), audit.getField_id());
+		String kay = stu_map.get(fields.getKeyName());
+		if(audit_str.equals(kay)){
+			addActionMessage("审核成功");
+		}else{
+			addActionMessage("审核失败！请校验信息");
+		}
+		return "Inspect";
 	}
 }

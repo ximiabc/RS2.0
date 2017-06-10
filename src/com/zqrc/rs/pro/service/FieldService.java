@@ -30,6 +30,6 @@ public interface FieldService extends BaseDao<Fields>{
 	 */
 	void delByComposite(Integer grade,Integer type,Integer year,Integer orders);
 
-	Fields findByComposite(Integer i, Integer j, Integer time, Integer selectId);
+	Fields findByComposite(Integer grade, Integer type, Integer year,Integer orders);
 	
 }
