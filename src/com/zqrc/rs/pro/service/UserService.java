@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.service;
 
+import java.util.List;
+
 import com.zqrc.rs.base.BaseDao;
 import com.zqrc.rs.pro.entity.User;
 
@@ -15,4 +17,5 @@ public interface UserService extends BaseDao<User>{
 	
 	User findByAccount(String account);
 	
+	List<User> getAllSchool();
 }

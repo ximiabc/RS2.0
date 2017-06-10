@@ -13,6 +13,7 @@ public class DueTime implements Serializable{
 	private Integer grade_id;
 	private Integer type_id;
 	private Integer year_id;
+	private Integer school_id;
 	
 	private Date startDate;
 	private Date endDate;
@@ -51,4 +52,13 @@ public class DueTime implements Serializable{
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
+	public Integer getSchool_id() {
+		return school_id;
+	}
+
+	public void setSchool_id(Integer school_id) {
+		this.school_id = school_id;
+	}
+	
 }

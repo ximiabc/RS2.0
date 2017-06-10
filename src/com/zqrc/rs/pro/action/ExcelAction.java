@@ -317,26 +317,29 @@ public class ExcelAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String DatePrimaryIn(){
+		
 		return "addExcel";
 	}
 	/**
-	 * 小学辖区内
+	 * 小学辖区外
 	 * 数据解析
 	 * @return
 	 */
 	public String DatePrimaryOut(){
+		
 		return "addExcel";
 	}
 	/**
-	 * 小学辖区内
+	 * 中学辖区内
 	 * 数据解析
 	 * @return
 	 */
 	public String DateMiddleIn(){
+		
 		return "addExcel";
 	}
 	/**
-	 * 小学辖区内
+	 * 中学辖区外
 	 * 数据解析
 	 * @return
 	 */
@@ -456,7 +459,7 @@ public class ExcelAction extends BaseAction<Fields>{
 	 */
 	private void saveFieldsTitles(Integer grade,Integer type,String[]titles){
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=dueTimeService.getByComposite(grade, type, year.getId());
+		DueTime dueTime=dueTimeService.getByComposite(grade, type, year.getId(),0);
 
 		if((new Date()).after(dueTime.getStartDate())){//报名日期前后判定(报名后)
 			System.out.println("=================报名期间");

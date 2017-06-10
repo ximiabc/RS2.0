@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
+import com.zqrc.rs.pro.entity.Checks;
 import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.SchoolYear;
@@ -75,14 +76,15 @@ public class FieldsAction extends BaseAction<Fields>{
 	 */
 	private void saveFields(Integer grade,Integer type){
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=dueTimeService.getByComposite(grade, type, year.getId());
+		DueTime dueTime=dueTimeService.getByComposite(grade, type, year.getId(),0);
 		JSONArray array=new JSONArray(itemList);//接收到的数据解析
 		
 		if((new Date()).after(dueTime.getStartDate())){//报名日期前后判定(报名后)
 			System.out.println("=================");
 		}else{//报名前
 			for(int i=0;i<array.length();i++){
-				String str=((String)array.get(i)).split(":")[1];
+				String[]temp=((String)array.get(i)).split(":");
+				String str=temp[1];
 				Fields entity=new Fields();
 				entity.setGrade_id(grade);
 				entity.setType_id(type);
@@ -90,6 +92,7 @@ public class FieldsAction extends BaseAction<Fields>{
 				entity.setOrders(i+1);
 				entity.setName(str);
 				entity.setKeyName("item"+(i+1));
+				entity.setChecks(checksService.loadById(Integer.parseInt(temp[2].substring(4))));
 				fieldService.saveOrUpdate(entity);
 			}
 			for(int i=array.length()+1;i<40;i++){
@@ -104,9 +107,11 @@ public class FieldsAction extends BaseAction<Fields>{
 	 */
 	public String primaryIn() {
 		SchoolYear year=yearService.getNews();
+		List<Checks>checks=checksService.findAll();
 		List<Fields> fields=getFields(1, 1, year.getId());
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("beans", fields);
+		stack.set("checks", checks);
 		return "primaryIn";
 	}
 	
@@ -115,10 +120,12 @@ public class FieldsAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String primaryOut() {
+		List<Checks>checks=checksService.findAll();
 		SchoolYear year=yearService.getNews();
 		List<Fields> fields=getFields(1, 2, year.getId());
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("beans", fields);
+		stack.set("checks", checks);
 		return "primaryOut";
 	}
 	
@@ -127,10 +134,12 @@ public class FieldsAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String middleIn() {
+		List<Checks>checks=checksService.findAll();
 		SchoolYear year=yearService.getNews();
 		List<Fields> fields=getFields(2, 1, year.getId());
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("beans", fields);
+		stack.set("checks", checks);
 		return "middleIn";
 	}
 	
@@ -139,10 +148,12 @@ public class FieldsAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String middleOut() {
+		List<Checks>checks=checksService.findAll();
 		SchoolYear year=yearService.getNews();
 		List<Fields> fields=getFields(2, 2, year.getId());
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("beans", fields);
+		stack.set("checks", checks);
 		return "middleOut";
 	}
 	

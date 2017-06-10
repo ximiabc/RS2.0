@@ -19,9 +19,7 @@
 		<property name="keyName" type="string"></property>
 		
 		<!-- 附加信息 -->
-		<property name="checks" type="string"></property>
-		<property name="checkError" type="string"></property>
-		<property name="titles" type="string"></property>
+		<many-to-one name="checks" class="com.zqrc.rs.pro.entity.Checks" column="check_field"></many-to-one>
 	</class>
 	
 </hibernate-mapping>

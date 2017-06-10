@@ -47,6 +47,14 @@ public interface BaseDao<T> {
 	 * @return
 	 */
 	T getById(Integer id);
+	
+	/**
+	 * 在池中加载数据
+	 * 没有的话重新获取
+	 * @param id
+	 * @return
+	 */
+	T loadById(Integer id);
 
 	/**
 	 * 按id查询

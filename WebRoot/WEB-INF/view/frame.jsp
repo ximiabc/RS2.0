@@ -177,12 +177,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<span class="glyphicon glyphicon-tasks"></span>学生管理
 						</div>
 						<div class="rs-detailed">
-							<%-- <ul>
-								<c:if test="${currentUser.role.value == '1' && juint == '1' }">
-									<li><a href="admin_student_list" target="center">学生浏览</a></li>
-									<li><a href="admin_student_addExcel" target="center">批量导入</a></li>
-								</c:if>
-							</ul> --%>
 							<c:if test="${currentUser.role.value == '1' || juint == '1' }">
 								<div class="rs-summary">学生浏览</div>
 								<div class="rs-detailed">

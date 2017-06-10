@@ -1,5 +1,7 @@
 package com.zqrc.rs.pro.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,5 +30,12 @@ public class UserServiceImpl extends BaseDaoImpl<User> implements UserService{
 	 */
 	public User findByAccount(String account) {
 		return (User)getSession().createQuery("from User u where u.account = ? ").setString(0, account).uniqueResult();
+	}
+
+	/**
+	 * 获取所有学校
+	 */
+	public List<User> getAllSchool() {
+		return (List<User>)getSession().createQuery("from User u where u.role.value = ? ").setInteger(0, 3).list();
 	}
 }

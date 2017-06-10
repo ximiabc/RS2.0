@@ -17,9 +17,7 @@ public class Fields implements Serializable{
 	private String name;//显示名
 	private String keyName;//行中字段名
 	
-	private String checks;//校验字段
-	private String checkError;//校验失败提醒字段
-	private String titles;//提醒字段
+	private Checks checks; 
 	
 	public Fields() {
 	}
@@ -69,29 +67,12 @@ public class Fields implements Serializable{
 		this.year_id = year_id;
 	}
 
-	public String getChecks() {
+	public Checks getChecks() {
 		return checks;
 	}
 
-	public void setChecks(String checks) {
+	public void setChecks(Checks checks) {
 		this.checks = checks;
 	}
-
-	public String getCheckError() {
-		return checkError;
-	}
-
-	public void setCheckError(String checkError) {
-		this.checkError = checkError;
-	}
-
-	public String getTitles() {
-		return titles;
-	}
-
-	public void setTitles(String titles) {
-		this.titles = titles;
-	}
-	
 }
 

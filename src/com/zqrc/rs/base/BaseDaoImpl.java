@@ -67,6 +67,19 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T>{
 			return (T) getSession().get(clazz, id);
 		}
 	}
+	
+	public T loadById(Integer id) {
+		if (id == null) {
+			return null;
+		} else {
+			T t=(T)getSession().load(clazz, id);
+			if(t!=null){
+				return t;
+			}else{
+				return getById(id);
+			}
+		}
+	}
 
 	public List<T> getByIds(Integer[] ids) {
 		if (ids == null || ids.length == 0) {

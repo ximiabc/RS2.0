@@ -4,12 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.SchoolYear;
+import com.zqrc.rs.pro.entity.User;
 
 /**
  * 学生信息字段控制器
@@ -38,10 +40,12 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String primaryIn() {
+		List<User>schoolList=userService.getAllSchool();
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(1, 1, year.getId());
+		DueTime dueTime=getDueTime(1, 1, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("bean", dueTime);
+		stack.set("schools", schoolList);
 		return "primaryIn";
 	}
 	/**
@@ -52,7 +56,7 @@ public class DateAction extends BaseAction<DueTime>{
 	public String primaryInUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(1, 1, year.getId());
+		DueTime dueTime=getDueTime(1, 1, year.getId(),0);
 		if(dueTime==null){
 			dueTime=new DueTime();
 			dueTime.setGrade_id(1);
@@ -77,10 +81,12 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String primaryOut() {
+		List<User>schoolList=userService.getAllSchool();
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(1, 2, year.getId());
+		DueTime dueTime=getDueTime(1, 2, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("bean", dueTime);
+		stack.set("schools", schoolList);
 		return "primaryOut";
 	}
 	
@@ -92,7 +98,7 @@ public class DateAction extends BaseAction<DueTime>{
 	public String primaryOutUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(1, 2, year.getId());
+		DueTime dueTime=getDueTime(1, 2, year.getId(),0);
 		if(dueTime==null){
 			dueTime=new DueTime();
 			dueTime.setGrade_id(1);
@@ -116,10 +122,12 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String middleIn() {
+		List<User>schoolList=userService.getAllSchool();
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(2, 1, year.getId());
+		DueTime dueTime=getDueTime(2, 1, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("bean", dueTime);
+		stack.set("schools", schoolList);
 		return "middleIn";
 	}
 	
@@ -131,7 +139,7 @@ public class DateAction extends BaseAction<DueTime>{
 	public String middleInUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(2, 1, year.getId());
+		DueTime dueTime=getDueTime(2, 1, year.getId(),0);
 		if(dueTime==null){
 			dueTime=new DueTime();
 			dueTime.setGrade_id(2);
@@ -155,10 +163,12 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String middleOut() {
+		List<User>schoolList=userService.getAllSchool();
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(2, 2, year.getId());
+		DueTime dueTime=getDueTime(2, 2, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
 		stack.set("bean", dueTime);
+		stack.set("schools", schoolList);
 		return "middleOut";
 	}
 	
@@ -170,7 +180,7 @@ public class DateAction extends BaseAction<DueTime>{
 	public String middleOutUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(2, 2, year.getId());
+		DueTime dueTime=getDueTime(2, 2, year.getId(),0);
 		if(dueTime==null){
 			dueTime=new DueTime();
 			dueTime.setGrade_id(2);
@@ -196,8 +206,8 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @param year
 	 * @return
 	 */
-	private DueTime getDueTime(Integer grade, Integer type, Integer year){
-		return dueTimeService.getByComposite(grade, type, year);
+	private DueTime getDueTime(Integer grade, Integer type, Integer year,Integer school){
+		return dueTimeService.getByComposite(grade, type, year,school);
 	}
 	
 }

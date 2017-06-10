@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.zqrc.rs.pro.entity.Checks" table="t_checks">
+		<!--主键 -->
+		<id name="id" column="Id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<!--普通属性 -->
+		<property name="name" type="string"></property>
+		<property name="checks" type="string"></property>
+		<property name="errorMsg" type="string"></property>
+		
+		<set name="fields" lazy="false" cascade="all" inverse="true">
+			<key column="check_field"></key>
+			<one-to-many class="com.zqrc.rs.pro.entity.Fields"/>
+		</set>
+	</class>
+	
+</hibernate-mapping>

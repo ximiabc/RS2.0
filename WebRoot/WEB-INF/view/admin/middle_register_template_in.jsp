@@ -37,7 +37,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div id="dragslot" class="slot">
 						<ul id="slot-list" class="list-group slot-list text-center" style="margin-bottom: 0px;">
 							<s:iterator value="beans" status="indexs">
-								<li class="list-group-item slot-item">${name }
+								<li class="list-group-item slot-item">
+									<span id='${keyName }' class="rs-itemName">${name }</span>
+									<span id="rule${checks.id }" class="rs-itemRule">${checks.name }</span>
 									<span class="glyphicon glyphicon-edit pull-right" aria-hidden="true"></span>
 								</li>
 							</s:iterator>
@@ -86,6 +88,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="input-group">
 							<div class="input-group-addon">字段名</div>
 							<input type="text" id="rs-modalText" class="form-control">
+						</div>
+						<div class="input-group">
+							<div class="input-group-addon">内容填写规则</div>
+							<select name="checks_id" id="rs-modalSelect" class="form-control">
+								<s:iterator value="checks">
+									<option value="rule${id }">${name }</option>
+								</s:iterator>
+							</select>
 						</div>
 					</div>
 		    		<div class="modal-footer">

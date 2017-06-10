@@ -9,6 +9,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.zqrc.rs.pro.entity.User;
 import com.zqrc.rs.pro.service.AuditService;
+import com.zqrc.rs.pro.service.ChecksService;
 import com.zqrc.rs.pro.service.DueTimeService;
 import com.zqrc.rs.pro.service.FieldService;
 import com.zqrc.rs.pro.service.GradeService;
@@ -82,4 +83,6 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	protected YearService yearService;
 	@Resource
 	protected AuditService auditService;
+	@Resource
+	protected ChecksService checksService;
 }

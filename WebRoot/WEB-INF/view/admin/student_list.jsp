@@ -259,7 +259,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group col-xs-6">
 							    <label for="inputText" class="col-xs-4 control-label">${name }</label>
 								<div class="col-xs-8">
-								    <input name="${keyName }" type="text" class="form-control" id="inputText" placeholder="${titles }" data-vaild="${checks }" data-errmsg="${checkError }"/>
+								    <input name="${keyName }" type="text" class="form-control" id="inputText" placeholder="${checks.name }" data-vaild="${checks.checks }" data-errmsg="${checks.errorMsg }"/>
 								</div>
 							</div>
 						</s:iterator>

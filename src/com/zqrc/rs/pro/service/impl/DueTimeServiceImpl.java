@@ -19,7 +19,7 @@ public class DueTimeServiceImpl extends BaseDaoImpl<DueTime> implements DueTimeS
 	/**
 	 * 通过联合主键获取报名日期
 	 */
-	public DueTime getByComposite(Integer grade, Integer type, Integer year) {
-		return (DueTime)getSession().createQuery("from DueTime d where d.grade_id = ? and d.type_id = ? and d.year_id = ?").setInteger(0, grade).setInteger(1, type).setInteger(2, year).uniqueResult();
+	public DueTime getByComposite(Integer grade, Integer type, Integer year,Integer school) {
+		return (DueTime)getSession().createQuery("from DueTime d where d.grade_id = ? and d.type_id = ? and d.year_id = ? and d.school_id = ? ").setInteger(0, grade).setInteger(1, type).setInteger(2, year).setInteger(3, school).uniqueResult();
 	}
 }
