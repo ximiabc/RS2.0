@@ -242,9 +242,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="modal-footer">
 					        <div class="input-group pull-right" style="width: 260px; margin-right: 40px;">
 					        	<input id="ids" type="text" name="id" hidden>
-							    <input type="text" class="form-control" placeholder="输入验证信息">
+							    <input name="audit_str" type="text" class="form-control" placeholder="输入验证信息">
 							    <span class="input-group-btn">
-							        <button class="btn btn-info" type="submit">审核通过</button>
+							        <input class="btn btn-info" type="submit" value="审核通过"/>
 							    </span>
 						    </div>
 						</div>

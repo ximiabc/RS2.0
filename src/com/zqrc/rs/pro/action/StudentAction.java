@@ -48,11 +48,6 @@ public class StudentAction extends BaseAction<Student>{
 	public String list() {
 		/**
 		 * new QueryHelper(Topic.class, "t")//
-				.addWhereCondition("t.forum=?", forum)//
-				.addWhereCondition((viewType == 1), "t.type=?", Topic.TYPE_BEST) // 1 表示仅仅看精华帖
-				.addOrderByProperty((orderBy == 1), "t.lastUpdateTime", asc) // 1 表示仅仅按最后更新时间排序
-				.addOrderByProperty((orderBy == 2), "t.postTime", asc) // 表示仅仅按主题发表时间排序
-				.addOrderByProperty((orderBy == 3), "t.replyCount", asc) // 表示仅仅按回复数量排序
 				.addOrderByProperty((orderBy == 0), "(CASE t.type WHEN 2 THEN 2 ELSE 0 END)", false)//
 				.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false) // 0 表示默认排序(全部置顶帖在前面。并按最后更新时间降序排列)
 				.preparePageBean(topicService, pageNum);
@@ -72,9 +67,12 @@ public class StudentAction extends BaseAction<Student>{
 			fields2=fields;
 		}
 		HqlHelper helper=new HqlHelper(Student.class, "s")
+		//
 		.addWhereCondition("s.grade.id = ? ", Integer.parseInt(grade_id))
 		.addWhereCondition("s.type.id = ? ", Integer.parseInt(type_id))
 		.addWhereCondition("s.years.id = ? ", Integer.parseInt(year_id))
+		
+		//下拉查询条件
 		//.addWhereCondition((select_name.equals("1")), "s.", params)
 		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
 		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
@@ -82,8 +80,16 @@ public class StudentAction extends BaseAction<Student>{
 		.addWhereCondition(("5".equals(select_name)), "s.name = ?", datas)//学生名称
 		.addWhereCondition(("6".equals(select_name)), "s.states.id = ?", 1)//未报名
 		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
-		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//已报名
-		.addWhereCondition(("9".equals(select_name)), "s.states.id = ?", 4)//已报名
+		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//申请退出
+		.addWhereCondition(("9".equals(select_name)), "s.states.id = ?", 4)//失败
+		
+		//指定中小学
+		.addWhereCondition((getCurrentUser().getRole().getId() == 3 && 1 == getCurrentUser().getGrade().getId()), "s.grade.id = ? ", 1)//通过用户所属学历-小学
+		.addWhereCondition((getCurrentUser().getRole().getId() == 3 && 2 == getCurrentUser().getGrade().getId()), "s.grade.id = ? ", 2)//通过用户所属学历-中学学
+		.addWhereCondition((getCurrentUser().getRole().getId() == 4 && 1 == getCurrentUser().getUser().getGrade().getId()), "s.grade.id = ? ", 1)//通过用户所属学历-小学
+		.addWhereCondition((getCurrentUser().getRole().getId() == 4 && 2 == getCurrentUser().getUser().getGrade().getId()), "s.grade.id = ? ", 2)//通过用户所属学历-中学学
+		
+		//排序规则
 		.addOrderByProperty("id", false);
 		
 		PageBean pageBean =studentService.getPageBean(pageNum,10,helper);
@@ -231,24 +237,25 @@ public class StudentAction extends BaseAction<Student>{
 	 * 报名功能
 	 */
 	public String auditPass() {
-		
-		User user=getCurrentUser();
-		States states=statesService.getById(2);
-		Student student=studentService.getById(getModel().getId());
-		student.setStates(states);
-		student.setDate(new Date());
-		if(user.getRole().getId()==4){
-			student.setTeacher(user);
-			student.setSchool(user.getUser());
-		}else if(user.getRole().getId()==3){
-			student.setTeacher(user);
-			student.setSchool(user);
+		if(inspect()){
+			User user=getCurrentUser();
+			States states=statesService.getById(2);
+			Student student=studentService.getById(getModel().getId());
+			student.setStates(states);
+			student.setDate(new Date());
+			
+			if(user.getRole().getId()==4){//教师审核
+				student.setTeacher(user);
+				student.setSchool(user.getUser());
+			}else if(user.getRole().getId()==3){//学校、审核
+				student.setTeacher(user);
+				student.setSchool(user);
+			}
+			studentService.update(student);
 		}
-		studentService.update(student);
 		list();
 		return "audit";
 	}
-	
 	
 	private String year_id;
 	private String grade_id;
@@ -323,18 +330,19 @@ public class StudentAction extends BaseAction<Student>{
 	}
 
 	//	验证字段
-	public String inspect(){
-		
+	private boolean inspect(){
 		Student student = studentService.getById(getModel().getId());
-		Map<String, String> stu_map = studentService.findStudentMap(student.getId());
 		Audit audit = auditService.findByComposite(student.getGrade().getId(), student.getType().getId(), student.getYears().getId());
+		Map<String, String> stu_map = studentService.findStudentMap(student.getId());
+		
 		Fields fields = fieldService.findByComposite(student.getGrade().getId(), student.getType().getId(), student.getYears().getId(), audit.getField_id());
 		String kay = stu_map.get(fields.getKeyName());
 		if(audit_str.equals(kay)){
 			addActionMessage("审核成功");
+			return true;
 		}else{
 			addActionMessage("审核失败！请校验信息");
+			return false;
 		}
-		return "Inspect";
 	}
 }

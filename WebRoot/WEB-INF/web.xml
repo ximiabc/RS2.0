@@ -20,7 +20,7 @@
   </context-param>
   
   <!-- 解决懒加载异常的拦截器 -->
-    <filter>
+     <filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
 	</filter>
