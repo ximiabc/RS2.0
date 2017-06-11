@@ -140,22 +140,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--分页开始-->
 			<s:set name="uri" value="admin_student_audit"></s:set>
 			<div class="clearfix">
-				<div class="message">
-					共<i class="blue_page">
-						<s:property value="pageBean.pageCount" />
-					</i>页， 
-					<i class="blue_page">
-						<s:property value="pageBean.recordCount" />
-					</i>条记录， 当前显示第&nbsp;<i class="blue_page"> 
+				<span style="font-size:16px;">共<i><s:property value="pageBean.pageCount" /></i>页，<i>
+				 <s:property value="pageBean.recordCount" /></i>条记录， 当前显示第<i>
 					<s:if test="pageBean.currentPage == 0">
 						1
 					</s:if>
 					<s:else>
 						<s:property value="pageBean.currentPage" />
 					</s:else>
-					&nbsp;</i>页
-				</div>
-				<div class="message pull-right">
+					</i>页</span>
+				<div class="pull-right">
 				<ul class="pagination pull-right">
 					<!-- 首页键 -->
 				  	<li>

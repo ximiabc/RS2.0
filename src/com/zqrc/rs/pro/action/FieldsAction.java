@@ -81,6 +81,7 @@ public class FieldsAction extends BaseAction<Fields>{
 		
 		if((new Date()).after(dueTime.getStartDate())){//报名日期前后判定(报名后)
 			System.out.println("=================");
+			addActionMessage("报名期间，不允许修改字段！");
 		}else{//报名前
 			for(int i=0;i<array.length();i++){
 				String[]temp=((String)array.get(i)).split(":");

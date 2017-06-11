@@ -66,12 +66,12 @@ public class StudentAction extends BaseAction<Student>{
 		}else{
 			fields2=fields;
 		}
+		User sup=getCurrentUser().getUser();
 		HqlHelper helper=new HqlHelper(Student.class, "s")
 		//
 		.addWhereCondition("s.grade.id = ? ", Integer.parseInt(grade_id))
 		.addWhereCondition("s.type.id = ? ", Integer.parseInt(type_id))
 		.addWhereCondition("s.years.id = ? ", Integer.parseInt(year_id))
-		
 		//下拉查询条件
 		//.addWhereCondition((select_name.equals("1")), "s.", params)
 		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
@@ -82,13 +82,11 @@ public class StudentAction extends BaseAction<Student>{
 		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
 		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//申请退出
 		.addWhereCondition(("9".equals(select_name)), "s.states.id = ?", 4)//失败
-		
 		//指定中小学
 		.addWhereCondition((getCurrentUser().getRole().getId() == 3 && 1 == getCurrentUser().getGrade().getId()), "s.grade.id = ? ", 1)//通过用户所属学历-小学
 		.addWhereCondition((getCurrentUser().getRole().getId() == 3 && 2 == getCurrentUser().getGrade().getId()), "s.grade.id = ? ", 2)//通过用户所属学历-中学学
-		.addWhereCondition((getCurrentUser().getRole().getId() == 4 && 1 == getCurrentUser().getUser().getGrade().getId()), "s.grade.id = ? ", 1)//通过用户所属学历-小学
-		.addWhereCondition((getCurrentUser().getRole().getId() == 4 && 2 == getCurrentUser().getUser().getGrade().getId()), "s.grade.id = ? ", 2)//通过用户所属学历-中学学
-		
+		.addWhereCondition((getCurrentUser().getRole().getId() == 4 && 1 == sup.getGrade().getId()), "s.grade.id = ? ", 1)//通过用户所属学历-小学
+		.addWhereCondition((getCurrentUser().getRole().getId() == 4 && 2 == sup.getGrade().getId()), "s.grade.id = ? ", 2)//通过用户所属学历-中学学
 		//排序规则
 		.addOrderByProperty("id", false);
 		

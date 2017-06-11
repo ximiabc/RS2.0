@@ -498,6 +498,7 @@ public class ExcelAction extends BaseAction<Fields>{
 		if((new Date()).after(dueTime.getStartDate())){//报名日期前后判定(报名后)
 			System.out.println("=================报名期间");
 		}else{//报名前(模板导入式 表头操作)
+			System.out.println("================报名前字段管理");
 			for(int i=0;i<titles.length;i++){
 				String str=titles[i];
 				Fields entity=new Fields();
