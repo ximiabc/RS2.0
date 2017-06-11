@@ -19,6 +19,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			@media (min-width: 768px){.rs-pie .rs-infoBox{height: 300px;}}
 			@media (min-width: 992px){.rs-pie .rs-infoBox{height: 240px;}}
 		</style>
+		<!--[if lt IE 9]>
+			<style type="text/css">
+				.rs-infoIcon{color: rgb(0,188,255);}
+			</style>
+			<script src="js/respond.min.js" type="text/javascript" charset="utf-8"></script>
+		<![endif]-->
 	</head>
 	<body>
 		<div class="container-fluid">
@@ -113,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-		<script src="js/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/highcharts/highcharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/highcharts/exporting.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">

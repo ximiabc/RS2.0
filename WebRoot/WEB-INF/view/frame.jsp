@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 		<title>入学报名信息管理系统</title>
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
-		<script src="js/jquery-3.0.0.min.js"></script>
+		<script src="js/jquery-1.8.3.min.js"></script>
 		<script src="js/rs-tab.js"></script>
 		<style type="text/css">
 			body,html{height: 100%;min-width: 560px;}
@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#rs-pageMain{position:relative;height: 100%;width: 100%;padding-top: 103px;padding-bottom: 50px;}
 			#rs-frameCenter{margin-left:200px;height: 100%;}
 			#rs-pageFooter{bottom:0;text-align: center;background-color: #FFF;}
-			.rs-sider{position: absolute;top: 0px;width: 200px;height:100%;padding-top: 103px;padding-bottom: 50px;overflow:hidden;}
+			.rs-sider{position: absolute;top: 0px;left: 0px;width: 200px;height:100%;padding-top: 103px;padding-bottom: 50px;overflow:hidden;}
 			.rs-tab {height:100%;border-right: 1px solid #CCCCCC;color:#666;text-align: center;overflow:auto;}
 			.rs-summary {line-height: 40px;cursor: pointer;font-size: 16px;position: relative;border-bottom: #ccc 1px dotted;transition: background-color .6s linear;-moz-transition: background-color .6s linear;-webkit-transition: background-color .6s linear;-o-transition: background-color .6s linear;}
 			.rs-summary:hover{color:#000;}
@@ -41,6 +41,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			.rs-detailed .rs-detailed li a{color: #0BF;font-size: 16px;}
             .rs-detailed .rs-detailed li a.rs-focus{background-color:#f5f5f5;}
 		</style>
+		<!--[if lt IE 9]>
+		   <style type="text/css">
+		   .rs-detailed li , .rs-detailed .rs-summary {
+		       background-color:transparent;
+		       filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#9900BBFF,endColorstr=#9900BBFF);
+		       zoom: 1;
+		    }
+		    .rs-detailed .rs-detailed li{
+		    	background-color:transparent;
+		    	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFF,endColorstr=#FFFFFF);
+		    	zoom: 1;
+		    }
+		    </style>
+		<![endif]-->
 	</head>
 	<body>
 		<div id="rs-pageHeader">
@@ -139,7 +153,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					
 						<!--manage  -->
 						<div class="rs-summary">
-							<div class="rs-teacher glyphicon glyphicon-inbox"></div>教委管理
+							<span class="glyphicon glyphicon-inbox"></span>教委管理
 						</div>
 						<div class="rs-detailed">
 							<ul>
@@ -222,7 +236,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<!-- center panel -->
 			<div class="embed-responsive" id="rs-frameCenter">
-				<iframe class="embed-responsive-item" name="center" src="admin_mainView" width="100%" height="100%"></iframe>
+				<iframe class="embed-responsive-item" name="center" src="admin_mainView" width="100%" height="100%" frameborder="0"></iframe>
 			</div>
 		</div>
 		<div id="rs-pageFooter">
