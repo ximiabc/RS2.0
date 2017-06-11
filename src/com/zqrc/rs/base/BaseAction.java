@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.zqrc.rs.pro.entity.Power;
 import com.zqrc.rs.pro.entity.User;
 import com.zqrc.rs.pro.service.AuditService;
 import com.zqrc.rs.pro.service.ChecksService;
@@ -54,6 +55,15 @@ public abstract class BaseAction<T> extends ActionSupport implements ModelDriven
 	}
 	public User getCurrentUser() {
 		return (User)ActionContext.getContext().getSession().get("currentUser");
+	}
+	/**
+	 * 当前权限
+	 */
+	public void setCurrentPower(Power power) {
+		ActionContext.getContext().getSession().put("currentPower", power);
+	}
+	public Power getCurrentPower() {
+		return (Power)ActionContext.getContext().getSession().get("currentPower");
 	}
 	
 	/**

@@ -11,9 +11,18 @@ public class Grade {
 	private Integer id;
 	private String name;
 	private Set<Student>students=new HashSet<Student>();
+	private Set<User>users =new HashSet<User>();
 	
 	public Integer getId() {
 		return id;
+	}
+	
+	public Set<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 
 	public void setId(Integer id) {

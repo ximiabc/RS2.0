@@ -50,6 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<option value="4">所有学校</option>
 				    		<option value="2">学校账号</option>
 				    		<option value="3">学校名称</option>
+				    		<option value="5">所有小学</option>
+				    		<option value="6">所有中学</option>
 						</select>
 					    <input name="values" type="text" class="form-control" placeholder="查询参数">
 					    <button type="submit" class="form-control">检索</button>	
@@ -193,6 +195,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    <div class="col-xs-6">
 							      <select class="form-control">
 								      	<option>校级管理</option>
+							      </select>
+							    </div>
+							</div>
+							<div class="form-group">
+							    <label for="inputEmail3" class="col-xs-offset-2 col-xs-2 control-label">中/小学</label>
+							    <div class="col-xs-6">
+							      <select name="grade_id" class="form-control">
+								      	<option value="1">小学</option>
+								      	<option value="2">中学</option>
 							      </select>
 							    </div>
 							</div>

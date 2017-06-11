@@ -19,12 +19,21 @@ public class User {
 	private User user;//关联一个上级
 	private Set<User>users=new HashSet<User>();//关联多个下级
 	
+	private Grade grade;
 	private Set<Student> belongSchool=new HashSet<Student>();//所属学校
 	private Set<Student> belongTeacher=new HashSet<Student>();//所属操作老师
 
 	public User() {
 	}
 	
+	public Grade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Grade grade) {
+		this.grade = grade;
+	}
+
 	public String getPhone() {
 		return phone;
 	}

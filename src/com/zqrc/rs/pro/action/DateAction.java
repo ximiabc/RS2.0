@@ -40,7 +40,7 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String primaryIn() {
-		List<User>schoolList=userService.getAllSchool();
+		List<User>schoolList=userService.getSchoolByGrade(1);
 		SchoolYear year=yearService.getNews();
 		DueTime dueTime=getDueTime(1, 1, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
@@ -81,7 +81,7 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String primaryOut() {
-		List<User>schoolList=userService.getAllSchool();
+		List<User>schoolList=userService.getSchoolByGrade(1);
 		SchoolYear year=yearService.getNews();
 		DueTime dueTime=getDueTime(1, 2, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
@@ -122,7 +122,7 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String middleIn() {
-		List<User>schoolList=userService.getAllSchool();
+		List<User>schoolList=userService.getSchoolByGrade(2);
 		SchoolYear year=yearService.getNews();
 		DueTime dueTime=getDueTime(2, 1, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();
@@ -163,7 +163,7 @@ public class DateAction extends BaseAction<DueTime>{
 	 * @return
 	 */
 	public String middleOut() {
-		List<User>schoolList=userService.getAllSchool();
+		List<User>schoolList=userService.getSchoolByGrade(2);
 		SchoolYear year=yearService.getNews();
 		DueTime dueTime=getDueTime(2, 2, year.getId(),0);
 		ValueStack stack=ActionContext.getContext().getValueStack();

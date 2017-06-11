@@ -43,14 +43,14 @@
 		
 		<!-- 测试 excelout -->
 		<action name="excel*" method="{1}" class="com.zqrc.rs.pro.action.ExcelAction">
-        <!-- 导出excel -->
-        <result name="excel" type="stream">
-            <param name="contentType">application/vnd.ms-excel</param>    <!-- 注意这里的ContentType -->
-            <param name="inputName">excelStream</param>                   <!-- 这里需要和Action里的变量名一致 -->
-            <param name="contentDisposition">filename="excel.xls"</param> <!-- 下载文件的名字 -->
-            <param name="bufferSize">10240</param>  <!-- 下载文件的大小 10485760=10M -->
-        </result>
-    </action>
+	        <!-- 导出excel -->
+	        <result name="excel" type="stream">
+	            <param name="contentType">application/vnd.ms-excel</param>    <!-- 注意这里的ContentType -->
+	            <param name="inputName">excelStream</param>                   <!-- 这里需要和Action里的变量名一致 -->
+	            <param name="contentDisposition">filename="excel.xls"</param> <!-- 下载文件的名字 -->
+	            <param name="bufferSize">10240</param>  <!-- 下载文件的大小 10485760=10M -->
+	        </result>
+	    </action>
 		
 		<action name="audit*" method="{1}" class="com.zqrc.rs.pro.action.AuditAction">
 			<result name="PrimaryIn">/WEB-INF/view/admin/primary_Parameter_In.jsp</result>

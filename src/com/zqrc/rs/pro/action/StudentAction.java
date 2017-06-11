@@ -54,7 +54,6 @@ public class StudentAction extends BaseAction<Student>{
 				.addOrderByProperty((orderBy == 0), "t.lastUpdateTime", false) // 0 表示默认排序(全部置顶帖在前面。并按最后更新时间降序排列)
 				.preparePageBean(topicService, pageNum);
 		 */
-		
 		List<SchoolYear>years=yearService.getAllByNews();
 		if(grade_id==null){grade_id="1";}
 		if(type_id==null){type_id="1";}
@@ -69,14 +68,27 @@ public class StudentAction extends BaseAction<Student>{
 		}else{
 			fields2=fields;
 		}
-		PageBean pageBean =studentService.getPageBean(pageNum,10, new HqlHelper(Student.class, "s").
-				addOrderByProperty("id", false)
-//				.addWhereCondition("u.role.id = ?",4)
-				);
+		HqlHelper helper=new HqlHelper(Student.class, "s")
+		.addWhereCondition("s.grade.id = ? ", Integer.parseInt(grade_id))
+		.addWhereCondition("s.type.id = ? ", Integer.parseInt(type_id))
+		.addWhereCondition("s.years.id = ? ", Integer.parseInt(year_id))
+		//.addWhereCondition((select_name.equals("1")), "s.", params)
+		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
+		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
+		.addWhereCondition(("4".equals(select_name)), "s.account = ?", datas)//学生编号
+		.addWhereCondition(("5".equals(select_name)), "s.name = ?", datas)//学生名称
+		.addWhereCondition(("6".equals(select_name)), "s.states.id = ?", 1)//未报名
+		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
+		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//已报名
+		.addWhereCondition(("9".equals(select_name)), "s.states.id = ?", 4)//已报名
+		.addOrderByProperty("id", false);
+		
+		PageBean pageBean =studentService.getPageBean(pageNum,10,helper);
 		pageBean.setCurrentPage(pageNum);
+		
 		ValueStack vs = ServletActionContext.getContext().getValueStack();
-		vs.set("fields", fields2);
-		vs.set("fieldAll", fields);
+		vs.set("fields", fields2);//优先显示字段
+		vs.set("fieldAll", fields);//所有字段
 		vs.set("years", years);
 		vs.set("pageBean", pageBean);
 		vs.set("grade_id", grade_id);
@@ -99,10 +111,10 @@ public class StudentAction extends BaseAction<Student>{
 	 * @return
 	 */
 	public String update() {
-		Grade grade=gradeService.getById(Integer.parseInt(grade_id));
-		Type type=typeService.getById(Integer.parseInt(type_id));
-		SchoolYear year=yearService.getById(Integer.parseInt(year_id));
-		States states=statesService.getById(1);
+		Grade grade=gradeService.loadById(Integer.parseInt(grade_id));
+		Type type=typeService.loadById(Integer.parseInt(type_id));
+		SchoolYear year=yearService.loadById(Integer.parseInt(year_id));
+		States states=statesService.loadById(1);
 		model.setGrade(grade);
 		model.setType(type);
 		model.setYears(year);
@@ -134,6 +146,10 @@ public class StudentAction extends BaseAction<Student>{
 		return list();
 	}
 	
+	/**
+	 * getStudentToJson
+	 * @return
+	 */
 	public String studentById() {
 		Student user=studentService.getById(getModel().getId());
 		System.out.println(getModel().getId());

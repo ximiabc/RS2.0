@@ -58,7 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="rs-pageMain">
 			<div class="rs-sider">
 				<div class="rs-tab bg-info">
-					<c:set var="juint" value="1"></c:set>
+					<!-- 测试 -->
+					<c:set var="juint" value="0"></c:set>
 					
 					<!-- 教委高级 -->
 					<c:if test="${currentUser.role.value == '1' || juint == '1' }">
@@ -178,24 +179,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 						<div class="rs-detailed">
 							<c:if test="${currentUser.role.value == '1' || juint == '1' }">
+								<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2' || currentUser.role.value == '3' ) || juint == '1' }">
 								<div class="rs-summary">学生浏览</div>
-								<div class="rs-detailed">
-									<ul>
-										<li><a href="admin_student_list?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
-										<li><a href="admin_student_list?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
-										<li><a href="admin_student_list?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
-										<li><a href="admin_student_list?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
-									</ul>
-								</div>
-								<div class="rs-summary">批量导入</div>
-								<div class="rs-detailed">
-									<ul>
-										<li><a href="admin_student_addExcel?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
-										<li><a href="admin_student_addExcel?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
-										<li><a href="admin_student_addExcel?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
-										<li><a href="admin_student_addExcel?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
-									</ul>
-								</div>
+									<div class="rs-detailed">
+										<ul>
+											<li><a href="admin_student_list?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
+											<li><a href="admin_student_list?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
+											<li><a href="admin_student_list?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
+											<li><a href="admin_student_list?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
+										</ul>
+									</div>
+								</c:if>
+								<c:if test="${currentUser.role.value == '1' || juint == '1' }">
+									<div class="rs-summary">批量导入</div>
+									<div class="rs-detailed">
+										<ul>
+											<li><a href="admin_student_addExcel?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
+											<li><a href="admin_student_addExcel?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
+											<li><a href="admin_student_addExcel?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
+											<li><a href="admin_student_addExcel?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
+										</ul>
+									</div>
+								</c:if>
 							</c:if>
 							<c:if test="${(currentUser.role.value == '3' || currentUser.role.value == '4') || juint == '1' }">
 								<a class="rs-summary" href="admin_student_audit" target="center">报名审核</a>

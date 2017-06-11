@@ -68,6 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tfoot>
 				</table>
 				<s:actionmessage/>
+				<s:actionerror/>
 			</div>
 			
 		<!-- 模态框（Modal） -->
@@ -93,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					  <div class="form-group">
 					    <label for="input0" class="col-xs-3 control-label">名称：</label>
 						    <div class="col-xs-9 rs-width">
-						      <input name="name" value="${bean.name }" type="text" class="form-control" id="input0" placeholder="名称" data-errmsg="名称信息"/>
+						      <input name="name" value="${bean.name }" <c:if test="${currentUser.role.value == '3' }">disabled</c:if> type="text" class="form-control" id="input0" placeholder="名称" data-errmsg="名称信息"/>
 						    </div>
 					  </div>
 					  <div class="form-group">

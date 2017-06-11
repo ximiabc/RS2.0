@@ -53,14 +53,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					   			<option value="${id }"><s:date name="date" format="yyyy"/> </option>
 					   		</s:iterator>
 						</select>
-						<select name="grade_id" class="form-control">
-							<option <c:if test="${grade_id == '1' }">selected</c:if> value="1">小学</option>
-							<option <c:if test="${grade_id == '2' }">selected</c:if> value="2">中学</option>
-						</select>
-						<select name="type_id" class="form-control">
-							<option <c:if test="${type_id == '1' }">selected</c:if> selected="selected" value="1">辖区内</option>
-							<option <c:if test="${type_id == '2' }">selected</c:if> value="2">辖区外</option>
-						</select>
+						<input name="grade_id" value="${grade_id }" hidden>
+						<input name="type_id" value="${type_id }" hidden>
 						<select name="select_name" class="form-control">
 							<option selected="selected" value="1">关联查询</option>
 							<option value="2">学校编号</option>
@@ -69,7 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    		<option value="5">学生姓名</option>
 				    		<option value="6">未报名</option>
 				    		<option value="7">已报名</option>
-				    		<option value="8">申请撤回</option>
+				    		<option value="8">审核中</option>
+				    		<option value="9">报名失败</option>
 						</select>
 					    <input name="datas" type="text" class="form-control" placeholder="输入查询参数">
 					    <button type="submit" class="form-control">检索</button>	
@@ -265,15 +260,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</s:iterator>
 							
 							<div class="form-group col-xs-6">
-							    <label for="inputText" class="col-xs-4 control-label">学历</label>
-							    <div class="col-xs-8">
-							      <select name="grade_id" class="form-control">
-										<option value="1">小学</option>
-										<option value="2">中学</option>
-				                  </select>
-							    </div>
-							</div>
-							<div class="form-group col-xs-6">
 							    <label for="inputText" class="col-xs-4 control-label">报名年份</label>
 							    <div class="col-xs-8">
 							      <select name="year_id" class="form-control">
@@ -284,11 +270,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							    </div>
 							</div>
 							<div class="form-group col-xs-6">
+							    <label for="inputText" class="col-xs-4 control-label">学历</label>
+							    <div class="col-xs-8">
+							      <select name="grade_id" class="form-control">
+										<option value="1" <c:if test="${grade_id == '1' }">selected</c:if>>小学</option>
+										<option value="2" <c:if test="${grade_id == '2' }">selected</c:if>>中学</option>
+				                  </select>
+							    </div>
+							</div>
+							<div class="form-group col-xs-6">
 							    <label for="inputText" class="col-xs-4 control-label">辖区内/外</label>
 							    <div class="col-xs-8">
 							      <select name="type_id" class="form-control">
-										<option value="1">辖区内</option>
-										<option value="2">辖区外</option>
+										<option value="1" <c:if test="${type_id == '1' }">selected</c:if>>辖区内</option>
+										<option value="2" <c:if test="${type_id == '2' }">selected</c:if>>辖区外</option>
 				                  </select>
 							    </div>
 							</div>
@@ -327,7 +322,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="form-group col-xs-6">
 							    <label for="${keyName }" class="col-xs-4 control-label">${name }</label>
 								<div class="col-xs-8">
-								    <input name="${keyName }" type="text" class="form-control" id="${keyName }" data-vaild="${checks }" data-errmsg="${checkError }"/>
+								    <%-- <input name="${keyName }" type="text" class="form-control" id="${keyName }" data-vaild="${checks }" data-errmsg="${checkError }"/> --%>
+								     <input name="${keyName }" type="text" class="form-control" id="${keyName }" placeholder="${checks.name }" data-vaild="${checks.checks }" data-errmsg="${checks.errorMsg }"/>
 								</div>
 							</div>
 						</s:iterator>

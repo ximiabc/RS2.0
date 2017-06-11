@@ -18,6 +18,11 @@
             <key column="student_grade"></key>
             <one-to-many class="com.zqrc.rs.pro.entity.Student" />
         </set>
+        <!-- 关联学校 -->
+		<set name="users"  lazy="false" cascade="all" inverse="true" >
+            <key column="user_grade"></key>
+            <one-to-many class="com.zqrc.rs.pro.entity.User" />
+        </set>
 	</class>
 
 </hibernate-mapping>

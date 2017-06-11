@@ -16,6 +16,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONArray;
 
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.Fields;
@@ -99,7 +101,7 @@ public class ExcelAction extends BaseAction<Fields>{
 		try {
 			workbook = Workbook.createWorkbook(out);  
 			WritableSheet sheet = workbook.createSheet(title, 0);  
-			List<Fields> list_fields = fieldService.getByComposite(1,2,year);
+			List<Fields> list_fields = fieldService.getByComposite(grade,type,year);
 			int i=0;
 			while(i < list_fields.size()){
 				label = new jxl.write.Label(i, 0, list_fields.get(i).getName());  
@@ -307,7 +309,6 @@ public class ExcelAction extends BaseAction<Fields>{
 				}
 			}
 		}
-		System.out.println("grade_id="+grade_id+",type_id="+type_id);
 		return "primaryIn";
 	}
 	
@@ -317,7 +318,15 @@ public class ExcelAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String DatePrimaryIn(){
-		
+		grade_id="1";
+		type_id="1";
+		Integer year=yearService.getNews().getId();
+		List<Fields>fields=fieldService.getByComposite(1, 1,year);
+		List<String[]>list=ExcelUtil.sax(file, fields);
+		saveStudents(list, fields);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("grade_id", grade_id);
+		stack.set("type_id", type_id);
 		return "addExcel";
 	}
 	/**
@@ -326,7 +335,15 @@ public class ExcelAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String DatePrimaryOut(){
-		
+		grade_id="1";
+		type_id="2";
+		Integer year=yearService.getNews().getId();
+		List<Fields>fields=fieldService.getByComposite(1, 2,year);
+		List<String[]>list=ExcelUtil.sax(file, fields);
+		saveStudents(list, fields);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("grade_id", grade_id);
+		stack.set("type_id", type_id);
 		return "addExcel";
 	}
 	/**
@@ -335,7 +352,15 @@ public class ExcelAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String DateMiddleIn(){
-		
+		grade_id="2";
+		type_id="1";
+		Integer year=yearService.getNews().getId();
+		List<Fields>fields=fieldService.getByComposite(2, 1,year);
+		List<String[]>list=ExcelUtil.sax(file, fields);
+		saveStudents(list, fields);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("grade_id", grade_id);
+		stack.set("type_id", type_id);
 		return "addExcel";
 	}
 	/**
@@ -344,6 +369,15 @@ public class ExcelAction extends BaseAction<Fields>{
 	 * @return
 	 */
 	public String DateMiddleOut(){
+		grade_id="2";
+		type_id="2";
+		Integer year=yearService.getNews().getId();
+		List<Fields>fields=fieldService.getByComposite(2, 2,year);
+		List<String[]>list=ExcelUtil.sax(file, fields);
+		saveStudents(list, fields);
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("grade_id", grade_id);
+		stack.set("type_id", type_id);
 		return "addExcel";
 	}
 

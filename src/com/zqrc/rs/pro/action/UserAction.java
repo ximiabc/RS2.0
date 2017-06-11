@@ -1,7 +1,5 @@
 package com.zqrc.rs.pro.action;
 
-import net.sf.json.JSONArray;
-
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONObject;
 
@@ -26,6 +24,7 @@ public class UserAction extends BaseAction<User>{
 	private String pass0;
 	private String pass1;
 	private String checkCode;//验证码
+	private String grade_id;//中小学
 	public void setCheckCode(String checkCode) {
 		this.checkCode = checkCode;
 	}
@@ -68,6 +67,12 @@ public class UserAction extends BaseAction<User>{
 	}
 	public void setResult(String result) {
 		this.result = result;
+	}
+	public String getGrade_id() {
+		return grade_id;
+	}
+	public void setGrade_id(String grade_id) {
+		this.grade_id = grade_id;
 	}
 	
 	/**
@@ -172,14 +177,11 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String schoolList(){
 		HqlHelper helper=new HqlHelper(User.class, "u").addOrderByProperty("id", false).addWhereCondition("u.role.id = ?",3);
-		if("4".equals(select_type)){//所有学校
-		}else if("2".equals(select_type)){//学校账号
-			helper=helper.addWhereCondition("u.account = ?",values);
-		}else if("3".equals(select_type)){//学校名称
-			helper=helper.addWhereCondition("u.name = ?",values);
-		}else if("1".equals(select_type)){//关联账号
-			helper=helper.addWhereCondition("u.user.account = ?",getCurrentUser().getAccount());
-		}
+		helper=helper.addWhereCondition("2".equals(select_type),"u.account = ?",values);
+		helper=helper.addWhereCondition("3".equals(select_type),"u.name = ?",values);
+		helper=helper.addWhereCondition("1".equals(select_type),"u.user.account = ?",getCurrentUser().getAccount());
+		helper=helper.addWhereCondition("5".equals(select_type),"u.grade.id = ?",1);//小学
+		helper=helper.addWhereCondition("6".equals(select_type),"u.grade.id = ?",2);//中学
 		PageBean pageBean =userService.getPageBean(pageNum,10, helper);
 		pageBean.setCurrentPage(pageNum);
 		ValueStack vs = ServletActionContext.getContext().getValueStack();
@@ -203,7 +205,7 @@ public class UserAction extends BaseAction<User>{
 		user.setPass(phone.substring(phone.length()-6, phone.length()));
 		user.setRole(roleService.getById(3));
 		user.setUser(admin);
-		System.out.println(user.getAccount()+"=="+user.getPass());
+		user.setGrade(gradeService.getById(Integer.parseInt(grade_id)));
 		userService.save(user);
 		schoolList();
 		ValueStack stack=ActionContext.getContext().getValueStack();
@@ -367,12 +369,16 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String personalUpdate(){
 		User user=userService.getById(getCurrentUser().getId());
-		user.setPass(getModel().getPass());
-		user.setPhone(getModel().getPhone());
-		user.setName(getModel().getName());
-		user.setInfo(getModel().getInfo());
-		userService.update(user);
-		addActionMessage("修改成功！");
+		if(user.getPass().equals(pass0)){//确认原密码
+			user.setPass(getModel().getPass());
+			user.setPhone(getModel().getPhone());
+			user.setName(getModel().getName());
+			user.setInfo(getModel().getInfo());
+			userService.update(user);
+			addActionMessage("修改成功！");
+		}else{
+			addActionError("原密码输入错误！");
+		}
 		personal();
 		return "person";
 	}
@@ -401,7 +407,7 @@ public class UserAction extends BaseAction<User>{
 	@Override
 	public String execute() throws Exception {
 		//验证码校验
-		if(!checkCode.equals((String)ActionContext.getContext().getSession().get("securityCode"))){
+		if(!((String)ActionContext.getContext().getSession().get("securityCode")).equals(checkCode)){
 			addActionError("验证码错误！");
 			return "failed";
 		}
@@ -412,6 +418,7 @@ public class UserAction extends BaseAction<User>{
 			return "failed";
 		}else{
 			setCurrentUser(user);
+			setCurrentPower(powerService.getById(user.getRole().getId()));
 			return "success";
 		}
 	}

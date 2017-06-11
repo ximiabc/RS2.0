@@ -76,7 +76,7 @@ public class ExcelUtil{
 				Sheet sheet = workbook.getSheet(0);
 				if(check(list,titles)){//检查合法性
 					//获得数据
-					for (int i = 0; i < sheet.getRows(); i++) {//sheet.getRows():获得表格文件行数
+					for (int i = 1; i < sheet.getRows(); i++) {//sheet.getRows():获得表格文件行数
 						String[]str=new String[sheet.getColumns()];
 						for (int j = 0; j < sheet.getColumns(); j++) {//sheet.getColumns():获得表格文件列数
 							str[j]= sheet.getCell(j,i).getContents();

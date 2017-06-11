@@ -18,4 +18,6 @@ public interface UserService extends BaseDao<User>{
 	User findByAccount(String account);
 	
 	List<User> getAllSchool();
+	
+	List<User> getSchoolByGrade(Integer grade);
 }

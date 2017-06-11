@@ -17,6 +17,8 @@
 		<property name="num" type="integer"></property>
 		<property name="phone" type="string"></property>
 		<property name="info" type="string"></property>
+		<!-- 关联学历-->
+		<many-to-one name="grade" class="com.zqrc.rs.pro.entity.Grade" column="user_grade"></many-to-one>
 		<!-- 关联权限 -->
 		<many-to-one name="role" class="com.zqrc.rs.pro.entity.Role" column="user_role"></many-to-one>
 		<!-- 关联上级-->
