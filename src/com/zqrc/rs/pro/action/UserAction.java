@@ -95,16 +95,12 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String teacherList(){
 		HqlHelper helper=new HqlHelper(User.class, "u").addOrderByProperty("id", false).addWhereCondition("u.role.id = ?",4);
-		if("1".equals(select_type)){//所有学校
-		}else if("2".equals(select_type)){//学校账号
-			helper=helper.addWhereCondition("u.user.account = ?",values);
-		}else if("3".equals(select_type)){//学校名称
-			helper=helper.addWhereCondition("u.user.name = ?",values);
-		}else if("4".equals(select_type)){//教师账号
-			helper=helper.addWhereCondition("u.account = ?",values);
-		}else if("5".equals(select_type)){//教师名
-			helper=helper.addWhereCondition("u.name = ?",values);
-		}
+		helper=helper.addWhereCondition("2".equals(select_type),"u.user.account = ?",values);
+		helper=helper.addWhereCondition("3".equals(select_type),"u.user.name = ?",values);
+		helper=helper.addWhereCondition("4".equals(select_type),"u.account = ?",values);
+		helper=helper.addWhereCondition("5".equals(select_type),"u.name = ?",values);
+		helper=helper.addWhereCondition("3".equals(String.valueOf(getCurrentUser().getRole().getId())),"u.user.id = ?",getCurrentUser().getId());//关联当前用户
+		
 		
 		PageBean pageBean =userService.getPageBean(pageNum,10,helper);
 		pageBean.setCurrentPage(pageNum);
@@ -283,12 +279,8 @@ public class UserAction extends BaseAction<User>{
 	 */
 	public String manageList(){
 		HqlHelper helper=new HqlHelper(User.class, "u").addOrderByProperty("id", false).addWhereCondition("u.role.id = ?",2);
-		if("1".equals(select_type)){//所有
-		}else if("2".equals(select_type)){
-			helper=helper.addWhereCondition("u.account = ?",values);
-		}else if("3".equals(select_type)){
-			helper=helper.addWhereCondition("u.name = ?",values);
-		}
+		helper=helper.addWhereCondition("2".equals(select_type),"u.account = ?",values);
+		helper=helper.addWhereCondition("3".equals(select_type),"u.name = ?",values);
 		PageBean pageBean =userService.getPageBean(pageNum,10, helper);
 		pageBean.setCurrentPage(pageNum);
 		ValueStack vs = ServletActionContext.getContext().getValueStack();

@@ -45,6 +45,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<option selected="selected" value="1">2017</option>
 							<option value="2">2016</option>
 						</select>
+						<select name="type_id" class="form-control">
+							<option selected="selected" value="1">辖区内</option>
+							<option value="2">辖区外</option>
+						</select>
 						<select name="select_name" class="form-control">
 							<option selected="selected" value="1">关联查询</option>
 							<option value="2">学校编号</option>

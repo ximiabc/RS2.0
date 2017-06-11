@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<form class="form-inline pull-right">
 						<!--下拉选项框-->
 						<select name="select_type" class="form-control">
-							<option selected="selected" value="1">所有学校</option>
+							<option selected="selected" value="1">关联学校</option>
 							<option value="2">学校账号</option>
 				    		<option value="3">学校名称</option>
 				    		<option value="4">教师账号</option>
@@ -70,6 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td>教师账号</td>
 						<td>教师姓名</td>
 						<td>联系电话</td>
+						<td>报名学生</td>
 						<td>备注</td>
 						<td>操作</td>
 					</tr>
@@ -83,6 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td>${account }</td>
 							<td>${name }</td>
 							<td>${phone }</td>
+							<td>${belongTeacher.size() }</td>
 							<td>${info }</td>
 							<td>
 								<div class="rs-school-space">

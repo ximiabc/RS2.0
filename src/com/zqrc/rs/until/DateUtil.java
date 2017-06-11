@@ -21,18 +21,18 @@ public class DateUtil {
 		Format format = new SimpleDateFormat("yyyy-SSS");
 		String str=format.format(new Date());
 		switch (sups.length()) {
-		case 0:sups="0000"+i;
+		case 0:sups="0000";
 			break;
-		case 1:sups="000"+sups+i;
+		case 1:sups="000"+sups;
 			break;
-		case 2:sups="00"+sups+i;
+		case 2:sups="00"+sups;
 			break;
-		case 3:sups="0"+sups+i;
+		case 3:sups="0"+sups;
 			break;
 		default:
 			break;
 		}
-		return str.replace("-", sups);
+		return str.replace("-", sups)+i;
 	}
 	
 	/**

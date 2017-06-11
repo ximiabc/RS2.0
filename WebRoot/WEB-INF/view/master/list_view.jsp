@@ -47,7 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<form class="form-inline pull-right">
 						<select name="select_type" class="form-control col-md-2 col-sm-2 col-xs-2 rs-school-spacing">
 							<option selected="selected" value="1">关联学校</option>
-							<option value="4">所有学校</option>
 				    		<option value="2">学校账号</option>
 				    		<option value="3">学校名称</option>
 				    		<option value="5">所有小学</option>
@@ -65,10 +64,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<td></td>
 							<td>学校账号</td>
 							<td>学校名称</td>
-							<td>描述</td>
+							<td>中/小学</td>
 							<td>联系电话</td>
+							<td>管理人员</td>
 							<td>实际招生</td>
 							<td>计划招生</td>
+							<td>所属上级</td>
 							<td>备注</td>
 							<td>操作</td>
 						</tr>
@@ -79,11 +80,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${indexs.index+1 }</td>
 								<td>${account }</td>
 								<td>${name }</td>
-								<td>${info }</td>
+								<td>${grade.name }</td>
 								<td>${phone }</td>
+								<td>${users.size() }</td>
 								<td>${belongSchool.size() }</td>
 								<td>${num }</td>
 								<td>${user.name }</td>
+								<td>${info }</td>
 								<td>
 									<div class="rs-school-space">
 									<a href="admin_schoolDel?id=${id }" onclick="return confirm('确定删除该学校吗？')" class="btn btn-default">删除</a>
