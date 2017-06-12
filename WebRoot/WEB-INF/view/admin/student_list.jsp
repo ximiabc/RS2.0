@@ -42,7 +42,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<div class="col-xs-2">
 				<c:if test="${currentUser.role.value == '1'}">
-					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学生</button>
+					<c:if test="${currentPower.stus.id == 2 || currentPower.stus.id == 5 || currentPower.stus.id == 6 || currentPower.stus.id == 8 }" >
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学生</button>
+					</c:if>
 				</c:if>
 			</div>
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
@@ -145,8 +147,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<c:if test="${currentUser.role.value == '1'}">
 								<td>
 									<div class="rs-school-space">
-									<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除此学生');" class="btn btn-default" type="button" >删除</a>
-									<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
+										<c:if test="${currentPower.stus.id == 3 || currentPower.stus.id == 5 || currentPower.stus.id == 7 || currentPower.stus.id == 8 }" >
+											<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
+										</c:if>
+										<c:if test="${currentPower.stus.id == 4 || currentPower.stus.id == 6 || currentPower.stus.id == 7 || currentPower.stus.id == 8 }" >
+											<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除此学生');" class="btn btn-default" type="button" >删除</a>
+										</c:if>
 									</div>
 								</td>
 							</c:if>

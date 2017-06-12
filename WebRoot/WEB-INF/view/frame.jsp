@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="rs-sider">
 				<div class="rs-tab bg-info">
 					<!-- 测试 -->
-					<c:set var="juint" value="0"></c:set>
+					<c:set var="juint" value="1"></c:set>
 					
 					<!-- 教委高级 -->
 					<c:if test="${currentUser.role.value == '1' || juint == '1' }">
@@ -150,87 +150,109 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<li><a href="admin_authority_teacher" target="center">教师权限</a></li>
 							</ul>
 						</div>
-					
-						<!--manage  -->
-						<div class="rs-summary">
-							<span class="glyphicon glyphicon-inbox"></span>教委管理
-						</div>
-						<div class="rs-detailed">
-							<ul>
-								<li><a href="admin_manageList" target="center">浏览管理员</a></li>
-							</ul>
-						</div>
+						
+							<!--manage  -->
+							<div class="rs-summary">
+								<span class="glyphicon glyphicon-inbox"></span>教委管理
+							</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_manageList" target="center">浏览管理员</a></li>
+								</ul>
+							</div>
 					</c:if>
 					
 					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2') || juint == '1'}">
-						<!--School  -->
-						<div class="rs-summary">
-							<span class="glyphicon glyphicon-briefcase"></span>学校管理
-						</div>
-						<div class="rs-detailed">
-							<ul>
-								<li><a href="admin_schoolList" target="center">学校浏览</a></li>
-							</ul>
-						</div>
+						<!-- 教委权限限制 -->
+						<c:if test="${(currentPower.subs.id != 9 ) || juint == '1'}" >
+							<!--School  -->
+							<div class="rs-summary">
+								<span class="glyphicon glyphicon-briefcase"></span>学校管理
+							</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_schoolList" target="center">学校浏览</a></li>
+								</ul>
+							</div>
+						</c:if>
 					</c:if>
 					
+					<!-- 基本逻辑操作 -->
 					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2' || currentUser.role.value == '3') || juint == '1' }">
-						<!--Teacher  -->
+						<!-- 学校操作权限限制 -->
+						<c:if test="${(currentPower.subs.id != 9 ) || juint == '1'}" >
+							<!--Teacher  -->
+							<div class="rs-summary">
+								<span class="glyphicon glyphicon-inbox"></span>教师管理
+							</div>
+							<div class="rs-detailed">
+								<ul>
+									<li><a href="admin_teacherList" target="center">教师浏览</a></li>
+								</ul>
+							</div>
+						</c:if>
+					</c:if>
+					
+					<!-- 基本逻辑操作-->
+					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '3' || currentUser.role.value == '4') || juint == '1' }">
+						<!-- 权限限定 -->
+						<c:if test="${(currentPower.stus.id != 9 ) || juint == '1'}" >
+							<!--Student  -->
+							<div class="rs-summary">
+								<span class="glyphicon glyphicon-tasks"></span>学生管理
+							</div>
+							<div class="rs-detailed">
+								<!-- 仅高级人员操作 -->
+								<c:if test="${currentUser.role.value == '1' || juint == '1' }">
+									<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2' || currentUser.role.value == '3' ) || juint == '1' }">
+									<div class="rs-summary">学生浏览</div>
+										<div class="rs-detailed">
+											<ul>
+												<li><a href="admin_student_list?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
+												<li><a href="admin_student_list?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
+												<li><a href="admin_student_list?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
+												<li><a href="admin_student_list?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
+											</ul>
+										</div>
+									</c:if>
+									<c:if test="${currentUser.role.value == '1' || juint == '1' }">
+										<div class="rs-summary">批量导入</div>
+										<div class="rs-detailed">
+											<ul>
+												<li><a href="admin_student_addExcel?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
+												<li><a href="admin_student_addExcel?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
+												<li><a href="admin_student_addExcel?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
+												<li><a href="admin_student_addExcel?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
+											</ul>
+										</div>
+									</c:if>
+								</c:if>
+								<!-- 学校和教师的操作 -->
+								<c:if test="${(currentUser.role.value == '3' || currentUser.role.value == '4') }">
+									<div class="rs-summary">报名审核</div>
+									<div class="rs-detailed">
+										<ul>
+											<li><a href="admin_student_audit?type_id=1" target="center">辖区内</a></li>
+											<li><a href="admin_student_audit?type_id=2" target="center">辖区外</a></li>
+										</ul>
+									</div>
+								</c:if>
+							</div>
+						</c:if>
+					</c:if>
+					
+					<!-- 个人操作权限限制 -->
+					<c:if test="${(currentPower.self.id != 9 ) || juint == '1'}" >
+						<!--Person  -->
 						<div class="rs-summary">
-							<span class="glyphicon glyphicon-inbox"></span>教师管理
+							<span class="glyphicon glyphicon-user"></span>个人管理
 						</div>
 						<div class="rs-detailed">
 							<ul>
-								<li><a href="admin_teacherList" target="center">教师浏览</a></li>
+								<li><a href="admin_personal" target="center">我的信息</a></li>
 							</ul>
 						</div>
 					</c:if>
-					
-					<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '3' || currentUser.role.value == '4') || juint == '1' }">
-						<!--Student  -->
-						<div class="rs-summary">
-							<span class="glyphicon glyphicon-tasks"></span>学生管理
-						</div>
-						<div class="rs-detailed">
-							<c:if test="${currentUser.role.value == '1' || juint == '1' }">
-								<c:if test="${(currentUser.role.value == '1' || currentUser.role.value == '2' || currentUser.role.value == '3' ) || juint == '1' }">
-								<div class="rs-summary">学生浏览</div>
-									<div class="rs-detailed">
-										<ul>
-											<li><a href="admin_student_list?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
-											<li><a href="admin_student_list?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
-											<li><a href="admin_student_list?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
-											<li><a href="admin_student_list?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
-										</ul>
-									</div>
-								</c:if>
-								<c:if test="${currentUser.role.value == '1' || juint == '1' }">
-									<div class="rs-summary">批量导入</div>
-									<div class="rs-detailed">
-										<ul>
-											<li><a href="admin_student_addExcel?grade_id=1&type_id=1" target="center">辖区内小学</a></li>
-											<li><a href="admin_student_addExcel?grade_id=2&type_id=1" target="center">辖区内中学</a></li>
-											<li><a href="admin_student_addExcel?grade_id=1&type_id=2" target="center">辖区外小学</a></li>
-											<li><a href="admin_student_addExcel?grade_id=2&type_id=2" target="center">辖区外中学</a></li>
-										</ul>
-									</div>
-								</c:if>
-							</c:if>
-							<c:if test="${(currentUser.role.value == '3' || currentUser.role.value == '4') || juint == '1' }">
-								<a class="rs-summary" href="admin_student_audit" target="center">报名审核</a>
-							</c:if>
-						</div>
-					</c:if>
-					
-					<!--Person  -->
-					<div class="rs-summary">
-						<span class="glyphicon glyphicon-user"></span>个人管理
-					</div>
-					<div class="rs-detailed">
-						<ul>
-							<li><a href="admin_personal" target="center">我的信息</a></li>
-						</ul>
-					</div>
 				<!--end  -->
 				</div>
 			</div>

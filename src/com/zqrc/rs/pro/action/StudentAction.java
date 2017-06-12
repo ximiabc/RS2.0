@@ -223,9 +223,17 @@ public class StudentAction extends BaseAction<Student>{
 	 */
 	public String audit() {
 		List<SchoolYear>years=yearService.getAllByNews();
-		if(grade_id==null){grade_id="1";}
-		if(type_id==null){type_id="1";}
-		if(year_id==null){year_id=String.valueOf(years.get(0).getId());}
+		if(3 == (getCurrentUser().getRole().getId())){
+			grade_id=String.valueOf(getCurrentUser().getGrade().getId());
+		}else if(4 == (getCurrentUser().getRole().getId())){
+			User sup=userService.getById(getCurrentUser().getId()).getUser();
+			grade_id=String.valueOf(sup.getGrade().getId());
+		}
+		System.out.println(grade_id+","+type_id+"-"+year_id);
+		
+		if(null==year_id){
+			year_id=String.valueOf(years.get(0).getId());
+		}
 		
 		List<Fields>fields=fieldService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), Integer.parseInt(year_id));
 		List<Fields>fields2=new ArrayList<Fields>(6);
@@ -236,17 +244,13 @@ public class StudentAction extends BaseAction<Student>{
 		}else{
 			fields2=fields;
 		}
-		
-		User sup=userService.getById(getCurrentUser().getId()).getUser();
+
 		HqlHelper helper=new HqlHelper(Student.class, "s")
 		//基本条件
-		.addWhereCondition("s.grade.id = ? ", Integer.parseInt(grade_id))
-		.addWhereCondition("s.type.id = ? ", Integer.parseInt(type_id))
-		.addWhereCondition("s.years.id = ? ", Integer.parseInt(year_id))
+		.addWhereCondition(null!=grade_id,"s.grade.id = ? ", Integer.parseInt(grade_id))
+		.addWhereCondition(null!=type_id,"s.type.id = ? ", Integer.parseInt(type_id))
+		.addWhereCondition(null!=year_id,"s.years.id = ? ", Integer.parseInt(year_id))
 		//下拉查询条件
-		//.addWhereCondition((select_name.equals("1")), "s.", params)
-		.addWhereCondition((3 == (getCurrentUser().getRole().getId())), "s.grade.id = ? ", getCurrentUser().getGrade().getId())
-		.addWhereCondition((4 == (getCurrentUser().getRole().getId())), "s.grade.id = ? ", sup.getGrade().getId())
 		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
 		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
 		.addWhereCondition(("4".equals(select_name)), "s.account = ?", datas)//学生编号

@@ -41,7 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<!--表单查询及添加-->
 			<div class="rs-school-height row">
 				<div class="col-xs-2">
-					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学校</button>
+					<c:if test="${currentPower.subs.id == 2 || currentPower.subs.id == 5 || currentPower.subs.id == 6 || currentPower.subs.id == 8 }" >
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-1">增加学校</button>
+					</c:if>
 				</div>
 				<div class="col-xs-offset-1 col-xs-9 clearfix">
 					<form class="form-inline pull-right">
@@ -89,8 +91,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<td>${info }</td>
 								<td>
 									<div class="rs-school-space">
-									<a href="admin_schoolDel?id=${id }" onclick="return confirm('确定删除该学校吗？')" class="btn btn-default">删除</a>
-									<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
+									<!-- 删 -->
+									<c:if test="${currentPower.subs.id == 4 || currentPower.subs.id == 6 || currentPower.subs.id == 7 || currentPower.subs.id == 8 }" >
+										<a href="admin_schoolDel?id=${id }" onclick="return confirm('确定删除该学校吗？')" class="btn btn-default">删除</a>
+									</c:if>
+									<!-- 改 -->
+									<c:if test="${currentPower.subs.id == 3 || currentPower.subs.id == 5 || currentPower.subs.id == 7 || currentPower.subs.id == 8 }" >
+										<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
+									</c:if>
 									</div>
 								</td>
 							</tr>

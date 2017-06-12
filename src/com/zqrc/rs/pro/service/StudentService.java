@@ -13,4 +13,5 @@ import com.zqrc.rs.pro.entity.Student;
 public interface StudentService extends BaseDao<Student>{
 //	获取制定id的属性
 	Map<String,String> findStudentMap(Integer id);
+	
 }

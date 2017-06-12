@@ -45,4 +45,12 @@ public class UserServiceImpl extends BaseDaoImpl<User> implements UserService{
 	public List<User> getSchoolByGrade(Integer grade) {
 		return (List<User>)getSession().createQuery("from User u where u.role.value = ? and u.grade.id = ? ").setInteger(0, 3).setInteger(1, grade).list();
 	}
+
+	/**
+	 * 通过下级的ID获取当前
+	 */
+	@Deprecated
+	public User getUpUserById(Integer id) {
+		return (User)getSession().createQuery("from User u where u.users.id = ? ").setInteger(0, id).uniqueResult();
+	}
 }

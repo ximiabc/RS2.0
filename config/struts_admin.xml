@@ -5,7 +5,20 @@
 
 <struts>
 	<package name="filter" extends="json-default" namespace="/">
-	<!-- 字段异步 -->
+		<!--全局操作 -->
+		<global-results>
+			<result name="paramterError">/paramterError.jsp</result>
+			<result name="errors">/error.jsp</result>
+			<result name="timeout">/timeout.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="errors" exception="404"></exception-mapping>
+			<exception-mapping exception="java.lang.NullPointerException" result="timeout" /> 
+			<exception-mapping exception="java.lang.Exception" result="errors" />
+		</global-exception-mappings>
+		
+		<!-- 字段异步 -->
 		<action name="asyn_fields_*" class="com.zqrc.rs.pro.action.FieldsAction" method="{1}">
 			<!-- 课程知识点类型-->
 			<result name="types" type="json">
@@ -27,6 +40,19 @@
 
 	<!-- 高级管理员 -->
 	<package name="admin" extends="struts-default" namespace="/">
+		<!--全局操作 -->
+		<global-results>
+			<result name="paramterError">/paramterError.jsp</result>
+			<result name="errors">/error.jsp</result>
+			<result name="timeout">/timeout.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.NullPointerException" result="errors" /> 
+		</global-exception-mappings>
+		<!-- <global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="errors" />
+		</global-exception-mappings> -->
+		
 		<!-- 注意： action 的名称不能用关键字"fileUpload" -->
 		<action name="upload_*" class="com.zqrc.rs.pro.action.ExcelAction" method="{1}">
 			<!-- 限制运行上传的文件的类型 -->
@@ -52,6 +78,25 @@
 			<!-- 配置错误视图 -->
 			<result name="input">/error.jsp</result>
 		</action>
+		
+		<!-- 测试 excelout -->
+		<action name="excel*" method="{1}" class="com.zqrc.rs.pro.action.ExcelAction">
+	        <!-- 导出excel -->
+	        <result name="excel" type="stream">
+	            <param name="contentType">application/vnd.ms-excel</param>    <!-- 注意这里的ContentType -->
+	            <param name="inputName">excelStream</param>                   <!-- 这里需要和Action里的变量名一致 -->
+	            <param name="contentDisposition">filename="excel.xls"</param> <!-- 下载文件的名字 -->
+	            <param name="bufferSize">10240</param>  <!-- 下载文件的大小 10485760=10M -->
+	        </result>
+	    </action>
+		
+		<action name="audit*" method="{1}" class="com.zqrc.rs.pro.action.AuditAction">
+			<result name="PrimaryIn">/WEB-INF/view/admin/primary_Parameter_In.jsp</result>
+			<result name="PrimaryOut">/WEB-INF/view/admin/primary_Parameter_Out.jsp</result>
+			<result name="MiddleIn">/WEB-INF/view/admin/primary_middle_In.jsp</result>
+			<result name="MiddleOut">/WEB-INF/view/admin/primary_middle_Out.jsp</result>
+		</action>
+		
 		<!-- 日期-->
 		<action name="admin_date_*" class="com.zqrc.rs.pro.action.DateAction" method="{1}">
 			<!-- 小学日期 -->

@@ -20,4 +20,6 @@ public interface UserService extends BaseDao<User>{
 	List<User> getAllSchool();
 	
 	List<User> getSchoolByGrade(Integer grade);
+	
+	User getUpUserById(Integer id);
 }

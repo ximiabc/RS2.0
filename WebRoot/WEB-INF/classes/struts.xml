@@ -16,6 +16,19 @@
 	<include file="struts_teacher.xml"></include>
 	
 	<package name="index" extends="struts-default" namespace="/">
+		<!--全局操作 -->
+		<global-results>
+			<result name="paramterError">/paramterError.jsp</result>
+			<result name="errors">/error.jsp</result>
+			<result name="timeout">/timeout.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.NullPointerException" result="errors" /> 
+		</global-exception-mappings>
+		<!-- <global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="errors" />
+		</global-exception-mappings> -->
+		
 		<!-- 公共界面跳转 -->
 		<action name="view*" class="com.zqrc.rs.pro.action.PublicAction" method="{1}">
 			<!-- 登录页 -->
@@ -40,25 +53,6 @@
 			<!-- 登录失败 -->
 			<result name="failed">/WEB-INF/view/login.jsp</result>
 		</action>
-		
-		<!-- 测试 excelout -->
-		<action name="excel*" method="{1}" class="com.zqrc.rs.pro.action.ExcelAction">
-	        <!-- 导出excel -->
-	        <result name="excel" type="stream">
-	            <param name="contentType">application/vnd.ms-excel</param>    <!-- 注意这里的ContentType -->
-	            <param name="inputName">excelStream</param>                   <!-- 这里需要和Action里的变量名一致 -->
-	            <param name="contentDisposition">filename="excel.xls"</param> <!-- 下载文件的名字 -->
-	            <param name="bufferSize">10240</param>  <!-- 下载文件的大小 10485760=10M -->
-	        </result>
-	    </action>
-		
-		<action name="audit*" method="{1}" class="com.zqrc.rs.pro.action.AuditAction">
-			<result name="PrimaryIn">/WEB-INF/view/admin/primary_Parameter_In.jsp</result>
-			<result name="PrimaryOut">/WEB-INF/view/admin/primary_Parameter_Out.jsp</result>
-			<result name="MiddleIn">/WEB-INF/view/admin/primary_middle_In.jsp</result>
-			<result name="MiddleOut">/WEB-INF/view/admin/primary_middle_Out.jsp</result>
-		</action>
-		
 	</package>
 
 </struts>    
