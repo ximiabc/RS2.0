@@ -30,6 +30,87 @@ import com.zqrc.rs.until.PageBean;
  *
  */
 public class StudentAction extends BaseAction<Student>{
+	
+	/**
+	 * 审批学生
+	 */
+	public String audit() {
+		List<SchoolYear>years=yearService.getAllByNews();
+		if(3 == (getCurrentUser().getRole().getId())){
+			grade_id=String.valueOf(getCurrentUser().getGrade().getId());
+		}else if(4 == (getCurrentUser().getRole().getId())){
+			User sup=userService.getById(getCurrentUser().getId()).getUser();
+			grade_id=String.valueOf(sup.getGrade().getId());
+		}
+		System.out.println(grade_id+","+type_id+"-"+year_id);
+		
+		if(null==year_id){
+			year_id=String.valueOf(years.get(0).getId());
+		}
+		
+		List<Fields>fields=fieldService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), Integer.parseInt(year_id));
+		List<Fields>fields2=new ArrayList<Fields>(6);
+		if(fields.size()>=6){
+			for(int i=0;i<6;i++){
+				fields2.add(fields.get(i));
+			}
+		}else{
+			fields2=fields;
+		}
+
+		HqlHelper helper=new HqlHelper(Student.class, "s")
+		//基本条件
+		.addWhereCondition(null!=grade_id,"s.grade.id = ? ", Integer.parseInt(grade_id))
+		.addWhereCondition(null!=type_id,"s.type.id = ? ", Integer.parseInt(type_id))
+		.addWhereCondition(null!=year_id,"s.years.id = ? ", Integer.parseInt(year_id))
+		//下拉查询条件
+		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
+		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
+		.addWhereCondition(("4".equals(select_name)), "s.account = ?", datas)//学生编号
+		.addWhereCondition(("5".equals(select_name)), "s.name = ?", datas)//学生名称
+		.addWhereCondition(("6".equals(select_name)), "s.states.id = ?", 1)//未报名
+		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
+		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//申请退出
+		.addWhereCondition(("9".equals(select_name)), "s.states.id = ?", 4)//失败
+		//排序规则
+		.addOrderByProperty("id", false);
+		
+		PageBean pageBean =studentService.getPageBean(pageNum,10,helper);
+		pageBean.setCurrentPage(pageNum);
+		
+		ValueStack vs = ServletActionContext.getContext().getValueStack();
+		vs.set("fields", fields2);//优先显示字段
+		vs.set("fieldAll", fields);//所有字段
+		vs.set("years", years);
+		vs.set("pageBean", pageBean);
+		vs.set("grade_id", grade_id);
+		vs.set("type_id", type_id);
+		return "audit";
+	}
+	/**
+	 * 审批学生
+	 * 报名功能
+	 */
+	public String auditPass() {
+		if(inspect()){
+			User user=getCurrentUser();
+			States states=statesService.getById(2);
+			Student student=studentService.getById(getModel().getId());
+			student.setStates(states);
+			student.setDate(new Date());
+			
+			if(user.getRole().getId()==4){//教师审核
+				student.setTeacher(user);
+				student.setSchool(user.getUser());
+			}else if(user.getRole().getId()==3){//学校、审核
+				student.setTeacher(user);
+				student.setSchool(user);
+			}
+			studentService.update(student);
+		}
+		list();
+		return "audit";
+	}
 	/**
 	 * 批量导入学生页跳转
 	 * @return
@@ -43,10 +124,12 @@ public class StudentAction extends BaseAction<Student>{
 	
 	/**
 	 * 浏览学生
+	 * 主要为教委、管理员使用
 	 * @return
 	 */
 	public String list() {
 		List<SchoolYear>years=yearService.getAllByNews();
+		
 		if(grade_id==null){grade_id="1";}
 		if(type_id==null){type_id="1";}
 		if(year_id==null){year_id=String.valueOf(years.get(0).getId());}
@@ -216,87 +299,6 @@ public class StudentAction extends BaseAction<Student>{
 			setResult(object.toString());
 		}
 		return "types";
-	}
-	
-	/**
-	 * 审批学生
-	 */
-	public String audit() {
-		List<SchoolYear>years=yearService.getAllByNews();
-		if(3 == (getCurrentUser().getRole().getId())){
-			grade_id=String.valueOf(getCurrentUser().getGrade().getId());
-		}else if(4 == (getCurrentUser().getRole().getId())){
-			User sup=userService.getById(getCurrentUser().getId()).getUser();
-			grade_id=String.valueOf(sup.getGrade().getId());
-		}
-		System.out.println(grade_id+","+type_id+"-"+year_id);
-		
-		if(null==year_id){
-			year_id=String.valueOf(years.get(0).getId());
-		}
-		
-		List<Fields>fields=fieldService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), Integer.parseInt(year_id));
-		List<Fields>fields2=new ArrayList<Fields>(6);
-		if(fields.size()>=6){
-			for(int i=0;i<6;i++){
-				fields2.add(fields.get(i));
-			}
-		}else{
-			fields2=fields;
-		}
-
-		HqlHelper helper=new HqlHelper(Student.class, "s")
-		//基本条件
-		.addWhereCondition(null!=grade_id,"s.grade.id = ? ", Integer.parseInt(grade_id))
-		.addWhereCondition(null!=type_id,"s.type.id = ? ", Integer.parseInt(type_id))
-		.addWhereCondition(null!=year_id,"s.years.id = ? ", Integer.parseInt(year_id))
-		//下拉查询条件
-		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
-		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
-		.addWhereCondition(("4".equals(select_name)), "s.account = ?", datas)//学生编号
-		.addWhereCondition(("5".equals(select_name)), "s.name = ?", datas)//学生名称
-		.addWhereCondition(("6".equals(select_name)), "s.states.id = ?", 1)//未报名
-		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
-		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//申请退出
-		.addWhereCondition(("9".equals(select_name)), "s.states.id = ?", 4)//失败
-		//排序规则
-		.addOrderByProperty("id", false);
-		
-		PageBean pageBean =studentService.getPageBean(pageNum,10,helper);
-		pageBean.setCurrentPage(pageNum);
-		
-		ValueStack vs = ServletActionContext.getContext().getValueStack();
-		vs.set("fields", fields2);//优先显示字段
-		vs.set("fieldAll", fields);//所有字段
-		vs.set("years", years);
-		vs.set("pageBean", pageBean);
-		vs.set("grade_id", grade_id);
-		vs.set("type_id", type_id);
-		return "audit";
-	}
-	/**
-	 * 审批学生
-	 * 报名功能
-	 */
-	public String auditPass() {
-		if(inspect()){
-			User user=getCurrentUser();
-			States states=statesService.getById(2);
-			Student student=studentService.getById(getModel().getId());
-			student.setStates(states);
-			student.setDate(new Date());
-			
-			if(user.getRole().getId()==4){//教师审核
-				student.setTeacher(user);
-				student.setSchool(user.getUser());
-			}else if(user.getRole().getId()==3){//学校、审核
-				student.setTeacher(user);
-				student.setSchool(user);
-			}
-			studentService.update(student);
-		}
-		list();
-		return "audit";
 	}
 	
 	private String year_id;

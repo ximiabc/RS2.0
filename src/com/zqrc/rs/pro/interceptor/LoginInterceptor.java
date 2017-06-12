@@ -13,7 +13,7 @@ public class LoginInterceptor extends MethodFilterInterceptor {
 		if (user != null) {
 			return arg0.invoke();
 		} else {
-			return "login";
+			return "timeout";
 		}
 	}
 
