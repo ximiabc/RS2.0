@@ -8,16 +8,14 @@
 	<include file="struts_config.xml"></include>
 	<!-- 最高管理-->
 	<include file="struts_admin.xml"></include>
-	<!-- 普通管理-->
-	<include file="struts_manage.xml"></include>
-	<!-- 校长管理-->
-	<include file="struts_master.xml"></include>
-	<!-- 老师管理-->
-	<include file="struts_teacher.xml"></include>
 	
 	<package name="index" extends="struts-default" namespace="/">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.zqrc.rs.pro.interceptor.LoginInterceptor"/>
+		</interceptors>
 		<!--全局操作 -->
 		<global-results>
+			<result name="login">/index.jsp</result>
 			<result name="paramterError">/paramterError.jsp</result>
 			<result name="errors">/error.jsp</result>
 			<result name="timeout">/timeout.jsp</result>
@@ -25,9 +23,6 @@
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.NullPointerException" result="errors" /> 
 		</global-exception-mappings>
-		<!-- <global-exception-mappings>
-			<exception-mapping exception="java.lang.Exception" result="errors" />
-		</global-exception-mappings> -->
 		
 		<!-- 公共界面跳转 -->
 		<action name="view*" class="com.zqrc.rs.pro.action.PublicAction" method="{1}">

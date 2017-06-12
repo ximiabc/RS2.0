@@ -5,6 +5,10 @@
 
 <struts>
 	<package name="filter" extends="json-default" namespace="/">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.zqrc.rs.pro.interceptor.LoginInterceptor"/>
+		</interceptors>
+		
 		<!--全局操作 -->
 		<global-results>
 			<result name="paramterError">/paramterError.jsp</result>
@@ -24,34 +28,46 @@
 			<result name="types" type="json">
                 <param name="root">result</param>
             </result>
+            
+            <interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		<!-- 用户查询 -->
 		<action name="asyn_user_*" class="com.zqrc.rs.pro.action.UserAction" method="{1}">
 			<result name="types" type="json">
                 <param name="root">result</param>
             </result>
+            
+            <interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		<action name="asyn_*" class="com.zqrc.rs.pro.action.StudentAction" method="{1}">
 			<result name="types" type="json">
                 <param name="root">result</param>
             </result>
+            
+            <interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 	</package>
 
 	<!-- 高级管理员 -->
 	<package name="admin" extends="struts-default" namespace="/">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.zqrc.rs.pro.interceptor.LoginInterceptor"/>
+		</interceptors>
+		
 		<!--全局操作 -->
 		<global-results>
+			<result name="login">/index.jsp</result>
 			<result name="paramterError">/paramterError.jsp</result>
 			<result name="errors">/error.jsp</result>
 			<result name="timeout">/timeout.jsp</result>
 		</global-results>
+		<!-- 异常处理 -->
 		<global-exception-mappings>
 			<exception-mapping exception="java.lang.NullPointerException" result="errors" /> 
 		</global-exception-mappings>
-		<!-- <global-exception-mappings>
-			<exception-mapping exception="java.lang.Exception" result="errors" />
-		</global-exception-mappings> -->
 		
 		<!-- 注意： action 的名称不能用关键字"fileUpload" -->
 		<action name="upload_*" class="com.zqrc.rs.pro.action.ExcelAction" method="{1}">
@@ -77,6 +93,9 @@
 			<result name="success">/success.jsp</result>
 			<!-- 配置错误视图 -->
 			<result name="input">/error.jsp</result>
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		
 		<!-- 测试 excelout -->
@@ -88,6 +107,9 @@
 	            <param name="contentDisposition">filename="excel.xls"</param> <!-- 下载文件的名字 -->
 	            <param name="bufferSize">10240</param>  <!-- 下载文件的大小 10485760=10M -->
 	        </result>
+	        
+	        <interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 	    </action>
 		
 		<action name="audit*" method="{1}" class="com.zqrc.rs.pro.action.AuditAction">
@@ -95,6 +117,9 @@
 			<result name="PrimaryOut">/WEB-INF/view/admin/primary_Parameter_Out.jsp</result>
 			<result name="MiddleIn">/WEB-INF/view/admin/primary_middle_In.jsp</result>
 			<result name="MiddleOut">/WEB-INF/view/admin/primary_middle_Out.jsp</result>
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		
 		<!-- 日期-->
@@ -107,6 +132,9 @@
 			<result name="middleOut">/WEB-INF/view/admin/middle_register_time_out.jsp</result>
 			<!-- 报名日期 -->
 			<!-- <result name="view">/WEB-INF/view/admin/rs_date.jsp</result> -->
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		
 		<!-- 字段-->
@@ -119,6 +147,9 @@
 			<result name="middleOut">/WEB-INF/view/admin/middle_register_template_out.jsp</result>
 			<!-- 报名字段 -->
 			<!-- <result name="view">/WEB-INF/view/admin/rs_key.jsp</result> -->
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		
 		<!-- 权限 -->
@@ -129,6 +160,9 @@
 			<result name="master">/WEB-INF/view/admin/authority_master.jsp</result>
 			<!-- 教师权限 -->
 			<result name="teacher">/WEB-INF/view/admin/authority_teacher.jsp</result>
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		
 		<!-- 学生 -->
@@ -139,6 +173,9 @@
 			<result name="list">/WEB-INF/view/admin/student_list.jsp</result>
 			<!-- 学生审核 -->
 			<result name="audit">/WEB-INF/view/admin/student_audit.jsp</result>
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 		
 		<!-- 基本操作 -->
@@ -165,6 +202,9 @@
 			<!-- 教师操作************User -->
 			<!-- 教师浏览 -->
 			<result name="teacherList">/WEB-INF/view/teacher/list_view.jsp</result>
+			
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 		</action>
 	</package>
 </struts>

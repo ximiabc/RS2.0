@@ -390,6 +390,7 @@ public class UserAction extends BaseAction<User>{
 	 * @return
 	 */
 	public String mainView(){
+		
 		return "main";
 	}
 	
