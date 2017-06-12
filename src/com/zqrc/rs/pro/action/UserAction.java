@@ -385,6 +385,8 @@ public class UserAction extends BaseAction<User>{
 	 * @return
 	 */
 	public String help(){
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		stack.set("currentUser", getCurrentUser());
 		return "help";
 	}
 	

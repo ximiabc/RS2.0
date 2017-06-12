@@ -52,8 +52,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						
 						<select name="select_name" class="form-control">
 							<option selected="selected" value="1">关联查询</option>
-							<option value="2">学校编号</option>
-				    		<option value="3">学校名称</option>
+							<c:if test="${currentUser.role.value != '3' && currentUser.role.value != '4' }">
+								<option value="2">学校编号</option>
+				    			<option value="3">学校名称</option>
+							</c:if>
 				    		<option value="4">学生编号</option>
 				    		<option value="5">学生姓名</option>
 				    		<option value="6">未报名</option>
@@ -164,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					     	</a>
 						</s:if>
 						<s:else>
-					  		<a href="${uri }?pageNum=1" aria-label="Previous">
+					  		<a href="${uri }?pageNum=1&grade_id=${grade_id }&type_id=${type_id }" aria-label="Previous">
 					  			<span aria-hidden="true">首页</span>
 					  		</a>
 				  		</s:else>
@@ -172,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  	<!-- 上页键 -->
 				    <li>
 				    	<s:if test="pageBean.currentPage-1 > 0">
-					    	<a href="${uri }?pageNum=${pageBean.currentPage-1 }" href="#" aria-label="Previous">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage-1 }&grade_id=${grade_id }&type_id=${type_id }" href="#" aria-label="Previous">
 					    		<span aria-hidden="true">&laquo;</span>
 					    	</a>
 				    	</s:if>
@@ -188,13 +190,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    		<li><a>${pageNums }</a></li>
 				    	</c:if>
 				    	<c:if test="${pageBean.currentPage != pageNums }">
-				    		<li><a href="${uri }?pageNum=${pageNums }">${pageNums }</a></li>
+				    		<li><a href="${uri }?pageNum=${pageNums }&grade_id=${grade_id }&type_id=${type_id }">${pageNums }</a></li>
 				    	</c:if>
 				    </s:iterator>
 					<!-- 下页键 -->
 				    <li>
 				    	<s:if test="pageBean.currentPage+1 <= pageBean.pageCount">
-					    	<a href="${uri }?pageNum=${pageBean.currentPage+1 }" aria-label="Next">
+					    	<a href="${uri }?pageNum=${pageBean.currentPage+1 }&grade_id=${grade_id }&type_id=${type_id }" aria-label="Next">
 					    		<span aria-hidden="true">&raquo;</span>
 					    	</a>
 				    	</s:if>
@@ -212,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					     	</a>
 						</s:if>
 						<s:else>
-							<a href="${uri }?pageNum=${pageBean.pageCount }" aria-label="Previous">
+							<a href="${uri }?pageNum=${pageBean.pageCount }&grade_id=${grade_id }&type_id=${type_id }" aria-label="Previous">
 					     		<span aria-hidden="true">尾页</span>
 					     	</a>
 						</s:else>
@@ -227,7 +229,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <div class="modal-content">
 				    <div class="modal-header">
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">更改学生人数</h4>
+				        <h4 class="modal-title" id="myModalLabel">学生报名审核</h4>
 				    </div> 
 				    <form action="admin_student_auditPass" class="form-horizontal container-fluid">
 					    <div class="modal-body row">

@@ -154,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
 										</c:if>
 										<c:if test="${currentUser.role.value == '1'}">
-											<button id="n${id }" class="btn btn-default rs-modalBtn2" type="button">报名</button>
+											<button id="n${id }" class="btn btn-default rs-modalBtn3" type="button">报名</button>
 										</c:if>
 									</div>
 								</td>
@@ -311,6 +311,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </div>
 			</div>
 		</div>
+		
 		<!-- Modal 2-->
 		<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div class="modal-dialog modal-lg" role="document">
@@ -381,6 +382,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    </div>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+			    <div class="modal-content">
+				    <div class="modal-header">
+				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">学生报名</h4>
+				    </div> 
+				    <form action="admin_student_auditPass" class="form-horizontal container-fluid">
+					    <div class="modal-body row">
+							<s:iterator value="fieldAll" status="indexs">
+								<div class="form-group col-xs-6">
+									<label class="col-xs-6 control-label">${name }</label>
+							   		<label id="${keyName }"  class="col-xs-6 control-label rs-text"></label>
+								</div>
+							</s:iterator>
+					    </div>
+					    <div class="modal-footer">
+					        <div class="input-group pull-right" style="width: 260px; margin-right: 40px;">
+					        	<input id="ids" type="text" name="id" hidden>
+							    <input name="audit_str" type="text" class="form-control" placeholder="输入验证信息">
+							    <span class="input-group-btn">
+							        <input class="btn btn-info" type="submit" value="审核通过"/>
+							    </span>
+						    </div>
+						</div>
+					</form>
+			    </div>
+			</div>
+		</div>
+		
 		<script type="text/javascript">
               $("form").Vaild();
               //	清除提示
@@ -420,7 +452,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				});
 			});
 			//设置模态框值
-			$('.rs-modalBtn2').click(function(){
+			$('.rs-modalBtn3').click(function(){
 				var num = $(this).attr('id').slice(1);
 				$.ajax({
 					type: "GET",
@@ -428,11 +460,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					dataType: "json",
 					success: function(data){
 						var data = $.parseJSON(data);
+						$('#ids').val(data.id);
 						for(var key in data){
-							//console.group(key);console.log(data[key]);console.groupEnd();
-							$('#'+key).val(data[key]);
+							console.group(key);console.log(data[key]);console.groupEnd();
+							$('#'+key).text(data[key]);
 						}
-						$('#myModal-2').modal('show');
+						$('#myModal3').modal('show');
 					},
 					error: function(XHR){alert("获取信息失败");}
 				});

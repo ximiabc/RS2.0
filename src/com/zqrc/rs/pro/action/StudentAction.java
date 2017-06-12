@@ -66,8 +66,8 @@ public class StudentAction extends BaseAction<Student>{
 		//下拉查询条件
 		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
 		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
-		.addWhereCondition(("4".equals(select_name)), "s.account = ?", datas)//学生编号
-		.addWhereCondition(("5".equals(select_name)), "s.name = ?", datas)//学生名称
+		.addWhereCondition(("4".equals(select_name)), "s.item1 = ?", datas)//学生编号
+		.addWhereCondition(("5".equals(select_name)), "s.item2 = ?", datas)//学生名称
 		.addWhereCondition(("6".equals(select_name)), "s.states.id = ?", 1)//未报名
 		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
 		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//申请退出
@@ -151,7 +151,6 @@ public class StudentAction extends BaseAction<Student>{
 		.addWhereCondition("s.type.id = ? ", Integer.parseInt(type_id))
 		.addWhereCondition("s.years.id = ? ", Integer.parseInt(year_id))
 		//下拉查询条件
-		//.addWhereCondition((select_name.equals("1")), "s.", params)
 		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
 		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
 		.addWhereCondition(("4".equals(select_name)), "s.item1 = ?", datas)//学生编号
