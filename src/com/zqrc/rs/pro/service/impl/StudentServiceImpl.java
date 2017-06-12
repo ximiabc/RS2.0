@@ -70,4 +70,13 @@ public class StudentServiceImpl extends BaseDaoImpl<Student> implements
 		
 		return stu_map;
 	}
+
+	public Integer getPrimaryReal(Integer year) {
+		return getSession().createQuery("from Student s where s.grade.id = ? and s.years.id = ? and s.states.id = ?").setInteger(0, 1).setInteger(1, year).setInteger(2, 1) .list().size();
+	}
+
+	public Integer getMiddleReal(Integer year) {
+		return getSession().createQuery("from Student s where s.grade.id = ? and s.years.id = ? and s.states.id = ?").setInteger(0, 2).setInteger(1, year).setInteger(2, 1) .list().size();
+	}
+
 }

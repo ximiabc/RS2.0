@@ -59,7 +59,7 @@
 		
 		<!--全局操作 -->
 		<global-results>
-			<result name="login">/index.jsp</result>
+			<result name="login" type="chain">viewindex</result>
 			<result name="paramterError">/paramterError.jsp</result>
 			<result name="errors">/error.jsp</result>
 			<result name="timeout">/timeout.jsp</result>

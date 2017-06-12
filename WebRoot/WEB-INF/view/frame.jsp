@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="rs-sider">
 				<div class="rs-tab bg-info">
 					<!-- 测试 -->
-					<c:set var="juint" value="1"></c:set>
+					<c:set var="juint" value="0"></c:set>
 					
 					<!-- 教委高级 -->
 					<c:if test="${currentUser.role.value == '1' || juint == '1' }">

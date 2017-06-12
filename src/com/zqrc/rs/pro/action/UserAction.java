@@ -1,11 +1,14 @@
 package com.zqrc.rs.pro.action;
 
+import java.util.List;
+
 import org.apache.struts2.ServletActionContext;
 import org.json.JSONObject;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
+import com.zqrc.rs.pro.entity.SchoolYear;
 import com.zqrc.rs.pro.entity.User;
 import com.zqrc.rs.until.DateUtil;
 import com.zqrc.rs.until.HqlHelper;
@@ -390,6 +393,39 @@ public class UserAction extends BaseAction<User>{
 	 * @return
 	 */
 	public String mainView(){
+		ValueStack stack=ActionContext.getContext().getValueStack();
+		
+		Integer primaryReal=0;
+		Integer middleReal=0;
+		Integer primaryPlan=0;
+		Integer middlePlan=0;
+		List<User>primarySchool=null;
+		List<User>middleSchool=null;
+		if(getCurrentUser().getRole().getId()==1||getCurrentUser().getRole().getId()==2){
+			//中小学数据
+			SchoolYear year=yearService.getNews();
+			primaryReal=studentService.getPrimaryReal(year.getId());
+			middleReal=studentService.getMiddleReal(year.getId());
+			primarySchool=userService.getSchoolByGrade(1);
+			middleSchool=userService.getSchoolByGrade(2);
+			for (User user2 : primarySchool) {
+				primaryPlan+=user2.getNum();
+			}
+			for (User user2 : middleSchool) {
+				middlePlan+=user2.getNum();
+			}
+			stack.set("primaryReal", primaryReal);
+			stack.set("primaryPlan", primaryPlan);
+			stack.set("middleReal", middleReal);
+			stack.set("middlePlan", middlePlan);
+			stack.set("primary", primarySchool);
+			stack.set("middle", middleSchool);
+		}else if(getCurrentUser().getRole().getId()==3){//学校
+			User school=userService.getById(getCurrentUser().getId());
+			stack.set("school", school);
+		}if(getCurrentUser().getRole().getId()==4){//教师
+			
+		}
 		
 		return "main";
 	}

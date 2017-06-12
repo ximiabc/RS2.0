@@ -14,4 +14,10 @@ public interface StudentService extends BaseDao<Student>{
 //	获取制定id的属性
 	Map<String,String> findStudentMap(Integer id);
 	
+//	获取实际报名数小学
+	Integer getPrimaryReal(Integer year);
+	
+//	获取实际报名数中学
+	Integer getMiddleReal(Integer year);
+	
 }

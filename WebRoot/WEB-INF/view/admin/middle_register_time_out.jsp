@@ -16,41 +16,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<link rel="stylesheet" type="text/css" href="bootstrap-3.3.7-dist/css/bootstrap-datetimepicker.min.css"/>
 	</head>
 	<body>
-		<div style="padding: 100px 50px 0;">
+		<div style="padding: 100px 50px 0;"><s:actionmessage/>
 			<form class="form-horizontal" action="admin_date_middleOutUpdate" method="post">
-				<div class="col-xs-offset-1 col-xs-10">
-					<div class="panel panel-default">
-						<div class="panel-heading">中学辖区外生源报名日期</div>
-						<div class="panel-body form-group" style="margin-bottom: 0;">
-							<div class="col-xs-offset-2 col-xs-8">
-								<label for="toSchool" class="control-label">指定学校：</label>
-								<select id="toSchool" class="form-control">
-									<option value="0">全部学校</option>
-									<s:iterator value="schools">
-										<option value="${id }">${name }</option>
-									</s:iterator>
-								</select>
-				                <label for="startTime" class="control-label">开始报名日期：</label>
-				                <div id="startTime" class="input-group date form_date" data-date="">
-				                    <input name="startDates" class="form-control" size="16" type="text" value="<s:date name='bean.startDate' format='yyyy-MM-dd'/>" readonly>
-				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-				                </div>
-				                <label for="endTime" class="control-label">结束报名日期：</label>
-				                <div id="endTime" class="input-group date form_date" data-date="">
-				                    <input name="endDates" class="form-control" size="16" type="text" value="<s:date name="bean.endDate" format="yyyy-MM-dd"/>" readonly>
-				                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-									<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-				                </div>
-								<input type="submit" class="btn btn-primary btn-lg col-xs-offset-4 col-xs-4" style="margin-top: 25px;" value="提交"/>
-							</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">中学辖区外生源报名日期</div>
+					<div class="panel-body form-group" style="margin-bottom: 0;">
+						<div class="col-xs-offset-2 col-xs-8">
+							<label for="toSchool" class="control-label">指定学校：</label>
+							<select id="toSchool" class="form-control">
+								<option value="0">全部学校</option>
+								<s:iterator value="schools">
+									<option value="${id }">${name }</option>
+								</s:iterator>
+							</select>
+			                <label for="startTime" class="control-label">开始报名日期：</label>
+			                <div id="startTime" class="input-group date form_date" data-date="">
+			                    <input name="startDates" class="form-control" size="16" type="text" value="<s:date name='bean.startDate' format='yyyy-MM-dd'/>" readonly>
+			                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			                </div>
+			                <label for="endTime" class="control-label">结束报名日期：</label>
+			                <div id="endTime" class="input-group date form_date" data-date="">
+			                    <input name="endDates" class="form-control" size="16" type="text" value="<s:date name="bean.endDate" format="yyyy-MM-dd"/>" readonly>
+			                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+								<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			                </div>
+							<input type="submit" class="btn btn-primary btn-lg col-xs-offset-4 col-xs-4" style="margin-top: 25px;" value="提交"/>
 						</div>
-		            </div>
-				</div>
-				<div class="form-group text-center" >
-				</div>
+					</div>
+	            </div>
 			</form>
-			<s:actionmessage/>
 		</div>
 		<script src="js/jquery-3.0.0.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="bootstrap-3.3.7-dist/js/bootstrap-datetimepicker.min.js" type="text/javascript" charset="utf-8"></script>

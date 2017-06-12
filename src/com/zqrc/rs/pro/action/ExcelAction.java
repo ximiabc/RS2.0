@@ -157,7 +157,7 @@ public class ExcelAction extends BaseAction<Fields>{
 	 */
 	public String middelIn() throws Exception {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();  
-		getExcelByte("上街区中学范围内入学报名表",out,2,2,getNewDate());
+		getExcelByte("上街区中学范围内入学报名表",out,2,1,getNewDate());
 		excelStream = new ByteArrayInputStream(out.toByteArray());  
 		return "excel"; 
 	}
