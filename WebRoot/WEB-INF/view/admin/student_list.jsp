@@ -147,11 +147,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<c:if test="${currentUser.role.value == '1'}">
 								<td>
 									<div class="rs-school-space">
+										<c:if test="${currentPower.stus.id == 4 || currentPower.stus.id == 6 || currentPower.stus.id == 7 || currentPower.stus.id == 8 }" >
+											<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除此学生');" class="btn btn-default" type="button" >删除</a>
+										</c:if>
 										<c:if test="${currentPower.stus.id == 3 || currentPower.stus.id == 5 || currentPower.stus.id == 7 || currentPower.stus.id == 8 }" >
 											<button id="n${id }" class="btn btn-default rs-modalBtn" type="button">更改</button>
 										</c:if>
-										<c:if test="${currentPower.stus.id == 4 || currentPower.stus.id == 6 || currentPower.stus.id == 7 || currentPower.stus.id == 8 }" >
-											<a href="admin_student_del?id=${id }" onclick="return confirm('确定删除此学生');" class="btn btn-default" type="button" >删除</a>
+										<c:if test="${currentUser.role.value == '1'}">
+											<button id="n${id }" class="btn btn-default rs-modalBtn2" type="button">报名</button>
 										</c:if>
 									</div>
 								</td>
@@ -400,6 +403,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 			//设置模态框值
 			$('.rs-modalBtn').click(function(){
+				var num = $(this).attr('id').slice(1);
+				$.ajax({
+					type: "GET",
+					url: "asyn_studentById?id="+num,
+					dataType: "json",
+					success: function(data){
+						var data = $.parseJSON(data);
+						for(var key in data){
+							//console.group(key);console.log(data[key]);console.groupEnd();
+							$('#'+key).val(data[key]);
+						}
+						$('#myModal-2').modal('show');
+					},
+					error: function(XHR){alert("获取信息失败");}
+				});
+			});
+			//设置模态框值
+			$('.rs-modalBtn2').click(function(){
 				var num = $(this).attr('id').slice(1);
 				$.ajax({
 					type: "GET",

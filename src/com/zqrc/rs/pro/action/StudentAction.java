@@ -154,8 +154,8 @@ public class StudentAction extends BaseAction<Student>{
 		//.addWhereCondition((select_name.equals("1")), "s.", params)
 		.addWhereCondition(("2".equals(select_name)), "s.school.account = ?", datas)//学校编号
 		.addWhereCondition(("3".equals(select_name)), "s.school.name = ?", datas)//学校名称
-		.addWhereCondition(("4".equals(select_name)), "s.account = ?", datas)//学生编号
-		.addWhereCondition(("5".equals(select_name)), "s.name = ?", datas)//学生名称
+		.addWhereCondition(("4".equals(select_name)), "s.item1 = ?", datas)//学生编号
+		.addWhereCondition(("5".equals(select_name)), "s.item2 = ?", datas)//学生名称
 		.addWhereCondition(("6".equals(select_name)), "s.states.id = ?", 1)//未报名
 		.addWhereCondition(("7".equals(select_name)), "s.states.id = ?", 2)//已报名
 		.addWhereCondition(("8".equals(select_name)), "s.states.id = ?", 3)//申请退出
@@ -171,6 +171,8 @@ public class StudentAction extends BaseAction<Student>{
 		PageBean pageBean =studentService.getPageBean(pageNum,10,helper);
 		pageBean.setCurrentPage(pageNum);
 		
+		List<User> schools=userService.getSchoolByGrade(Integer.parseInt(grade_id));
+		
 		ValueStack vs = ServletActionContext.getContext().getValueStack();
 		vs.set("fields", fields2);//优先显示字段
 		vs.set("fieldAll", fields);//所有字段
@@ -178,6 +180,7 @@ public class StudentAction extends BaseAction<Student>{
 		vs.set("pageBean", pageBean);
 		vs.set("grade_id", grade_id);
 		vs.set("type_id", type_id);
+		vs.set("schools", schools);
 		return "list";
 	}
 	
