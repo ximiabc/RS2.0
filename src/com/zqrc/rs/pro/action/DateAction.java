@@ -56,22 +56,28 @@ public class DateAction extends BaseAction<DueTime>{
 	public String primaryInUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(1, 1, year.getId(),0);
-		if(dueTime==null){
-			dueTime=new DueTime();
-			dueTime.setGrade_id(1);
-			dueTime.setType_id(1);
-			dueTime.setYear_id(year.getId());
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.save(dueTime);
+		DueTime dueTime=getDueTime(1, 1, year.getId(),getModel().getSchool_id());
+		if(format.parse(startDates).before(format.parse(endDates))){
+			if(dueTime==null){
+				dueTime=new DueTime();
+				dueTime.setGrade_id(1);
+				dueTime.setType_id(1);
+				dueTime.setYear_id(year.getId());
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTime.setSchool_id(getModel().getSchool_id());
+				dueTimeService.save(dueTime);
+			}else{
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTimeService.update(dueTime);
+			}
+			primaryIn();
+			addActionMessage("修改成功！");
 		}else{
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.update(dueTime);
+			primaryIn();
+			addActionMessage("修改参数不合法！请检查");
 		}
-		primaryIn();
-		addActionMessage("修改成功！");
 		return "primaryIn";
 	}
 	
@@ -98,22 +104,29 @@ public class DateAction extends BaseAction<DueTime>{
 	public String primaryOutUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(1, 2, year.getId(),0);
-		if(dueTime==null){
-			dueTime=new DueTime();
-			dueTime.setGrade_id(1);
-			dueTime.setType_id(2);
-			dueTime.setYear_id(year.getId());
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.save(dueTime);
+		DueTime dueTime=getDueTime(1, 2, year.getId(),getModel().getSchool_id());
+		if(format.parse(startDates).before(format.parse(endDates))){
+			if(dueTime==null){
+				dueTime=new DueTime();
+				dueTime.setGrade_id(1);
+				dueTime.setType_id(2);
+				dueTime.setYear_id(year.getId());
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTime.setSchool_id(getModel().getSchool_id());
+				dueTimeService.save(dueTime);
+			}else{
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTimeService.update(dueTime);
+			}
+			primaryOut();
+			addActionMessage("修改成功！");
 		}else{
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.update(dueTime);
+			primaryOut();
+			addActionMessage("修改参数不合法！请检查");
 		}
-		primaryOut();
-		addActionMessage("修改成功！");
+		
 		return "primaryOut";
 	}
 	
@@ -139,22 +152,28 @@ public class DateAction extends BaseAction<DueTime>{
 	public String middleInUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(2, 1, year.getId(),0);
-		if(dueTime==null){
-			dueTime=new DueTime();
-			dueTime.setGrade_id(2);
-			dueTime.setType_id(1);
-			dueTime.setYear_id(year.getId());
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.save(dueTime);
+		DueTime dueTime=getDueTime(2, 1, year.getId(), getModel().getSchool_id());
+		if(format.parse(startDates).before(format.parse(endDates))){
+			if(dueTime==null){
+				dueTime=new DueTime();
+				dueTime.setGrade_id(2);
+				dueTime.setType_id(1);
+				dueTime.setYear_id(year.getId());
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTime.setSchool_id(getModel().getSchool_id());
+				dueTimeService.save(dueTime);
+			}else{
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTimeService.update(dueTime);
+			}
+			middleIn();
+			addActionMessage("修改成功！");
 		}else{
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.update(dueTime);
+			middleIn();
+			addActionMessage("修改参数不合法！请检查");
 		}
-		middleIn();
-		addActionMessage("修改成功！");
 		return "middleIn";
 	}
 	
@@ -180,22 +199,28 @@ public class DateAction extends BaseAction<DueTime>{
 	public String middleOutUpdate() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SchoolYear year=yearService.getNews();
-		DueTime dueTime=getDueTime(2, 2, year.getId(),0);
-		if(dueTime==null){
-			dueTime=new DueTime();
-			dueTime.setGrade_id(2);
-			dueTime.setType_id(2);
-			dueTime.setYear_id(year.getId());
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.save(dueTime);
+		DueTime dueTime=getDueTime(2, 2, year.getId(),getModel().getSchool_id());
+		if(format.parse(startDates).before(format.parse(endDates))){
+			if(dueTime==null){
+				dueTime=new DueTime();
+				dueTime.setGrade_id(2);
+				dueTime.setType_id(2);
+				dueTime.setYear_id(year.getId());
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTime.setSchool_id(getModel().getSchool_id());
+				dueTimeService.save(dueTime);
+			}else{
+				dueTime.setStartDate(format.parse(startDates));
+				dueTime.setEndDate(format.parse(endDates));
+				dueTimeService.update(dueTime);
+			}
+			middleOut();
+			addActionMessage("修改成功！");
 		}else{
-			dueTime.setStartDate(format.parse(startDates));
-			dueTime.setEndDate(format.parse(endDates));
-			dueTimeService.update(dueTime);
+			middleOut();
+			addActionMessage("修改参数不合法！请检查");
 		}
-		middleOut();
-		addActionMessage("修改成功！");
 		return "middleOut";
 	}
 	

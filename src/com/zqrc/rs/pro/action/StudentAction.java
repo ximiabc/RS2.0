@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import com.opensymphony.xwork2.util.ValueStack;
 import com.zqrc.rs.base.BaseAction;
 import com.zqrc.rs.pro.entity.Audit;
+import com.zqrc.rs.pro.entity.DueTime;
 import com.zqrc.rs.pro.entity.Fields;
 import com.zqrc.rs.pro.entity.Grade;
 import com.zqrc.rs.pro.entity.SchoolYear;
@@ -33,6 +34,7 @@ public class StudentAction extends BaseAction<Student>{
 	
 	/**
 	 * 审批学生
+	 * 学校、教师
 	 */
 	public String audit() {
 		List<SchoolYear>years=yearService.getAllByNews();
@@ -92,25 +94,84 @@ public class StudentAction extends BaseAction<Student>{
 	 * 报名功能
 	 */
 	public String auditPass() {
-		if(inspect()){
-			User user=getCurrentUser();
-			States states=statesService.getById(2);
-			Student student=studentService.getById(getModel().getId());
-			student.setStates(states);
-			student.setDate(new Date());
-			
-			if(user.getRole().getId()==4){//教师审核
-				student.setTeacher(user);
-				student.setSchool(user.getUser());
-			}else if(user.getRole().getId()==3){//学校、审核
-				student.setTeacher(user);
-				student.setSchool(user);
-			}
-			studentService.update(student);
+		User user=getCurrentUser();
+		SchoolYear year=yearService.getNews();
+		DueTime time1=null;
+		DueTime time0=null;
+		if(user.getRole().getId()==3){//学校
+			time1=dueTimeService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), year.getId(), user.getId());
+			time0=dueTimeService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), year.getId(), 0);//通用报名安排
+		}else if(user.getRole().getId()==4){//教师
+			time1=dueTimeService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), year.getId(), user.getUser().getId());
+			time0=dueTimeService.getByComposite(Integer.parseInt(grade_id), Integer.parseInt(type_id), year.getId(), 0);//通用报名安排
 		}
-		list();
+		Date date=new Date();
+		if(null!=time1){//time1有数据
+			if(date.after(time1.getStartDate())&&date.before(time1.getEndDate())){//在报名标准日期间
+				if(inspect()){//报名功能
+					States states=statesService.getById(2);
+					Student student=studentService.getById(getModel().getId());
+					student.setStates(states);
+					student.setDate(new Date());
+					
+					if(user.getRole().getId()==4){//教师审核
+						student.setTeacher(user);
+						student.setSchool(user.getUser());
+					}else if(user.getRole().getId()==3){//学校、审核
+						student.setSchool(user);
+					}
+					studentService.update(student);
+					addActionMessage("报名成功");
+					audit();
+					return "audit";
+				}
+			}
+		}
+		if(null!=time0){//通用日期
+			if(date.after(time0.getStartDate())&&date.before(time0.getEndDate())){//在报名标准日期间
+				if(inspect()){//报名功能
+					States states=statesService.getById(2);
+					Student student=studentService.getById(getModel().getId());
+					student.setStates(states);
+					student.setDate(new Date());
+					
+					if(user.getRole().getId()==4){//教师审核
+						student.setTeacher(user);
+						student.setSchool(user.getUser());
+					}else if(user.getRole().getId()==3){//学校、审核
+						student.setSchool(user);
+					}
+					studentService.update(student);
+					addActionMessage("报名成功");
+				}else{
+					addActionMessage("报名验证失败！");
+				}
+			}else{
+				addActionMessage("非报名时间！");
+			}
+		}else{
+			addActionMessage("非报名时间！");
+		}
+		audit();
 		return "audit";
 	}
+	
+	/**
+	 * 教委管理给学生报名学校
+	 * @return
+	 */
+	public String auditPassadmin() {
+		States states=statesService.getById(2);
+		User user=userService.getById(Integer.parseInt(audit_str));
+		Student student=studentService.getById(getModel().getId());
+		student.setStates(states);
+		student.setDate(new Date());
+		student.setSchool(user);
+		studentService.update(student);
+		addActionMessage("报名成功！");
+		return list();
+	}
+	
 	/**
 	 * 批量导入学生页跳转
 	 * @return
@@ -375,7 +436,10 @@ public class StudentAction extends BaseAction<Student>{
 		this.audit_str = audit_str;
 	}
 
-	//	验证字段
+	/**
+	 * 报名字段验证
+	 * @return
+	 */
 	private boolean inspect(){
 		Student student = studentService.getById(getModel().getId());
 		Audit audit = auditService.findByComposite(student.getGrade().getId(), student.getType().getId(), student.getYears().getId());

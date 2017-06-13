@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="panel-body form-group" style="margin-bottom: 0;">
 						<div class="col-xs-offset-2 col-xs-8">
 							<label for="toSchool" class="control-label">指定学校：</label>
-							<select id="toSchool" class="form-control">
+							<select name="school_id" id="toSchool" class="form-control">
 								<option value="0">全部学校</option>
 								<s:iterator value="schools">
 									<option value="${id }">${name }</option>

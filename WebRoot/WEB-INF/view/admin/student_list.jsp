@@ -35,6 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</style>
 		</head>
 	<body>
+		<!-- 操作提醒 -->
+		<s:actionmessage/>
 		<!--表单部分-->
 		<div class="container-fluid">
 			<!--表单查询及添加-->
@@ -390,19 +392,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				        <button type="button" class="close less" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				        <h4 class="modal-title" id="myModalLabel">学生报名</h4>
 				    </div> 
-				    <form action="admin_student_auditPass" class="form-horizontal container-fluid">
+				    <form action="admin_student_auditPassadmin" class="form-horizontal container-fluid">
 					    <div class="modal-body row">
 							<s:iterator value="fieldAll" status="indexs">
 								<div class="form-group col-xs-6">
 									<label class="col-xs-6 control-label">${name }</label>
-							   		<label id="${keyName }"  class="col-xs-6 control-label rs-text"></label>
+							   		<label id="REG${keyName }"  class="col-xs-6 control-label rs-text"></label>
 								</div>
 							</s:iterator>
 					    </div>
 					    <div class="modal-footer">
 					        <div class="input-group pull-right" style="width: 260px; margin-right: 40px;">
 					        	<input id="ids" type="text" name="id" hidden>
-							    <input name="audit_str" type="text" class="form-control" placeholder="输入验证信息">
+							    <select id="audit_str" name="audit_str" class="form-control">
+							    	<s:iterator value="schools">
+							    		<option value="${id }">${name }</option>
+							    	</s:iterator>
+			                  	</select>
 							    <span class="input-group-btn">
 							        <input class="btn btn-info" type="submit" value="审核通过"/>
 							    </span>
@@ -463,7 +469,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						$('#ids').val(data.id);
 						for(var key in data){
 							console.group(key);console.log(data[key]);console.groupEnd();
-							$('#'+key).text(data[key]);
+							$('#REG'+key).text(data[key]);
 						}
 						$('#myModal3').modal('show');
 					},

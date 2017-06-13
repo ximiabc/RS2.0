@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</style>
 		</head>
 	<body>
+		<s:actionmessage/>
 		<!--表单部分-->
 		<div class="container-fluid">
 			<!--表单查询及添加-->
@@ -62,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    		<option value="7">已报名</option>
 				    		<option value="8">申请撤回</option>
 						</select>
-					    <input type="text" class="form-control" placeholder="number">
+					    <input name="datas" type="text" class="form-control" placeholder="number">
 					    <button type="submit" class="form-control">检索</button>	
 				    </form>
 				</div>
@@ -243,6 +244,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					    <div class="modal-footer">
 					        <div class="input-group pull-right" style="width: 260px; margin-right: 40px;">
 					        	<input id="ids" type="text" name="id" hidden>
+					        	<input name="grade_id" type="text" value="${grade_id }" hidden/>
+					        	<input name="type_id" type="text" value="${type_id }" hidden/>
 							    <input name="audit_str" type="text" class="form-control" placeholder="输入验证信息">
 							    <span class="input-group-btn">
 							        <input class="btn btn-info" type="submit" value="审核通过"/>
